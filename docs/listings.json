@@ -1,6 +1,14 @@
 [
   {
     "listing": "/index.html",
-    "items": []
+    "items": [
+      "/posts/001-song_recommender/implicit_recsys.html"
+    ]
+  },
+  {
+    "listing": "/index.docx",
+    "items": [
+      "/posts/001-song_recommender/implicit_recsys.docx"
+    ]
   }
 ]

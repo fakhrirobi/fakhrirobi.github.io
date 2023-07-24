@@ -1,0 +1,422 @@
+---
+title: 'Song Recommender System '
+description: |
+  Recommender System on Implicit Feedback Dataset (Number artist playcount)
+title-block-banner: true
+date: '2023-17-07'
+categories:
+  - projects
+  - recommender system
+code-fold: show
+draft: false
+jupyter: python3
+---
+
+```{python}
+import pandas as pd 
+import numpy as np 
+import os 
+```
+
+```{python}
+
+artist_user_path = 'interim_user_artists.csv'
+```
+
+```{python}
+artist_user_df = pd.read_csv(artist_user_path)
+```
+
+```{python}
+artist_user_df
+```
+
+```{python}
+#map user id --> ordered id 
+user_id_to_ordered_id = {}
+ordered_id_to_user_id = {}
+for idx,user_id in enumerate(artist_user_df['userID'].unique()) : 
+    user_id_to_ordered_id[user_id] = idx+1
+    ordered_id_to_user_id[idx+1] = user_id
+
+
+```
+
+```{python}
+user_id_to_ordered_id
+```
+
+```{python}
+ordered_id_to_user_id
+```
+
+```{python}
+artist_id_to_ordered_id = {}
+ordered_id_to_artist_id = {}
+for idx,artist_id in enumerate(artist_user_df['artistID'].unique()) : 
+    artist_id_to_ordered_id[artist_id] = idx+1
+    ordered_id_to_artist_id[idx+1] = artist_id
+```
+
+```{python}
+import joblib 
+
+
+joblib.dump(user_id_to_ordered_id,'../mapping/user_id_to_ordered_id.pkl')
+joblib.dump(ordered_id_to_user_id,'../mapping/ordered_id_to_user_id.pkl')
+joblib.dump(artist_id_to_ordered_id,'../mapping/artist_id_to_ordered_id.pkl')
+joblib.dump(ordered_id_to_artist_id,'../mapping/ordered_id_to_artist_id.pkl')
+```
+
+## Mapping userID and artistID
+
+```{python}
+mapped_user_artist_df = artist_user_df.copy()
+```
+
+```{python}
+mapped_user_artist_df.userID = mapped_user_artist_df.userID.map(user_id_to_ordered_id)
+mapped_user_artist_df.artistID = mapped_user_artist_df.artistID.map(artist_id_to_ordered_id)
+```
+
+```{python}
+mapped_user_artist_df
+```
+
+## Create Utility Matrix
+
+```{python}
+from scipy.sparse import coo_matrix
+"""
+From Documentation 
+Constructing a matrix using ijv format
+
+row  = np.array([0, 3, 1, 0])
+col  = np.array([0, 3, 1, 2])
+data = np.array([4, 5, 7, 9])
+coo_array((data, (row, col)), shape=(4, 4)).toarray()
+array([[4, 0, 9, 0],
+       [0, 7, 0, 0],
+       [0, 0, 0, 0],
+       [0, 0, 0, 5]])
+"""
+row = mapped_user_artist_df.userID.values
+col = mapped_user_artist_df.artistID.values
+data = mapped_user_artist_df.weight.values
+
+
+implicit_utility = coo_matrix((data,(row,col)))
+implicit_utility = implicit_utility.tocsr()
+```
+
+```{python}
+def create_utility_matrix(utility_df,data,row_name,col_name,value_name) : 
+    """_summary_
+
+    Args:
+        data (_type_): _description_
+        row_name (_type_): _description_
+        col_name (_type_): _description_
+        value_name (_type_): _description_
+    """
+    ## TODO : add to utils package. 
+    row = utility_df[row_name].values
+    col = utility_df[col_name].values
+    data = utility_df[value_name].values
+
+
+    utility_matrix = coo_matrix((data,(row,col)))
+    utility_matrix = implicit_utility.tocsr()
+    return utility_matrix
+```
+
+```{python}
+print(implicit_utility)
+```
+
+
+## Split Dataset 
+Training, Validation, and Testing
+
+```{python}
+from implicit.evaluation import train_test_split
+```
+
+```{python}
+implicit_utility_coo = implicit_utility.tocoo()
+
+
+train_data,test_data = train_test_split(ratings=implicit_utility_coo,train_percentage=0.8)
+train_data_coo = train_data.tocoo()
+
+train_data,val_data = train_test_split(ratings=train_data_coo,train_percentage=0.8)
+```
+
+```{python}
+def generate_train_val_test(utility_matrix) : 
+    """_summary_
+
+    Args:
+        utility_matrix (_type_): csr matrix
+    """
+    utility_matrix = implicit_utility.tocoo()
+
+
+    train_data,test_data = train_test_split(ratings=utility_matrix,train_percentage=0.8)
+    train_data_coo = train_data.tocoo()
+
+    train_data,val_data = train_test_split(ratings=utility_matrix,train_percentage=0.8)
+    
+    return train_data,val_data,test_data
+```
+
+```{python}
+(implicit_utility_coo.nnz)
+```
+
+```{python}
+train_data.nnz
+```
+
+```{python}
+val_data.nnz
+```
+
+```{python}
+test_data.nnz
+```
+
+## Fit model on training data
+
+### ALS Approach
+
+```{python}
+from implicit.als import AlternatingLeastSquares
+from implicit.nearest_neighbours import bm25_weight,tfidf_weight
+
+
+
+model_als = AlternatingLeastSquares(factors=100)
+model_als.fit(train_data)
+```
+
+
+### Bayesian Personalized Ranking
+
+```{python}
+from implicit.bpr import BayesianPersonalizedRanking
+
+model_bpr = BayesianPersonalizedRanking(factors=100)
+model_bpr.fit(train_data)
+```
+
+### Logistic Matrix Factorization
+
+```{python}
+from implicit.lmf import LogisticMatrixFactorization
+
+model_logmat = LogisticMatrixFactorization(factors=100)
+model_logmat.fit(train_data)
+```
+
+### Hybrid Approach
+
+
+## Find Best Model Based on Prediction on Validation Set
+
+```{python}
+method_list = [func for func in dir(model_bpr) if callable(getattr(model_bpr, func)) and not func.startswith("__")]
+```
+
+```{python}
+prediction_bpr_val = model_bpr.recommend_all(val_data)
+```
+
+```{python}
+from implicit.evaluation import ranking_metrics_at_k
+
+
+metrics_als = ranking_metrics_at_k(model=model_als,
+                                   train_user_items=train_data,
+                                   test_user_items=val_data)
+```
+
+```{python}
+metrics_bpr = ranking_metrics_at_k(model=model_bpr,
+                                   train_user_items=train_data,
+                                   test_user_items=val_data)
+```
+
+```{python}
+metrics_lmf = ranking_metrics_at_k(model=model_logmat,
+                                   train_user_items=train_data,
+                                   test_user_items=val_data)
+```
+
+```{python}
+metrics_als_df = pd.DataFrame(metrics_als,index=[0])
+metrics_als_df['model'] = 'AlternatingLeastSquares'
+```
+
+```{python}
+metrics_als_df
+```
+
+```{python}
+metrics_bpr_df  = pd.DataFrame(metrics_bpr,index=[0])
+metrics_bpr_df
+metrics_bpr_df['model'] = 'BayesianPersonalizedRanking'
+```
+
+```{python}
+metrics_lmf_df  = pd.DataFrame(metrics_lmf,index=[0])
+metrics_lmf_df['model'] = 'LogisticMatrixFactorization'
+```
+
+```{python}
+model_selection_df = pd.concat([metrics_als_df,metrics_bpr_df,metrics_lmf_df],axis=0)
+model_selection_df
+```
+
+## Hyperparameter Tuning
+
+Use optuna on 5 Fold Cross Validation
+
+```{python}
+tra
+```
+
+```{python}
+#create cross validation helper 
+
+from sklearn.model_selection import KFold 
+
+```
+
+```{python}
+import optuna 
+from scipy.sparse import csr_matrix
+
+from implicit.evaluation import ndcg_at_k
+
+train_data,test_data = train_test_split(ratings=implicit_utility_coo,train_percentage=0.8)
+train_utility = train_data.tocoo()
+def objective(trial):
+    #parameter recommendation 
+    
+    #discrete parameter
+    factors_param = trial.suggest_int('number_of_factors',low=100,high=500,step=100) 
+    
+    #continous parameter
+    alpha_param = trial.suggest_loguniform('alpha_weight',low=0.01,high=1.0)
+    regularization_param = trial.suggest_loguniform('regularization',low=0.01,high=0.2)
+
+    #define cross validation 
+
+    
+    #cross validation 
+    fold = KFold(5)
+
+    ndcg_sum = 0
+    for idx,(train_idx,test_idx) in enumerate(fold.split(train_utility)) : 
+       
+        model_als_tuning = AlternatingLeastSquares(factors=factors_param,
+                                            regularization=regularization_param,
+                                            alpha=alpha_param)
+        train = csr_matrix((train_utility.data[train_idx],
+                        (train_utility.row[train_idx], train_utility.col[train_idx])),
+                        shape=train_utility.shape, dtype=train_utility.dtype)
+
+        test = csr_matrix((train_utility.data[test_idx],
+                        (train_utility.row[test_idx], train_utility.col[test_idx])),
+                        shape=train_utility.shape, dtype=train_utility.dtype)
+        model_als_tuning.fit(train)
+        ndcg_at_fold = ndcg_at_k(model=model_als_tuning,
+                  train_user_items=train,
+                  test_user_items=test,K=10)
+        ndcg_sum +=ndcg_at_fold
+        
+        #logging the tuning process 
+
+    #add negative to minimize function like Negative Log LikeLihood --> gradient descent
+    ndcg_avg = -(ndcg_sum / 5)
+    print(f'''Fold : {idx+1}
+         Average NDCG : {ndcg_avg}
+        
+        
+        
+        ''')
+    return ndcg_avg
+```
+
+```{python}
+#create study object 
+study=optuna.create_study(direction='minimize')
+study.optimize(objective, n_trials=100)
+```
+
+### Measure Tuned Model on Test Set 
+
+```{python}
+model_als_tuned= AlternatingLeastSquares(factors=100,
+                                    regularization=0.16799704422342204,
+                                    alpha=0.5097051938957499)
+model_als_tuned.fit(train_data)
+```
+
+```{python}
+final_tuned_metrics = ranking_metrics_at_k(model=model_als_tuned,
+                                   train_user_items=train_data,
+                                   test_user_items=test_data)
+```
+
+```{python}
+final_tuned_metrics
+```
+
+### Fit Model on All Training Data
+
+```{python}
+final_als= AlternatingLeastSquares(factors=100,
+                                    regularization=0.16799704422342204,
+                                    alpha=0.5097051938957499)
+final_als.fit(implicit_utility)
+```
+
+```{python}
+
+def load_artist_data() : 
+    artist_path = "interim_artists.csv"
+    artist_data = pd.read_csv(artist_path,usecols=['id','name'])
+    return artist_data
+```
+
+```{python}
+id_rec = final_als.recommend(userid=2,
+                    user_items=train_data[2])
+artists_ordered_ids = id_rec[0]
+
+artists_id = [ordered_id_to_artist_id[id] for id in artists_ordered_ids ]
+artist_data = load_artist_data()
+
+artist_name = artist_data.loc[artist_data['id'].isin(artists_id),'name'].tolist()
+artist_name
+```
+
+```{python}
+##
+```
+
+### Save Model
+
+```{python}
+import joblib 
+joblib.dump(final_als,"../models/als_tuned_model.pkl")
+```
+
+#### Sanity Check on Recommendation
+
+
+
+
+
