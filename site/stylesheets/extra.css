@@ -1,0 +1,24 @@
+.dataframe {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 50%;
+    margin: 20px 0;
+}
+.dataframe thead th {
+    background-color: #cfe9fd;
+    color: white;
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+}
+.dataframe tbody td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+.dataframe tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.dataframe tbody tr:hover {
+    background-color: #ddd;
+}
