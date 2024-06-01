@@ -1,0 +1,108 @@
+site_name: Rovo's Blog
+site_url: https://fakhrirobi.github.io/
+site_author: Fakhri Robi Aulia
+repo_url: https://github.com/fakhrirobi/
+
+theme:
+  name: material
+  highlightjs: true
+  font : 
+    text : Geologica
+    code : Fira Code 
+  hljs_languages:
+    - yaml
+    - rust
+    - python
+  features:
+  - announce.dismiss
+  # - content.action.edit
+  # - content.action.view
+  - content.code.annotate
+  - content.code.copy
+  # - content.tabs.link
+  - content.tooltips
+  - header.autohide
+  - navigation.expand
+  - navigation.footer
+  - navigation.indexes
+  - navigation.instant
+  # - navigation.prune
+  - navigation.sections
+  - navigation.tabs
+  # - navigation.tabs.sticky
+  - navigation.top
+  - navigation.tracking
+  - search.highlight
+  - search.share
+  - search.suggest
+  - toc.follow
+  # - toc.integrate
+
+markdown_extensions:
+
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      title: On this page
+      toc_depth: 3
+
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - mdx_math
+  - md_in_html
+
+# Extra javascript
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/fakhrirobi/
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:fakhrirobi.fra@gmail.com
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/katex.js 
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML
+extra_css:
+  - docs/stylesheets/extra.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - mkdocs-jupyter : 
+      theme : dark
+nav:
+    - Home: index.md
+
