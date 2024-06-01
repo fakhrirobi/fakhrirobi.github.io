@@ -1,0 +1,1316 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Fakhri Robi Aulia">
+      
+      
+        <link rel="canonical" href="https://fakhrirobi.github.io/002-measuring%20impact%20with%20AB%20Test/ab_test/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>Measuring Effect of Product Recommendation Initiative to decide whether to launch feature to all user - Rovo's Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Geologica:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Geologica";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../docs/stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#measuring-effect-of-product-recommendation-initiative-to-decide-whether-to-launch-feature-to-all-user" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Rovo&#39;s Blog" class="md-header__button md-logo" aria-label="Rovo's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rovo's Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Measuring Effect of Product Recommendation Initiative to decide whether to launch feature to all user
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fakhrirobi/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rovo&#39;s Blog" class="md-nav__button md-logo" aria-label="Rovo's Blog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Rovo's Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fakhrirobi/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="measuring-effect-of-product-recommendation-initiative-to-decide-whether-to-launch-feature-to-all-user"><strong>Measuring Effect of Product Recommendation Initiative to decide whether to  launch feature to all user</strong><a class="headerlink" href="#measuring-effect-of-product-recommendation-initiative-to-decide-whether-to-launch-feature-to-all-user" title="Permanent link">&para;</a></h1>
+<p><img alt="Website" src="../isaac-smith-unsplash.jpg" />
+<center>Photo by <a href="https://unsplash.com/@isaacmsmith?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Isaac Smith</a> on <a href="https://unsplash.com/photos/pen-om-paper-AT77Q0Njnt0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  </center></p>
+<p>PT Buah Alam , is an online grocery store that are currently growing at an grow stages of startup, to reach profitability they need to make a move. One of the eandeavor by approaching by boosting sales on platform. </p>
+<p>How to do that ? There are lot of ways. One of them through upselling / cross selling </p>
+<p>The Data Science Team already developed the recommendation algorithm in checkout pages </p>
+<p><img alt="variant" src="../variant.PNG" /></p>
+<p>Here's a catch : </p>
+<ol>
+<li>
+<p>If we implement new initiative to all of our user , the cost is too big and does not guarantee better marketing performance</p>
+</li>
+<li>
+<p>If we implement don't implement / atleast try, we have opportunity cost , "maybe" this initiative works well and yield better marketing performance </p>
+</li>
+</ol>
+<p>Solution ? </p>
+<p>There are several ways to prove causality / causal relationship </p>
+<p><img alt="Website" src="../hierarchy.PNG" /></p>
+<p>One of the most reliable tool is through Randomized Control Trial (RCT) </p>
+<p>For example, we want to estimate the effect on changing call to action in payment button</p>
+<p><img alt="Website" src="../effect.PNG" /></p>
+<p>However there are still other potential cause or what we called as <strong>confounding</strong> variable. </p>
+<p><img alt="confounding factor" src="../confounding.PNG" /></p>
+<p>To remove the bias , we could add randomization to make other confounder equal , by assignming randomly which user get button change</p>
+<p><img alt="Randomization" src="../randomization.PNG" /></p>
+<p>That the basic idea of <strong>Randomized Control Trial</strong> or commonly called as A/B Test</p>
+<p>So when does the A/B Test works ? </p>
+<ol>
+<li>
+<p>When each experiment unit doesnot interfere / influence other experiment unit (Stable Unit Treatment Value Assumption)
+   For example in marketplace where there is network effect</p>
+</li>
+<li>
+<p>When assigning experiment is possible (for example it's unethical to assign people to get lower education)</p>
+</li>
+<li>
+<p>When period is too long For example experimenting on ads campaign to measure number of deals made for property housing </p>
+</li>
+</ol>
+<p>So is it possible in our case ? Yes ! It's possible because : </p>
+<ol>
+<li>
+<p>Each user can be assigned to different feature </p>
+</li>
+<li>
+<p>Each user doesnot interfere with other users</p>
+</li>
+<li>
+<p>The period to measure causal impact still feasible </p>
+</li>
+</ol>
+<p>So how do we do A/B test? Don't worry here is the steps : </p>
+<p><img alt="ab test workflow" src="../workflow.PNG" /></p>
+<h1 id="1-setting-up-problem">1. Setting Up Problem<a class="headerlink" href="#1-setting-up-problem" title="Permanent link">&para;</a></h1>
+<p>Our focus is about increasing revenue ? But which revenue ? There are lot of revenues. The Revenue we are using is from user transaction because we can intervene on it. </p>
+<p>After that we should have idea what is the current funnel / user journey in buying phase </p>
+<p><img alt="journey" src="../journey.png" /></p>
+<p>After that we should decide what metrics as our target of experimentation. Back to our goal this recommender system initiative to boost revenue. Spesifically Revenue from User Transaction. Hence our <strong>metrics</strong> is <strong>Revenue per User</strong></p>
+<h1 id="2-designing-experiment">2. Designing Experiment<a class="headerlink" href="#2-designing-experiment" title="Permanent link">&para;</a></h1>
+<h2 id="21-experiment-unit">2.1. Experiment Unit<a class="headerlink" href="#21-experiment-unit" title="Permanent link">&para;</a></h2>
+<p>Our Experiment unit is user level , but which user since the recommendation system is located checkout process , our user pool is user who proceed into checkout process </p>
+<h2 id="22-group">2.2. Group<a class="headerlink" href="#22-group" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Control Group : Users who dont receive product recommendation during checkout process </li>
+<li>Treatment Group : User who receive product recommendation during checkout process </li>
+</ul>
+<h2 id="23-hypothesis">2.3. Hypothesis<a class="headerlink" href="#23-hypothesis" title="Permanent link">&para;</a></h2>
+<p>We want to check if revenue per user for treatment group is &gt; control group </p>
+<p><span class="arithmatex">\(H_0 = \mu_{control} &gt;= \mu_{treatment}\)</span></p>
+<p><span class="arithmatex">\(H_1 = \mu_{control} &lt; \mu_{treatment}\)</span></p>
+<p>Our statistical test aim to prove the hypothesis whether it is rejected or fail to reject </p>
+<h2 id="23-number-of-samples">2.3. Number of Samples<a class="headerlink" href="#23-number-of-samples" title="Permanent link">&para;</a></h2>
+<p>As Information , we have <strong>15 Million</strong> Active User , with median monthly in-checkout-process user of <strong>20.000</strong> . We use median because number of user in checkout process is vary. </p>
+<p>So how many number of user we need for both treatment and control ? Well it's depend on Treatment Effect you want to capture , the smaller the effect you want to capture the more sample we need to add because of the experiment precision</p>
+<p>Decision to role out new feature based on whether new initiative meet certain criteria such as :</p>
+<ol>
+<li>
+<p>Statistically Significant 
+   We'll talk about it later</p>
+</li>
+<li>
+<p>Practically Significant
+   Related to Business Requirement</p>
+</li>
+</ol>
+<h3 id="231-business-requirement">2.3.1 Business Requirement<a class="headerlink" href="#231-business-requirement" title="Permanent link">&para;</a></h3>
+<p>Our new initiative by recommending purchase is indeed costly, we have to calculate the cost first </p>
+<h4 id="2311-cost-of-making-recommendation">2.3.1.1. Cost of Making Recommendation<a class="headerlink" href="#2311-cost-of-making-recommendation" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Man Power 
+   The Development process assumed in six month , people that are involved : </p>
+<ul>
+<li>
+<p>Data Scientist , assume monthly rate $ 8000 to $ 12000 / month x 6 month = $ 48.000 - $ 72.000 </p>
+</li>
+<li>
+<p>Data Engineer  , assume monthly rate $8000 to $12000 / month x 6 month = $48.000 - $72.000 </p>
+</li>
+<li>
+<p>MLOps , assume monthly rate $9000 to $10000 / month x 6 month = $45.000 - $60.000 </p>
+</li>
+<li>
+<p>Software Engineer , assume monthly rate $9000 to $10000 / month x 6 month = $45.000 - $60.000 </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Development Cost</th>
+<th>Development Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Role</strong></td>
+<td>Lower Bound Cost</td>
+<td>Upper Bound Cost</td>
+</tr>
+<tr>
+<td>Data Scientist</td>
+<td>48000</td>
+<td>72000</td>
+</tr>
+<tr>
+<td>Data Engineer</td>
+<td>48000</td>
+<td>72000</td>
+</tr>
+<tr>
+<td>MLOps</td>
+<td>45000</td>
+<td>60000</td>
+</tr>
+<tr>
+<td>Software Engineer</td>
+<td>45000</td>
+<td>60000</td>
+</tr>
+<tr>
+<td><strong>Total Cost</strong></td>
+<td>186000</td>
+<td>264000</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Cloud 
+    to handle ~ 100k users per  day x 30 day, another information is that the calculation is in batch manner, we don't need real time recommendation yet. Let say the cost isUSD <span class="arithmatex">\(1000-2000 per month  x 12 month =\)</span>1.000 -$24.000  annualy</p>
+</li>
+<li>
+<p>Cost Summarization</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Cost Attribute</th>
+<th>Lower Bound Cost</th>
+<th>Upper Bound Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Development Cost</td>
+<td>186000</td>
+<td>264000</td>
+</tr>
+<tr>
+<td>Annual Infra Cost</td>
+<td>12000</td>
+<td>24000</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>198000</td>
+<td>288000</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2312-reasonable-revenue">2.3.1.2. Reasonable Revenue<a class="headerlink" href="#2312-reasonable-revenue" title="Permanent link">&para;</a></h4>
+<p>We have seen that in order to make recommender system is not cheap at this scale, hence at what incremental level should we roll out this feature to all user ? Of Course covering costs + expected increase in user revenue. </p>
+<p>About cost we have already know let say we take  USD 288,000 , what about expected increase in user revenue. As per now median per user revenue was about USD 1 daily.  Median  of monthly user checkout 100.000 user 
+minimum revenue should be <span class="arithmatex">\(Revenue &gt;= 288.000\)</span> </p>
+<p>Current Revenue per User/ annual  = 1 x 20.000 x 12  =  USD 240.000 
+Gaps = Not Yet Covered Cost + Expected Growth USD 48.000 / (12 x 20.000 ) = USD 0.2 </p>
+<p>Revenue / User / Daily &gt;= USD 1.2 </p>
+<p>If we continue to success we can have USD 1 increase from USD 1 to USD 2 We can have Additional Revenue of </p>
+<p><strong>First Year</strong></p>
+<p>2-1.2 x 20.000 x 12 = <strong>USD 192.000</strong></p>
+<p><strong>Second Year or more</strong></p>
+<p>2 x 20.000 x 12 - (Annual Infra Cost) </p>
+<p>2 x 20.000 x 12 - (24.000) = <strong>USD 456.000</strong></p>
+<p>So in this case we have to able to detect USD 1 Change in revenue per user. This will relate to the next problem which is power Analysis</p>
+<h3 id="231-power-analysis">2.3.1 Power Analysis<a class="headerlink" href="#231-power-analysis" title="Permanent link">&para;</a></h3>
+<p>In statistical testing there are two possible Errors : </p>
+<ul>
+<li>Rejecting when it should failed to be Rejected, or (Type I Error) </li>
+<li>Fail to Reject when it should be Rejected or (Type II Error)</li>
+</ul>
+<p>Typically Type I Error influence what we called as significance level or <span class="arithmatex">\(\alpha\)</span>. While the second one is influenced by Power <span class="arithmatex">\((1-\beta)\)</span></p>
+<p>Will be focusing on <strong>Power</strong> Analysis </p>
+<ul>
+<li>Power is the probability to reject <span class="arithmatex">\(H_{0}\)</span> given <span class="arithmatex">\(H_{0}\)</span> is false.</li>
+</ul>
+<div class="arithmatex">\[
+\text{power} = 1-\beta = P(\text{reject } H_{0} \ | \ H_{0} \text{ is false})
+\]</div>
+<ul>
+<li>Power is dependent to Factor such as </li>
+<li>Effect size</li>
+<li>Data variance</li>
+<li>Sample size (<span class="arithmatex">\(n\)</span>)</li>
+</ul>
+<p>We will simulate how above mentioned factor related to power </p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">math</span> 
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">mu_1</span><span class="p">,</span><span class="n">mu_2</span><span class="p">,</span><span class="n">std_dev_1</span><span class="p">,</span><span class="n">std_dev_2</span><span class="p">,</span><span class="n">n_sample_1</span><span class="p">,</span><span class="n">n_sample_2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_repeat</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+
+    <span class="c1"># generate data </span>
+    <span class="n">data_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_1</span><span class="p">,</span> <span class="n">std_dev_1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">data_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_2</span><span class="p">,</span> <span class="n">std_dev_2</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+    <span class="n">sample_1_mean</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sample_2_mean</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_repeat</span><span class="p">):</span>
+        <span class="c1"># Generate data</span>
+        <span class="n">sample_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_sample_1</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">sample_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">data_2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_sample_2</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># obtain mean </span>
+        <span class="n">mean_1</span> <span class="o">=</span> <span class="n">sample_1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">mean_2</span> <span class="o">=</span> <span class="n">sample_2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="c1"># Append mean to the list</span>
+        <span class="n">sample_1_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_1</span><span class="p">)</span>
+        <span class="n">sample_2_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_2</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">sample_1_mean</span><span class="p">,</span><span class="n">sample_2_mean</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Group 1 - $H_0$&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">mean_2</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;Group 2 - $H_1$&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_1</span><span class="p">),</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;group 1 mean&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_2</span><span class="p">),</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;group 2 mean&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>Let's generate some simulation </p>
+<h4 id="variance"><strong>Variance</strong><a class="headerlink" href="#variance" title="Permanent link">&para;</a></h4>
+<p><strong>Bigger</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">2</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">20</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_26_0.png" /></p>
+<p>The More Variance we get, is getting harder to see the effect size of two groups</p>
+<p><strong>Smaller</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">2</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">1</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_29_0.png" /></p>
+<p>The Less Variance we get we can see the difference clearly now </p>
+<h4 id="sample-size"><strong>Sample Size</strong><a class="headerlink" href="#sample-size" title="Permanent link">&para;</a></h4>
+<p><strong>Smaller</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">2</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">5</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_33_0.png" /></p>
+<p><strong>Bigger</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">2</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">5</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_35_0.png" /></p>
+<h4 id="effect-size"><strong>Effect Size</strong><a class="headerlink" href="#effect-size" title="Permanent link">&para;</a></h4>
+<p>or Change / Increase we want to detect</p>
+<p><strong>Smaller</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="o">+</span><span class="mf">0.01</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">5</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_38_0.png" /></p>
+<p><strong>Bigger</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">dict_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;mu_1&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;mu_2&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="o">+</span><span class="mi">5</span> <span class="p">,</span>
+    <span class="s1">&#39;std_dev_1&#39;</span><span class="p">:</span><span class="mi">5</span> <span class="p">,</span> <span class="s1">&#39;std_dev_2&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="s1">&#39;n_sample_1&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="s1">&#39;n_sample_2&#39;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span>
+    <span class="s1">&#39;n_repeat&#39;</span><span class="p">:</span><span class="mi">1000</span>
+<span class="p">}</span>
+<span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="o">**</span><span class="n">dict_params</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_40_0.png" /></p>
+<p>The more small effect size we want to detect &rarr; <strong>more power required</strong></p>
+<h3 id="wrapping-up">Wrapping Up<a class="headerlink" href="#wrapping-up" title="Permanent link">&para;</a></h3>
+<p>In this case we have already know how much effect we wanna test , in this case USD 1 Increase in Revenue oer User </p>
+<p>to calculate minimum sample size we can use : 
+<script type="math/tex; mode=display">
+n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
+</script>
+</p>
+<p>with : </p>
+<ol>
+<li><span class="arithmatex">\(\delta\)</span> : Effect Size</li>
+<li><span class="arithmatex">\(\sigma\)</span> : variance of Population (estimated) from revenue per user variance </li>
+<li><span class="arithmatex">\(\alpha/2\)</span> : alpha ,  <span class="arithmatex">\(1- Confidence Interval\)</span></li>
+<li><span class="arithmatex">\(\beta\)</span> : beta, 1- Power Level</li>
+<li><span class="arithmatex">\(z\)</span> : z score</li>
+</ol>
+<p>Deciding <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> , in a typical experiment </p>
+<ol>
+<li><span class="arithmatex">\(\alpha\)</span> is 5% or Confidence is 95%</li>
+<li><span class="arithmatex">\(\beta\)</span> is 20%  or Power is 80%</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_minimum_sample</span><span class="p">(</span><span class="n">effect_size</span><span class="p">,</span><span class="n">std</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">beta</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="c1"># obtain both zscore</span>
+    <span class="n">z_alpha_2</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">z_beta</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span>
+
+    <span class="n">upper</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">std</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">z_alpha_2</span> <span class="o">+</span> <span class="n">z_beta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">effect_size</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">n_sample</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">upper</span><span class="o">/</span><span class="n">lower</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_sample</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">n_sample</span> <span class="o">=</span> <span class="n">calculate_minimum_sample</span><span class="p">(</span><span class="n">effect_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">std</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">n_sample</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>1570
+</code></pre></div>
+<p>For each variant we should assign <strong>1570</strong> randomization unit, in this case is user </p>
+<h2 id="24-experiment-durations">2.4. Experiment Durations<a class="headerlink" href="#24-experiment-durations" title="Permanent link">&para;</a></h2>
+<p>A good experiment duration &lt; 1 month , since the variation is only 2, we can try to conduct it by 1 week. Starting from <strong>February 2<sup>nd</sup>, 2024</strong> to <strong>February 8<sup>th</sup>, 2024</strong></p>
+<h1 id="3-running-experiments">3. Running Experiments<a class="headerlink" href="#3-running-experiments" title="Permanent link">&para;</a></h1>
+<p>Since we don't have a privilege to experimentation platform we will use generated data. </p>
+<p>But before running the experiments we will have to do <strong>A/A</strong> test ? </p>
+<h2 id="31-before-experiment-aa-tests">3.1. Before Experiment : A/A Tests<a class="headerlink" href="#31-before-experiment-aa-tests" title="Permanent link">&para;</a></h2>
+<p><strong>Why</strong> ? Because there are maybe still not a ceterus paribus condition no bias , for example user may have experienced delayed response time that cause user to differ in behaviour which eventually will influence our metrics of interest</p>
+<p><strong>How</strong> ? In order to make that not happen, we can compare same variant by having the same metrics. </p>
+<p><strong>But</strong>, it's expensive to run experiment before experiment. There is a hackish way, by using metrics from last observation, for example last week metrics , and then randomly assign user two different group. </p>
+<p>Workflow : </p>
+<ol>
+<li>Obtain Last Week metrics from each user (revenue per user)</li>
+<li>For n iteration do : <ul>
+<li>Randomly Assign user into two groups</li>
+<li>Obtain means of each metrics from both group</li>
+<li>Conduct statistical test, to check differences of mean metrics between two variant using t-test</li>
+<li>Collect p-value</li>
+</ul>
+</li>
+<li>Test the p-value distribution whether followed uniform distribution using Goodness of Fit test such as <strong>Kolmogorov Smirnoff Test</strong></li>
+<li>If the p-value &gt; <span class="arithmatex">\(\alpha\)</span> can be concluded that the samples is the same from referenced distribution ( in this case uniform distribution) </li>
+<li>Plot the p-value from n_iteration, the p value should be uniform (indicating variant is the same) </li>
+</ol>
+<p>We will generate using synthetic data </p>
+<div class="highlight"><pre><span></span><code><span class="n">num_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">100_000</span><span class="o">/</span><span class="mi">30</span><span class="p">)</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span><span class="n">metric_name</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">dummy_aa_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_samples</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+       <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">halfnorm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">num_samples</span><span class="p">)</span> <span class="c1"># constraint revenue to positive</span>
+    <span class="p">})</span>
+    <span class="k">return</span> <span class="n">dummy_aa_test</span>
+
+<span class="n">dummy_aa_test</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span><span class="n">metric_name</span><span class="o">=</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">)</span>
+<span class="n">dummy_aa_test</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>revenue_per_user</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>5.264200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>11.863647</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>5.423547</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>14.484032</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>15.570061</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>23328</th>
+      <td>23329</td>
+      <td>9.137816</td>
+    </tr>
+    <tr>
+      <th>23329</th>
+      <td>23330</td>
+      <td>6.039538</td>
+    </tr>
+    <tr>
+      <th>23330</th>
+      <td>23331</td>
+      <td>16.040150</td>
+    </tr>
+    <tr>
+      <th>23331</th>
+      <td>23332</td>
+      <td>1.436674</td>
+    </tr>
+    <tr>
+      <th>23332</th>
+      <td>23333</td>
+      <td>5.646788</td>
+    </tr>
+  </tbody>
+</table>
+<p>23333 rows × 2 columns</p>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">simulate_aa_test</span><span class="p">(</span><span class="n">n_iter</span><span class="p">,</span><span class="n">metric_name</span><span class="p">,</span><span class="n">num_samples</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">data</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">(</span><span class="n">num_samples</span><span class="p">,</span><span class="n">metric_name</span><span class="o">=</span><span class="n">metric_name</span><span class="p">)</span>
+
+    <span class="n">p_vals_t_test</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">)</span> <span class="p">:</span> 
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span> <span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">metric_g1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">metric_name</span><span class="p">]</span>
+        <span class="n">metric_g2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">][</span><span class="n">metric_name</span><span class="p">]</span>
+
+        <span class="n">mu_1</span> <span class="o">=</span> <span class="n">metric_g1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">mu_2</span> <span class="o">=</span> <span class="n">metric_g2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">metric_g1</span><span class="p">,</span> <span class="n">metric_g2</span><span class="p">)</span>
+
+        <span class="n">p_vals_t_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span>
+
+    <span class="c1"># perform k-s test</span>
+    <span class="n">ks_stat</span><span class="p">,</span><span class="n">p_val_ks_test</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">kstest</span><span class="p">(</span><span class="n">p_vals_t_test</span><span class="p">,</span><span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="n">p_vals_t_test</span><span class="p">,</span><span class="n">p_val_ks_test</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">p_value</span><span class="p">,</span><span class="n">ks_p_val</span> <span class="o">=</span> <span class="n">simulate_aa_test</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">metric_name</span><span class="o">=</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">,</span><span class="n">num_samples</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;p-value&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&lt;Axes: ylabel=&#39;Count&#39;&gt;
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_54_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">ks_p_val</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0.7919638330879013
+</code></pre></div>
+<p>The simulated A/A test is from the same distribution (uniform distribution) </p>
+<h1 id="4-analyzing-data">4. Analyzing Data<a class="headerlink" href="#4-analyzing-data" title="Permanent link">&para;</a></h1>
+<p>Let's Recap our Experimentation Plan </p>
+<p><strong>Metrics of Experimentation</strong> : Revenue per User </p>
+<p><strong>Experiment Unit</strong> : User in Checkout Process </p>
+<p><strong>Variant</strong> : </p>
+<div class="highlight"><pre><span></span><code>1. Control Group : No Product Recommendation during checkout process 
+2. Treatment Group : Product Recommendation during checkout process y
+</code></pre></div>
+<p><strong>Number of Samples</strong> : 1570 from each variant </p>
+<p><strong>Experiment Duration</strong> : Experiment was conducted for a week , starting from <strong>February 2<sup>nd</sup>, 2024</strong> to <strong>February 8<sup>th</sup>, 2024</strong></p>
+<p><strong>Our Hypothesis</strong> : by adding product recommendation could boost revenue per user</p>
+<p>So what do we do when it comes after experiment. We obtain data from experiment log from both of each group. However as Data Scientist we should be sceptical hence we need to perform <strong>Sanity Check</strong> </p>
+<h2 id="41-data-check">4.1. Data Check<a class="headerlink" href="#41-data-check" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">experiment_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;experiment_collected_data.csv&#39;</span><span class="p">,</span><span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">])</span>
+<span class="n">experiment_data</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datetime</th>
+      <th>user_id</th>
+      <th>group</th>
+      <th>revenue_per_user</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2024-02-02</td>
+      <td>d5683160-da8e-4027-80eb-f1543a6203e5</td>
+      <td>control</td>
+      <td>16.433941</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2024-02-03</td>
+      <td>c829d253-d79e-42b8-9fe0-f2f69bd9d7d0</td>
+      <td>treatment</td>
+      <td>2.274594</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2024-02-03</td>
+      <td>4307a4d6-1125-4191-8aa2-a473c5f46c5c</td>
+      <td>control</td>
+      <td>6.293043</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2024-02-07</td>
+      <td>f23f605a-7a25-45bc-b4bf-3c9ddb4dfacb</td>
+      <td>control</td>
+      <td>29.030031</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2024-02-06</td>
+      <td>fb404923-91df-4c01-956c-3ede39361914</td>
+      <td>control</td>
+      <td>2.196385</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3135</th>
+      <td>2024-02-04</td>
+      <td>e56ea29f-a89f-46d0-a81d-1ad6759f26f3</td>
+      <td>treatment</td>
+      <td>13.885899</td>
+    </tr>
+    <tr>
+      <th>3136</th>
+      <td>2024-02-04</td>
+      <td>2597b6c8-71e2-4acc-87a0-8d775e7bf83f</td>
+      <td>treatment</td>
+      <td>6.362146</td>
+    </tr>
+    <tr>
+      <th>3137</th>
+      <td>2024-02-02</td>
+      <td>5e758638-e6e2-49c8-81ab-187156b59f97</td>
+      <td>control</td>
+      <td>3.460954</td>
+    </tr>
+    <tr>
+      <th>3138</th>
+      <td>2024-02-03</td>
+      <td>310130df-086e-4c5e-911c-1401979195a5</td>
+      <td>control</td>
+      <td>1.898356</td>
+    </tr>
+    <tr>
+      <th>3139</th>
+      <td>2024-02-06</td>
+      <td>532dc215-a179-4874-9e8b-89d141fe10c9</td>
+      <td>control</td>
+      <td>2.944030</td>
+    </tr>
+  </tbody>
+</table>
+<p>3140 rows × 4 columns</p>
+</div>
+
+<p>Check number of unique user from each group</p>
+<div class="highlight"><pre><span></span><code><span class="n">experiment_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>group
+control      1570
+treatment    1570
+Name: user_id, dtype: int64
+</code></pre></div>
+<p>Number of Unique User is like what we expect</p>
+<p>Next, we should check the experiment datetime </p>
+<div class="highlight"><pre><span></span><code><span class="n">filter_1</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2024-08-02&#39;</span>
+<span class="n">filter_2</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">&#39;2024-02-02&#39;</span>
+
+<span class="n">experiment_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">filter_1</span><span class="o">&amp;</span><span class="n">filter_2</span><span class="p">)]</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>datetime</th>
+      <th>user_id</th>
+      <th>group</th>
+      <th>revenue_per_user</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+
+<p>Our data is valid in terms of datetime as experiment plan</p>
+<p>Next, we should check if there is duplicate record from user assignment </p>
+<div class="highlight"><pre><span></span><code><span class="n">experiment_data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0
+</code></pre></div>
+<p>It's safe from duplicate user assignment</p>
+<h3 id="411-checking-guadrail-metrics">4.1.1. Checking Guadrail Metrics<a class="headerlink" href="#411-checking-guadrail-metrics" title="Permanent link">&para;</a></h3>
+<p>In real experiment platform, we should check , what we called as <strong>Guadrail Metrics</strong>, which should not be different. Otherwise it will affect the experiment outcome become bias, for example <strong>latency</strong></p>
+<h2 id="42-aggregating-data">4.2. Aggregating Data<a class="headerlink" href="#42-aggregating-data" title="Permanent link">&para;</a></h2>
+<p>Next step after we have clean &amp; valid data, we should aggregate data to reflect metrics from both group </p>
+<div class="highlight"><pre><span></span><code><span class="n">summarize_data</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">})</span>
+<span class="n">summarize_data</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>C:\Users\fakhr\AppData\Local\Temp\ipykernel_21012\1678331338.py:1: FutureWarning:
+
+The provided callable &lt;function mean at 0x000001AD8D28E480&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>revenue_per_user</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>control</th>
+      <td>8.949105</td>
+    </tr>
+    <tr>
+      <th>treatment</th>
+      <td>9.852804</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">summarize_data</span><span class="p">[</span><span class="s1">&#39;lift&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">summarize_data</span><span class="p">[</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">summarize_data</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>revenue_per_user</th>
+      <th>lift</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>control</th>
+      <td>8.949105</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>treatment</th>
+      <td>9.852804</td>
+      <td>0.903699</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="43-performing-statistical-test">4.3. Performing Statistical Test<a class="headerlink" href="#43-performing-statistical-test" title="Permanent link">&para;</a></h2>
+<p>Condition : 
+We are interested whether by providing product recommendation during checkout will increase revenue per user. </p>
+<p>Why we need to perform statistical test ? We can just compare the difference between mean
+Yes! at some point it is right, however we only have small sample, and trying to estimate the population, hence what we can use to leverage the statistical test to add confidence in our result </p>
+<p>Type of Statistical Test, we want to compare the revenue, in terms of mean difference between two groups (independent sample), we can leverage <strong>T-student Test</strong> for mean from two sample. 
+Since we are going to check its bigger or not, its one tailed test</p>
+<p>Hypothesis : </p>
+<p><span class="arithmatex">\(H_0 : \mu_{\text{treatment}} &lt;= \mu_{\text{control}}\)</span></p>
+<p><span class="arithmatex">\(H_1 : \mu_{\text{treatment}} &gt; \mu_{\text{control}}\)</span></p>
+<p>At experiment plan we want Confidence Interval of <strong>95%</strong> or <span class="arithmatex">\(\alpha=0.05\)</span></p>
+<p>Assumption : we don;t know variance about population, and both variance assumed to be equal </p>
+<p>How to conclude ? 
+1. If p-value &gt; <span class="arithmatex">\(\alpha\)</span> fail to reject the null Hypothesis, otherwise reject the null hypothesis
+2. equivalent to if t-test value &lt; t-table fail to reject the null Hypothesis </p>
+<div class="highlight"><pre><span></span><code><span class="n">control_group</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;control&#39;</span><span class="p">,</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">treatment_group</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;treatment&#39;</span><span class="p">,</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">t_stat</span><span class="p">,</span><span class="n">p_val_t_test</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">treatment_group</span><span class="p">,</span><span class="n">control_group</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;greater&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">p_val_t_test</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>1.5326415297769846e-05
+</code></pre></div>
+<p>Proven that we can reject null hypothesis</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Parameters</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">1570</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">n_samples</span><span class="o">-</span><span class="mi">2</span>
+<span class="n">critical_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>  <span class="c1"># one tailed </span>
+
+<span class="c1"># t-distribution</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="c1"># generate some data </span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;t-distribution with </span><span class="si">{</span><span class="n">df</span><span class="si">}</span><span class="s1"> degrees of freedom&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">critical_value</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Rejection Region&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add critical values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">critical_value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Critical Value: </span><span class="si">{</span><span class="n">critical_value</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_stat</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;T statistic value&#39;</span><span class="p">)</span>
+
+<span class="c1"># Labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Two-tailed t-test Rejection Region&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t-value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_79_0.png" /></p>
+<p>Clearly we   reject the null hypothesis. Next Step we can generate confidence interval for our treatment effect using standard error </p>
+<div class="arithmatex">\[ (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  -  t_{\alpha/2,df} \cdot SE \leq \mu_{\text{treatment}}- \mu_{\text{treatment}} \leq (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  +  t_{\alpha/2,df} \cdot SE\]</div>
+<div class="arithmatex">\[SE = \sqrt{(\cfrac{s_1^2}{n_1} + \cfrac{s_2^2}{n_2}})  \]</div>
+<p>with : </p>
+<ol>
+<li><span class="arithmatex">\(SE\)</span> : Standard error</li>
+<li><span class="arithmatex">\(s_1^2\)</span> : variance from group 1 , control group</li>
+<li><span class="arithmatex">\(s_2^2\)</span> : variance from group 2 , treatment group</li>
+<li><span class="arithmatex">\(n_1\)</span> : number of sample from group 1 , control group</li>
+<li><span class="arithmatex">\(n_2\)</span> : number of sample from group 2 , treatment group</li>
+<li><span class="arithmatex">\(t_{\alpha/2 , df}\)</span> : t table value given alpha and degrees of freedom</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">difference</span> <span class="o">=</span> <span class="n">treatment_group</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">control_group</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
+<span class="n">n_1</span> <span class="o">=</span> <span class="mi">1570</span> 
+<span class="n">n_2</span> <span class="o">=</span> <span class="mi">1570</span>
+<span class="n">s_1</span> <span class="o">=</span> <span class="n">control_group</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">s_2</span> <span class="o">=</span> <span class="n">treatment_group</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+
+<span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">s_1</span><span class="o">/</span><span class="n">n_1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">s_2</span><span class="o">/</span><span class="n">n_2</span><span class="p">))</span>
+
+<span class="n">t_alpha</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n_1</span><span class="o">+</span><span class="n">n_2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">c_i</span> <span class="o">=</span> <span class="n">t_alpha</span><span class="o">*</span><span class="n">se</span>
+
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Effect Confidence Interval </span><span class="si">{</span><span class="n">difference</span><span class="si">}</span><span class="s1"> +/-</span><span class="si">{</span><span class="n">c_i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Effect Confidence Interval 0.903699066036344 +/--0.4243055658869349
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">c_i</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-0.4243055658869349
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">difference</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0.903699066036344
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">difference</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=-</span><span class="n">c_i</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">elinewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Revenue per User + CI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">ymin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Statistically not Significant&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">ymin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Practically Not Significant&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparing Practically and Statistically Significant&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../ab_test_files/ab_test_84_0.png" /></p>
+<h1 id="5-inferring-decision">5. Inferring Decision<a class="headerlink" href="#5-inferring-decision" title="Permanent link">&para;</a></h1>
+<p>We already reach the end of the experimentation. We have to decided whether to launch product recommendation system during checkout process or not to all users. </p>
+<p>To rollout this feature , the result should be : 
+1. Statistically Significant
+2. Practically Significant</p>
+<p>From the Result it looks like <strong>only Statistical Significance</strong> . However the revenue per user still not fullfill our minimum USD 1 Revenue per user increase, so we have to <strong>decide not to launch the product</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/fakhrirobi/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:fakhrirobi.fra@gmail.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.code.annotate", "content.code.copy", "content.tooltips", "header.autohide", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML"></script>
+      
+    
+  </body>
+</html>
