@@ -101,7 +101,6 @@ extra_css:
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  - mkdocs-jupyter : 
-      theme : dark
+
 nav:
     - Home: index.md
