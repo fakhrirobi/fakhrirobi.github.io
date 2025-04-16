@@ -76,11 +76,11 @@ markdown_extensions:
   - pymdownx.tilde
   - mdx_math
   - md_in_html
-  - pymdownx.superfences: 
-    custom_fences:
-    - name: mermaid
-      class: mermaid
-      format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 # Extra javascript
 extra:
