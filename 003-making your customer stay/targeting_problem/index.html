@@ -597,7 +597,8 @@ Photo by <a href="https://unsplash.com/@enginakyurt?utm_content=creditCopyText&u
 <p>Step by Step Solution : </p>
 <p><strong>1. Running Experiment</strong></p>
 <p>First we need to design experiment by giving randomly coupon to user assign  , however we should be aware that people who offered coupon can either accept or do not accept their coupon </p>
-<p><div class="highlight"><pre><span></span><code>graph LR
+<p><pre class="mermaid"><code>
+graph LR
     A(Coupon Assignment) --&gt;B(Coupon Claims)
     B --&gt; C(Gross Booking)
     D(Number of Bookings) --&gt; B
@@ -606,7 +607,9 @@ Photo by <a href="https://unsplash.com/@enginakyurt?utm_content=creditCopyText&u
     E --&gt; F
     F --&gt; C 
     D --&gt; C
-</code></pre></div>
+
+
+</code></pre>
 The variable we can observe : 
 1. Number of Bookings 
 2. Membership 
@@ -636,9 +639,13 @@ The variable we can observe :
 <li><strong>Temporal Sequencing</strong> </li>
 </ol>
 <p>If we have treatment (T) and Outcome Variable (Y). It means we do some treatment first then we observe the outcome variable. For example we want to measure the effect of rising price of commodity we want to measure the Demand. </p>
-<div class="highlight"><pre><span></span><code>   graph LR
+<pre class="mermaid"><code>
+   graph LR
       A(Commodity Price) --&gt;B(Demand)
-</code></pre></div>
+
+
+
+</code></pre>
 <ol>
 <li><strong>Non Spurious Relationship</strong></li>
 </ol>
@@ -648,10 +655,10 @@ The variable we can observe :
 <li><strong>Removing alternate Causes (Confounding)</strong></li>
 </ol>
 <p>Previously we want to measure the effect of rising price of commodity on demand, however there are many factors affecting demand,such as seasonality </p>
-<div class="highlight"><pre><span></span><code>   graph LR
+<pre class="mermaid"><code>
+   graph LR
       A(Commodity Price) --&gt;B(Demand)
-      C(Seasonality Confounding) --&gt; B
-</code></pre></div>
+      C(Seasonality Confounding) --&gt; B</code></pre>
 <p>How to remove this bias ? </p>
 <ol>
 <li>We could use randomization / random experiment such as <strong>A/B Test</strong> </li>
@@ -661,7 +668,8 @@ The variable we can observe :
 <p>The one who developed causality theory is Donald B Rubin, or called as <strong>Rubin Causality</strong> framework of <strong>potential outcome</strong> framework. </p>
 <p>So what is potential outcome, let say we have  a headache, how can we cure the headache, for example : we can take medicine. </p>
 <p>The outcome or result after taking medicine </p>
-<div class="highlight"><pre><span></span><code>   graph LR
+<pre class="mermaid"><code>
+   graph LR
       A[Headache] --&gt;B[Take Pills]
       B --&gt; C[Headache Gone]
       B --&gt; D[Still Headache]
@@ -669,7 +677,10 @@ The variable we can observe :
       A --&gt; E[Doesnot Take Pills]
       E --&gt; F[Headache Gone]
       E --&gt; G[Still Headache]
-</code></pre></div>
+
+
+
+</code></pre>
 <p>Taking Pills or Not Taking Pills is a form of treatment say we denote as <strong>T</strong> , each person only can take one treatment at a time (take pills or not ) and only observe one outcome say we denote <strong>Y</strong> (still headache or not)</p>
 <p>those outcome, called potential outcome. </p>
 <p>Hence if we want to denote the outcome of each person, say <span class="arithmatex">\(i\)</span> after taking pills is <span class="arithmatex">\(Y_{1i}\)</span> </p>
@@ -705,12 +716,16 @@ The variable we can observe :
 <p>We only have one outcome at a time, hence we need to estimate the other one using model </p>
 <p>Let's dive in </p>
 <p>Modelling Workflow </p>
-<div class="highlight"><pre><span></span><code>   graph LR
+<pre class="mermaid"><code>
+   graph LR
       A[Data Preparation] --&gt;B[Exploratory Data Analysis]
       B --&gt; C[Data Preprocessing]
       C --&gt; D[Modelling Phase]
       D --&gt; E[Finding Best Model]
-</code></pre></div>
+
+
+
+</code></pre>
 <h3 id="data-preparation">Data Preparation<a class="headerlink" href="#data-preparation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
@@ -1750,10 +1765,14 @@ Y = \sum^{K-1}<em i="i">{i=1} \beta</em>} \cdot X_i + \beta_K \cdot T +  \sum^{K
 <ol>
 <li>
 <p>Train <strong>any</strong> machine learning model to all data 
-<div class="highlight"><pre><span></span><code>   graph LR
+<pre class="mermaid"><code>
+   graph LR
       A(Covariate) --&gt;B(Y)
       C(Treatment Variable) --&gt; B
-</code></pre></div></p>
+
+
+
+</code></pre></p>
 </li>
 <li>
 <p>During prediction phase : </p>
