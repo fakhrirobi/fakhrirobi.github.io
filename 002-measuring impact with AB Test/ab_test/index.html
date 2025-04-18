@@ -377,8 +377,8 @@
 </ul>
 <h2 id="23-hypothesis">2.3. Hypothesis<a class="headerlink" href="#23-hypothesis" title="Permanent link">&para;</a></h2>
 <p>We want to check if revenue per user for treatment group is &gt; control group </p>
-<p><span class="arithmatex">\(H_0 = \mu_{control} &gt;= \mu_{treatment}\)</span></p>
-<p><span class="arithmatex">\(H_1 = \mu_{control} &lt; \mu_{treatment}\)</span></p>
+<p>$H_0 = \mu_{control} &gt;= \mu_{treatment}$</p>
+<p>$H_1 = \mu_{control} &lt; \mu_{treatment}$</p>
 <p>Our statistical test aim to prove the hypothesis whether it is rejected or fail to reject </p>
 <h2 id="23-number-of-samples">2.3. Number of Samples<a class="headerlink" href="#23-number-of-samples" title="Permanent link">&para;</a></h2>
 <p>As Information , we have <strong>15 Million</strong> Active User , with median monthly in-checkout-process user of <strong>20.000</strong> . We use median because number of user in checkout process is vary. </p>
@@ -403,7 +403,7 @@
    The Development process assumed in six month , people that are involved : </p>
 <ul>
 <li>
-<p>Data Scientist , assume monthly rate $ 8000 to $ 12000 / month x 6 month = $ 48.000 - $ 72.000 </p>
+<p>Data Scientist , assume monthly rate \$ 8000 to \$ 12000 / month x 6 month = \$ 48.000 - \$ 72.000 </p>
 </li>
 <li>
 <p>Data Engineer  , assume monthly rate $8000 to $12000 / month x 6 month = $48.000 - $72.000 </p>
@@ -459,7 +459,7 @@
 </li>
 <li>
 <p>Cloud 
-    to handle ~ 100k users per  day x 30 day, another information is that the calculation is in batch manner, we don't need real time recommendation yet. Let say the cost isUSD <span class="arithmatex">\(1000-2000 per month  x 12 month =\)</span>1.000 -$24.000  annualy</p>
+    to handle ~ 100k users per  day x 30 day, another information is that the calculation is in batch manner, we don't need real time recommendation yet. Let say the cost isUSD $1000-2000 per month  x 12 month =$1.000 -$24.000  annualy</p>
 </li>
 <li>
 <p>Cost Summarization</p>
@@ -494,7 +494,7 @@
 <h4 id="2312-reasonable-revenue">2.3.1.2. Reasonable Revenue<a class="headerlink" href="#2312-reasonable-revenue" title="Permanent link">&para;</a></h4>
 <p>We have seen that in order to make recommender system is not cheap at this scale, hence at what incremental level should we roll out this feature to all user ? Of Course covering costs + expected increase in user revenue. </p>
 <p>About cost we have already know let say we take  USD 288,000 , what about expected increase in user revenue. As per now median per user revenue was about USD 1 daily.  Median  of monthly user checkout 100.000 user 
-minimum revenue should be <span class="arithmatex">\(Revenue &gt;= 288.000\)</span> </p>
+minimum revenue should be $Revenue &gt;= 288.000$ </p>
 <p>Current Revenue per User/ annual  = 1 x 20.000 x 12  =  USD 240.000 
 Gaps = Not Yet Covered Cost + Expected Growth USD 48.000 / (12 x 20.000 ) = USD 0.2 </p>
 <p>Revenue / User / Daily &gt;= USD 1.2 </p>
@@ -511,19 +511,21 @@ Gaps = Not Yet Covered Cost + Expected Growth USD 48.000 / (12 x 20.000 ) = USD 
 <li>Rejecting when it should failed to be Rejected, or (Type I Error) </li>
 <li>Fail to Reject when it should be Rejected or (Type II Error)</li>
 </ul>
-<p>Typically Type I Error influence what we called as significance level or <span class="arithmatex">\(\alpha\)</span>. While the second one is influenced by Power <span class="arithmatex">\((1-\beta)\)</span></p>
+<p>Typically Type I Error influence what we called as significance level or $\alpha$. While the second one is influenced by Power $(1-\beta)$</p>
 <p>Will be focusing on <strong>Power</strong> Analysis </p>
 <ul>
-<li>Power is the probability to reject <span class="arithmatex">\(H_{0}\)</span> given <span class="arithmatex">\(H_{0}\)</span> is false.</li>
+<li>Power is the probability to reject $H_{0}$ given $H_{0}$ is false.</li>
 </ul>
-<div class="arithmatex">\[
+<p>
+<script type="math/tex; mode=display">
 \text{power} = 1-\beta = P(\text{reject } H_{0} \ | \ H_{0} \text{ is false})
-\]</div>
+</script>
+</p>
 <ul>
 <li>Power is dependent to Factor such as </li>
 <li>Effect size</li>
 <li>Data variance</li>
-<li>Sample size (<span class="arithmatex">\(n\)</span>)</li>
+<li>Sample size ($n$)</li>
 </ul>
 <p>We will simulate how above mentioned factor related to power </p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> 
@@ -643,7 +645,7 @@ Gaps = Not Yet Covered Cost + Expected Growth USD 48.000 / (12 x 20.000 ) = USD 
 <span class="n">generate_ab_viz</span><span class="p">(</span><span class="n">mean_1</span><span class="p">,</span><span class="n">mean_2</span><span class="p">)</span>
 </code></pre></div>
 <p><img alt="png" src="../ab_test_files/ab_test_40_0.png" /></p>
-<p>The more small effect size we want to detect &rarr; <strong>more power required</strong></p>
+<p>The more small effect size we want to detect --&gt; <strong>more power required</strong></p>
 <h3 id="wrapping-up">Wrapping Up<a class="headerlink" href="#wrapping-up" title="Permanent link">&para;</a></h3>
 <p>In this case we have already know how much effect we wanna test , in this case USD 1 Increase in Revenue oer User </p>
 <p>to calculate minimum sample size we can use : 
@@ -653,16 +655,16 @@ n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
 </p>
 <p>with : </p>
 <ol>
-<li><span class="arithmatex">\(\delta\)</span> : Effect Size</li>
-<li><span class="arithmatex">\(\sigma\)</span> : variance of Population (estimated) from revenue per user variance </li>
-<li><span class="arithmatex">\(\alpha/2\)</span> : alpha ,  <span class="arithmatex">\(1- Confidence Interval\)</span></li>
-<li><span class="arithmatex">\(\beta\)</span> : beta, 1- Power Level</li>
-<li><span class="arithmatex">\(z\)</span> : z score</li>
+<li>$\delta$ : Effect Size</li>
+<li>$\sigma$ : variance of Population (estimated) from revenue per user variance </li>
+<li>$\alpha/2$ : alpha ,  $1- Confidence Interval$</li>
+<li>$\beta$ : beta, 1- Power Level</li>
+<li>$z$ : z score</li>
 </ol>
-<p>Deciding <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> , in a typical experiment </p>
+<p>Deciding $\alpha$ and $\beta$ , in a typical experiment </p>
 <ol>
-<li><span class="arithmatex">\(\alpha\)</span> is 5% or Confidence is 95%</li>
-<li><span class="arithmatex">\(\beta\)</span> is 20%  or Power is 80%</li>
+<li>$\alpha$ is 5% or Confidence is 95%</li>
+<li>$\beta$ is 20%  or Power is 80%</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_minimum_sample</span><span class="p">(</span><span class="n">effect_size</span><span class="p">,</span><span class="n">std</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">beta</span><span class="p">)</span> <span class="p">:</span> 
     <span class="c1"># obtain both zscore</span>
@@ -678,11 +680,11 @@ n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
 <div class="highlight"><pre><span></span><code><span class="n">n_sample</span> <span class="o">=</span> <span class="n">calculate_minimum_sample</span><span class="p">(</span><span class="n">effect_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">std</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 <span class="n">n_sample</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>1570
-</code></pre></div>
+<pre><code>1570
+</code></pre>
 <p>For each variant we should assign <strong>1570</strong> randomization unit, in this case is user </p>
 <h2 id="24-experiment-durations">2.4. Experiment Durations<a class="headerlink" href="#24-experiment-durations" title="Permanent link">&para;</a></h2>
-<p>A good experiment duration &lt; 1 month , since the variation is only 2, we can try to conduct it by 1 week. Starting from <strong>February 2<sup>nd</sup>, 2024</strong> to <strong>February 8<sup>th</sup>, 2024</strong></p>
+<p>A good experiment duration &lt; 1 month , since the variation is only 2, we can try to conduct it by 1 week. Starting from <strong>February 2nd, 2024</strong> to <strong>February 8th, 2024</strong></p>
 <h1 id="3-running-experiments">3. Running Experiments<a class="headerlink" href="#3-running-experiments" title="Permanent link">&para;</a></h1>
 <p>Since we don't have a privilege to experimentation platform we will use generated data. </p>
 <p>But before running the experiments we will have to do <strong>A/A</strong> test ? </p>
@@ -701,7 +703,7 @@ n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
 </ul>
 </li>
 <li>Test the p-value distribution whether followed uniform distribution using Goodness of Fit test such as <strong>Kolmogorov Smirnoff Test</strong></li>
-<li>If the p-value &gt; <span class="arithmatex">\(\alpha\)</span> can be concluded that the samples is the same from referenced distribution ( in this case uniform distribution) </li>
+<li>If the p-value &gt; $\alpha$ can be concluded that the samples is the same from referenced distribution ( in this case uniform distribution) </li>
 <li>Plot the p-value from n_iteration, the p value should be uniform (indicating variant is the same) </li>
 </ol>
 <p>We will generate using synthetic data </p>
@@ -825,24 +827,24 @@ n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
 <div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">p_value</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span><span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;p-value&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>&lt;Axes: ylabel=&#39;Count&#39;&gt;
-</code></pre></div>
+<pre><code>&lt;Axes: ylabel='Count'&gt;
+</code></pre>
 <p><img alt="png" src="../ab_test_files/ab_test_54_1.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="n">ks_p_val</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>0.7919638330879013
-</code></pre></div>
+<pre><code>0.7919638330879013
+</code></pre>
 <p>The simulated A/A test is from the same distribution (uniform distribution) </p>
 <h1 id="4-analyzing-data">4. Analyzing Data<a class="headerlink" href="#4-analyzing-data" title="Permanent link">&para;</a></h1>
 <p>Let's Recap our Experimentation Plan </p>
 <p><strong>Metrics of Experimentation</strong> : Revenue per User </p>
 <p><strong>Experiment Unit</strong> : User in Checkout Process </p>
 <p><strong>Variant</strong> : </p>
-<div class="highlight"><pre><span></span><code>1. Control Group : No Product Recommendation during checkout process 
+<pre><code>1. Control Group : No Product Recommendation during checkout process 
 2. Treatment Group : Product Recommendation during checkout process y
-</code></pre></div>
+</code></pre>
 <p><strong>Number of Samples</strong> : 1570 from each variant </p>
-<p><strong>Experiment Duration</strong> : Experiment was conducted for a week , starting from <strong>February 2<sup>nd</sup>, 2024</strong> to <strong>February 8<sup>th</sup>, 2024</strong></p>
+<p><strong>Experiment Duration</strong> : Experiment was conducted for a week , starting from <strong>February 2nd, 2024</strong> to <strong>February 8th, 2024</strong></p>
 <p><strong>Our Hypothesis</strong> : by adding product recommendation could boost revenue per user</p>
 <p>So what do we do when it comes after experiment. We obtain data from experiment log from both of each group. However as Data Scientist we should be sceptical hence we need to perform <strong>Sanity Check</strong> </p>
 <h2 id="41-data-check">4.1. Data Check<a class="headerlink" href="#41-data-check" title="Permanent link">&para;</a></h2>
@@ -959,11 +961,11 @@ n = \cfrac{2 \sigma^2 (z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}
 <p>Check number of unique user from each group</p>
 <div class="highlight"><pre><span></span><code><span class="n">experiment_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>group
+<pre><code>group
 control      1570
 treatment    1570
 Name: user_id, dtype: int64
-</code></pre></div>
+</code></pre>
 <p>Number of Unique User is like what we expect</p>
 <p>Next, we should check the experiment datetime </p>
 <div class="highlight"><pre><span></span><code><span class="n">filter_1</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="s1">&#39;2024-08-02&#39;</span>
@@ -1004,8 +1006,8 @@ Name: user_id, dtype: int64
 <p>Next, we should check if there is duplicate record from user assignment </p>
 <div class="highlight"><pre><span></span><code><span class="n">experiment_data</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>0
-</code></pre></div>
+<pre><code>0
+</code></pre>
 <p>It's safe from duplicate user assignment</p>
 <h3 id="411-checking-guadrail-metrics">4.1.1. Checking Guadrail Metrics<a class="headerlink" href="#411-checking-guadrail-metrics" title="Permanent link">&para;</a></h3>
 <p>In real experiment platform, we should check , what we called as <strong>Guadrail Metrics</strong>, which should not be different. Otherwise it will affect the experiment outcome become bias, for example <strong>latency</strong></p>
@@ -1014,10 +1016,10 @@ Name: user_id, dtype: int64
 <div class="highlight"><pre><span></span><code><span class="n">summarize_data</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">})</span>
 <span class="n">summarize_data</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>C:\Users\fakhr\AppData\Local\Temp\ipykernel_21012\1678331338.py:1: FutureWarning:
+<pre><code>C:\Users\fakhr\AppData\Local\Temp\ipykernel_21012\1678331338.py:1: FutureWarning:
 
-The provided callable &lt;function mean at 0x000001AD8D28E480&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string &quot;mean&quot; instead.
-</code></pre></div>
+The provided callable &lt;function mean at 0x000001AD8D28E480&gt; is currently using SeriesGroupBy.mean. In a future version of pandas, the provided callable will be used directly. To keep current behavior pass the string "mean" instead.
+</code></pre>
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1109,12 +1111,12 @@ Yes! at some point it is right, however we only have small sample, and trying to
 <p>Type of Statistical Test, we want to compare the revenue, in terms of mean difference between two groups (independent sample), we can leverage <strong>T-student Test</strong> for mean from two sample. 
 Since we are going to check its bigger or not, its one tailed test</p>
 <p>Hypothesis : </p>
-<p><span class="arithmatex">\(H_0 : \mu_{\text{treatment}} &lt;= \mu_{\text{control}}\)</span></p>
-<p><span class="arithmatex">\(H_1 : \mu_{\text{treatment}} &gt; \mu_{\text{control}}\)</span></p>
-<p>At experiment plan we want Confidence Interval of <strong>95%</strong> or <span class="arithmatex">\(\alpha=0.05\)</span></p>
+<p>$H_0 : \mu_{\text{treatment}} &lt;= \mu_{\text{control}}$</p>
+<p>$H_1 : \mu_{\text{treatment}} &gt; \mu_{\text{control}}$</p>
+<p>At experiment plan we want Confidence Interval of <strong>95%</strong> or $\alpha=0.05$</p>
 <p>Assumption : we don;t know variance about population, and both variance assumed to be equal </p>
 <p>How to conclude ? 
-1. If p-value &gt; <span class="arithmatex">\(\alpha\)</span> fail to reject the null Hypothesis, otherwise reject the null hypothesis
+1. If p-value &gt; $\alpha$ fail to reject the null Hypothesis, otherwise reject the null hypothesis
 2. equivalent to if t-test value &lt; t-table fail to reject the null Hypothesis </p>
 <div class="highlight"><pre><span></span><code><span class="n">control_group</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;control&#39;</span><span class="p">,</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="n">treatment_group</span> <span class="o">=</span> <span class="n">experiment_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">experiment_data</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;treatment&#39;</span><span class="p">,</span><span class="s1">&#39;revenue_per_user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -1123,8 +1125,8 @@ Since we are going to check its bigger or not, its one tailed test</p>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">p_val_t_test</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>1.5326415297769846e-05
-</code></pre></div>
+<pre><code>1.5326415297769846e-05
+</code></pre>
 <p>Proven that we can reject null hypothesis</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Parameters</span>
 <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">1570</span>
@@ -1155,16 +1157,20 @@ Since we are going to check its bigger or not, its one tailed test</p>
 </code></pre></div>
 <p><img alt="png" src="../ab_test_files/ab_test_79_0.png" /></p>
 <p>Clearly we   reject the null hypothesis. Next Step we can generate confidence interval for our treatment effect using standard error </p>
-<div class="arithmatex">\[ (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  -  t_{\alpha/2,df} \cdot SE \leq \mu_{\text{treatment}}- \mu_{\text{treatment}} \leq (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  +  t_{\alpha/2,df} \cdot SE\]</div>
-<div class="arithmatex">\[SE = \sqrt{(\cfrac{s_1^2}{n_1} + \cfrac{s_2^2}{n_2}})  \]</div>
+<p>
+<script type="math/tex; mode=display"> (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  -  t_{\alpha/2,df} \cdot SE \leq \mu_{\text{treatment}}- \mu_{\text{treatment}} \leq (\bar{x}_{\text{treatment}} - \bar{x}_{\text{control}} )  +  t_{\alpha/2,df} \cdot SE</script>
+</p>
+<p>
+<script type="math/tex; mode=display">SE = \sqrt{(\cfrac{s_1^2}{n_1} + \cfrac{s_2^2}{n_2}})  </script>
+</p>
 <p>with : </p>
 <ol>
-<li><span class="arithmatex">\(SE\)</span> : Standard error</li>
-<li><span class="arithmatex">\(s_1^2\)</span> : variance from group 1 , control group</li>
-<li><span class="arithmatex">\(s_2^2\)</span> : variance from group 2 , treatment group</li>
-<li><span class="arithmatex">\(n_1\)</span> : number of sample from group 1 , control group</li>
-<li><span class="arithmatex">\(n_2\)</span> : number of sample from group 2 , treatment group</li>
-<li><span class="arithmatex">\(t_{\alpha/2 , df}\)</span> : t table value given alpha and degrees of freedom</li>
+<li>$SE$ : Standard error</li>
+<li>$s_1^2$ : variance from group 1 , control group</li>
+<li>$s_2^2$ : variance from group 2 , treatment group</li>
+<li>$n_1$ : number of sample from group 1 , control group</li>
+<li>$n_2$ : number of sample from group 2 , treatment group</li>
+<li>$t_{\alpha/2 , df}$ : t table value given alpha and degrees of freedom</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="n">difference</span> <span class="o">=</span> <span class="n">treatment_group</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">control_group</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> 
 <span class="n">n_1</span> <span class="o">=</span> <span class="mi">1570</span> 
@@ -1183,16 +1189,16 @@ Since we are going to check its bigger or not, its one tailed test</p>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Effect Confidence Interval </span><span class="si">{</span><span class="n">difference</span><span class="si">}</span><span class="s1"> +/-</span><span class="si">{</span><span class="n">c_i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Effect Confidence Interval 0.903699066036344 +/--0.4243055658869349
-</code></pre></div>
+<pre><code>Effect Confidence Interval 0.903699066036344 +/--0.4243055658869349
+</code></pre>
 <div class="highlight"><pre><span></span><code><span class="n">c_i</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>-0.4243055658869349
-</code></pre></div>
+<pre><code>-0.4243055658869349
+</code></pre>
 <div class="highlight"><pre><span></span><code><span class="n">difference</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>0.903699066036344
-</code></pre></div>
+<pre><code>0.903699066036344
+</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 

@@ -20,7 +20,7 @@
     
     
       
-        <title>Hotel Search Ranking System - Rovo's Blog</title>
+        <title>Hotel ranking - Rovo's Blog</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Hotel Search Ranking System
+              Hotel ranking
             
           </span>
         </div>
@@ -306,7 +306,9 @@
   
 
 
-<h1 id="hotel-search-ranking-system">Hotel Search Ranking System<a class="headerlink" href="#hotel-search-ranking-system" title="Permanent link">&para;</a></h1>
+  <h1>Hotel ranking</h1>
+
+<h2 id="hotel-search-ranking-system">Hotel Search Ranking System<a class="headerlink" href="#hotel-search-ranking-system" title="Permanent link">&para;</a></h2>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
 <h2 id="ota-business-nature">OTA Business Nature<a class="headerlink" href="#ota-business-nature" title="Permanent link">&para;</a></h2>
 <p>OTA Company has two business models : </p>
@@ -347,7 +349,7 @@ The problem is that :
 <p>We need to know what is our business models. Its commision based model. </p>
 <ul>
 <li>
-<p>If number of bookings increase &rarr; company income increase </p>
+<p>If number of bookings increase --&gt; company income increase </p>
 </li>
 <li>
 <p>So number of bookings right ? Why dont use conversion. </p>
@@ -355,7 +357,7 @@ The problem is that :
 </ul>
 <p>Of course we can. But we are not using conversion because it can be mislead if we dont mention the numerator </p>
 <p><strong>Metrics</strong> : Total Bookings Increase by 20%</p>
-<p><span class="arithmatex">\(\textbf{Total Booking} = \text{Number of bookings from search activity}\)</span></p>
+<p>$\textbf{Total Booking} = \text{Number of bookings from search activity}$</p>
 <h3 id="ml-objective">ML Objective<a class="headerlink" href="#ml-objective" title="Permanent link">&para;</a></h3>
 <p>Its about what you expect from your ML System. </p>
 <p><em>Model Wise</em> : 
@@ -425,7 +427,7 @@ flowchart TD
 3. Query Features  </p>
 <p>Here is the idea : </p>
 <ol>
-<li>If we use Hotel Features Only &rarr; it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. </li>
+<li>If we use Hotel Features Only --&gt; it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. </li>
 <li>To add more personalization we can add feature that unique to user level </li>
 <li>To what extend its unique, if user characteristics does not change then the recommendation would be the same. However that is not ideal because user intention may be different at different search session </li>
 </ol>
@@ -617,7 +619,7 @@ Due to the huge size of original data, we decide to sample the data based on  se
 
 
 
-<div>
+<div style="overflow-x:scroll">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -630,6 +632,7 @@ Due to the huge size of original data, we decide to sample the data based on  se
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
