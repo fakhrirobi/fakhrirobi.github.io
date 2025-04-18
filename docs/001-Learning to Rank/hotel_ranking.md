@@ -571,7 +571,7 @@ What the data should look ?
 
 
 |search_session_id|   listing_id | event_time          | event_type   |
-|-:|-------------:|:--------------------|:-------------|
+|-------------|-------------|--------------------|-------------|
 |1|         3914 | 2022-10-01 17:04:19 | click        |
 |1|         3352 | 2022-10-01 17:04:30 | click        |
 |1|         2575 | 2022-10-01 17:04:36 | click        |
@@ -583,6 +583,7 @@ What the data should look ?
 |1|         2341 | 2022-10-01 17:06:05 | click        |
 |1|          438 | 2022-10-01 17:06:11 | scroll       |
 |1|         1757 | 2022-10-01 17:06:27 | book         |
+
 
 - Each unique session : 
   
@@ -717,7 +718,7 @@ sample_session
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1028,7 +1029,7 @@ sample_session
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1342,7 +1343,7 @@ booked_session
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1552,7 +1553,7 @@ dataset.groupby('srch_id').agg({'prop_id':'count'}).sort_values('prop_id')
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1640,7 +1641,7 @@ display(dataset.loc[
 ```
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1712,7 +1713,7 @@ display(dataset.loc[
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -2093,7 +2094,7 @@ display(dataset.loc[
 ```
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -3195,7 +3196,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomForestRegressor</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestRegressor.html">?<span>Documentation for RandomForestRegressor</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre></div> </div></div></div></div>
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div style="overflow-x:scroll;"><div style="overflow-x:scroll;">RandomForestRegressor</div></div><div style="overflow-x:scroll;"><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestRegressor.html">?<span>Documentation for RandomForestRegressor</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre></div> </div></div></div></div>
 
 
 
@@ -3724,7 +3725,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
           max_cat_threshold=None, max_cat_to_onehot=None, max_delta_step=None,
           max_depth=None, max_leaves=None, min_child_weight=None, missing=nan,
           monotone_constraints=None, multi_strategy=None, n_estimators=500,
-          n_jobs=-1, num_parallel_tree=None, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>XGBRanker</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://xgboost.readthedocs.io/en/release_3.0.0/python/python_api.html#xgboost.XGBRanker">?<span>Documentation for XGBRanker</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
+          n_jobs=-1, num_parallel_tree=None, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div style="overflow-x:scroll;"><div style="overflow-x:scroll;">XGBRanker</div></div><div style="overflow-x:scroll;"><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://xgboost.readthedocs.io/en/release_3.0.0/python/python_api.html#xgboost.XGBRanker">?<span>Documentation for XGBRanker</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
           colsample_bynode=None, colsample_bytree=None, device=None,
           early_stopping_rounds=None, enable_categorical=False,
           eval_metric=None, feature_types=None, feature_weights=None,
@@ -4180,7 +4181,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
           max_cat_threshold=None, max_cat_to_onehot=None, max_delta_step=None,
           max_depth=None, max_leaves=None, min_child_weight=None, missing=nan,
           monotone_constraints=None, multi_strategy=None, n_estimators=500,
-          n_jobs=-1, num_parallel_tree=None, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>XGBRanker</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://xgboost.readthedocs.io/en/release_3.0.0/python/python_api.html#xgboost.XGBRanker">?<span>Documentation for XGBRanker</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
+          n_jobs=-1, num_parallel_tree=None, ...)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div style="overflow-x:scroll;"><div style="overflow-x:scroll;">XGBRanker</div></div><div style="overflow-x:scroll;"><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://xgboost.readthedocs.io/en/release_3.0.0/python/python_api.html#xgboost.XGBRanker">?<span>Documentation for XGBRanker</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
           colsample_bynode=None, colsample_bytree=None, device=None,
           early_stopping_rounds=None, enable_categorical=False,
           eval_metric=None, feature_types=None, feature_weights=None,
@@ -4321,7 +4322,7 @@ val_prediction_pointwise
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -4469,7 +4470,7 @@ val_prediction_pairwise
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -4614,7 +4615,7 @@ val_prediction_listwise
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -4800,7 +4801,7 @@ dcg.head(5)
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -4851,7 +4852,7 @@ ideal_dcg
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5053,7 +5054,7 @@ dcg / ideal_dcg
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5315,7 +5316,7 @@ val_ndcg5
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5388,7 +5389,7 @@ val_ndcg10
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5461,7 +5462,7 @@ val_ndcg50
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5510,7 +5511,7 @@ val_ndcg.sort_values('NDCG@10',ascending=False)
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5618,7 +5619,7 @@ test_ndcg_pairwise
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5665,7 +5666,7 @@ val_ndcg_pairwise
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -5712,7 +5713,7 @@ pd.concat(
 
 
 
-<div>
+<div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
