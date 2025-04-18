@@ -22,3 +22,7 @@
 .dataframe tbody tr:hover {
     background-color: #ddd;
 }
+
+div { 
+    overflow-x: scroll
+}
