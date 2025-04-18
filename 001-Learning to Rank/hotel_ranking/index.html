@@ -349,7 +349,7 @@ The problem is that :
 <p>We need to know what is our business models. Its commision based model. </p>
 <ul>
 <li>
-<p>If number of bookings increase --&gt; company income increase </p>
+<p>If number of bookings increase &rarr; company income increase </p>
 </li>
 <li>
 <p>So number of bookings right ? Why dont use conversion. </p>
@@ -357,7 +357,7 @@ The problem is that :
 </ul>
 <p>Of course we can. But we are not using conversion because it can be mislead if we dont mention the numerator </p>
 <p><strong>Metrics</strong> : Total Bookings Increase by 20%</p>
-<p>$\textbf{Total Booking} = \text{Number of bookings from search activity}$</p>
+<p><span class="arithmatex">\(\textbf{Total Booking} = \text{Number of bookings from search activity}\)</span></p>
 <h3 id="ml-objective">ML Objective<a class="headerlink" href="#ml-objective" title="Permanent link">&para;</a></h3>
 <p>Its about what you expect from your ML System. </p>
 <p><em>Model Wise</em> : 
@@ -427,7 +427,7 @@ flowchart TD
 3. Query Features  </p>
 <p>Here is the idea : </p>
 <ol>
-<li>If we use Hotel Features Only --&gt; it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. </li>
+<li>If we use Hotel Features Only &rarr; it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. </li>
 <li>To add more personalization we can add feature that unique to user level </li>
 <li>To what extend its unique, if user characteristics does not change then the recommendation would be the same. However that is not ideal because user intention may be different at different search session </li>
 </ol>
@@ -435,72 +435,112 @@ flowchart TD
 1. Hotels / Listing Feature
 2. User / Personalized Features 
 3. Query Features  </p>
-<Table of Feature>
-
-### Listing / Hotel Features 
-
-- It could be feature that describe facility , for example : 
-    - Number of rooms available between dates 
-    - Price 
-    - Location 
-    - etc 
-- For now there are lot of companies using embeddings to express the feature of an entity 
-- Usually embeddings are resulted from pretrained model (neural nets for example)
-
-
-There are lot of variables that classify as Listing / Property Features, however several consideration is that : 
-
-- The feature should survive cold start problem 
-
-
-### Cold Start Problem 
-
-Why we care about new item / new user ? 
-
-**New Item / Property** 
-
-- It affects revenue of property, 
-- We want our search / recommendation is fair towards property 
-
-**New User** : 
+<h3 id="listing-hotel-features">Listing / Hotel Features<a class="headerlink" href="#listing-hotel-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>It could be feature that describe facility , for example : <ul>
+<li>Number of rooms available between dates </li>
+<li>Price </li>
+<li>Location </li>
+<li>etc </li>
+</ul>
+</li>
+<li>For now there are lot of companies using embeddings to express the feature of an entity </li>
+<li>Usually embeddings are resulted from pretrained model (neural nets for example)</li>
+</ul>
+<p>There are lot of variables that classify as Listing / Property Features, however several consideration is that : </p>
+<ul>
+<li>The feature should survive cold start problem </li>
+</ul>
+<h3 id="cold-start-problem">Cold Start Problem<a class="headerlink" href="#cold-start-problem" title="Permanent link">&para;</a></h3>
+<p>Why we care about new item / new user ? </p>
+<p><strong>New Item / Property</strong> </p>
+<ul>
+<li>It affects revenue of property, </li>
+<li>We want our search / recommendation is fair towards property </li>
+</ul>
+<p><strong>New User</strong> : 
 - Help user build interaction 
-- Have great search experience by providing relevant property 
-
-
-
-
-To properly handle the cold start problem, we research on how to handle it. To do so , we survey several reference (cited in References Section)
-We can divide solution into : 
-
-- Feature Based  Solution  : 
-
-  - Add Feature that are robust to Cold Start Feature , for example : 
-     - User Demographic Features e.g. Age, Gender , etc
-     - Listing Demographic Features e.g. price, lot size , facilities, etc 
-
-  - Fill Default Values from Local / Geographic 
-  - Estimate Property Features from Similar Property (AirBnB)
-
-  - Estimate Property Engagement Features (AirBnB)
-
-- Model Based Solution : 
-
-    - Develop 2 Model for User : 
-       - New User 
-         Need to define what is new user, for example, new user could be user that has not booked any property 
-       - Old User 
-
-
-
-| Column                         | Type    | Description                                                          |Cold Start| Cold Start Strategy 
-|--------------------------------|---------|----------------------------------------------------------------------|------------|------------|
-| `prop_id`                      | Int     | Hotel property identifier                                            |
-| `prop_starrating`              | Float   | Hotel star rating                                                    | 
-| `prop_log_historical_price`              | Float   | Log Historical Price                                                   |
-| `price_usd`                    | Float   | Display price in USD                                                 | 
-| `promotion_flag`               | Bool    | 1 if the hotel was under promotion                                   |  
-
-
+- Have great search experience by providing relevant property </p>
+<p>To properly handle the cold start problem, we research on how to handle it. To do so , we survey several reference (cited in References Section)
+We can divide solution into : </p>
+<ul>
+<li>
+<p>Feature Based  Solution  : </p>
+</li>
+<li>
+<p>Add Feature that are robust to Cold Start Feature , for example : </p>
+<ul>
+<li>User Demographic Features e.g. Age, Gender , etc</li>
+<li>Listing Demographic Features e.g. price, lot size , facilities, etc </li>
+</ul>
+</li>
+<li>
+<p>Fill Default Values from Local / Geographic </p>
+</li>
+<li>
+<p>Estimate Property Features from Similar Property (AirBnB)</p>
+</li>
+<li>
+<p>Estimate Property Engagement Features (AirBnB)</p>
+</li>
+<li>
+<p>Model Based Solution : </p>
+<ul>
+<li>Develop 2 Model for User : </li>
+<li>New User 
+     Need to define what is new user, for example, new user could be user that has not booked any property </li>
+<li>Old User </li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+<th>Cold Start</th>
+<th>Cold Start Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prop_id</code></td>
+<td>Int</td>
+<td>Hotel property identifier</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>prop_starrating</code></td>
+<td>Float</td>
+<td>Hotel star rating</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>prop_log_historical_price</code></td>
+<td>Float</td>
+<td>Log Historical Price</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>price_usd</code></td>
+<td>Float</td>
+<td>Display price in USD</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>promotion_flag</code></td>
+<td>Bool</td>
+<td>1 if the hotel was under promotion</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="n">PROPERTY_FEATURES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;prop_starrating&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;price_usd&#39;</span><span class="p">,</span>
@@ -508,67 +548,105 @@ We can divide solution into :
     <span class="s1">&#39;promotion_flag&#39;</span>
 <span class="p">]</span> 
 </code></pre></div>
-
-### User Personal Features
-
-More Like User Preferences (Could be Implicit or Explicit), Past Bookings(If Available) for examples : 
+<h3 id="user-personal-features">User Personal Features<a class="headerlink" href="#user-personal-features" title="Permanent link">&para;</a></h3>
+<p>More Like User Preferences (Could be Implicit or Explicit), Past Bookings(If Available) for examples : 
 - Past Bookings (1w,1month,3month,etc)
 - Average Stay 
-- etc 
-
-Okay, you might say what would happen if user is new ? AirBnB in their paper build separate model for login user and logout user. We could categorize new user as logout user due to the fact that the data is not available enough 
-
-| Column                         | Type    | Description                                                          |
-|--------------------------------|---------|----------------------------------------------------------------------|
-| `visitor_location_country_id`  | Int     | Customer’s country ID                                                |
-| `visitor_hist_starrating`      | Float   | User’s historical average hotel star‑rating                          |
-| `visitor_hist_adr_usd`         | Float   | User’s historical average daily rate (USD)                           |
-
-
+- etc </p>
+<p>Okay, you might say what would happen if user is new ? AirBnB in their paper build separate model for login user and logout user. We could categorize new user as logout user due to the fact that the data is not available enough </p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visitor_location_country_id</code></td>
+<td>Int</td>
+<td>Customer’s country ID</td>
+</tr>
+<tr>
+<td><code>visitor_hist_starrating</code></td>
+<td>Float</td>
+<td>User’s historical average hotel star‑rating</td>
+</tr>
+<tr>
+<td><code>visitor_hist_adr_usd</code></td>
+<td>Float</td>
+<td>User’s historical average daily rate (USD)</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">USER_FEATURES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;visitor_hist_starrating&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;visitor_hist_adr_usd&#39;</span>
 <span class="p">]</span> 
 </code></pre></div>
-
-### Search Features
-
-What does Query Features Mean ? [article](https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839)
+<h3 id="search-features">Search Features<a class="headerlink" href="#search-features" title="Permanent link">&para;</a></h3>
+<p>What does Query Features Mean ? <a href="https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839">article</a>
 Features that describe criteria for hotels we are looking for , for example : 
 - Number of guests 
 - Number of Stay 
-- etc 
-
-
-
-
-The same goes with expedia in their [article](https://medium.com/expedia-group-tech/learning-to-rank-at-expedia-group-how-to-adapt-the-property-search-result-page-based-on-f4ebef78c94b)
-
-which include : 
+- etc </p>
+<p>The same goes with expedia in their <a href="https://medium.com/expedia-group-tech/learning-to-rank-at-expedia-group-how-to-adapt-the-property-search-result-page-based-on-f4ebef78c94b">article</a></p>
+<p>which include : 
 - checkin_date 
-- checkout_date 
-
-
-- We could also  represent this as embedding
-
-Here is the feature definition from dataset
-
-| Column                         | Type    | Description                                                          |
-|--------------------------------|---------|----------------------------------------------------------------------|
-| `srch_destination_id`          | Int     | Destination ID for the search                                        |
-| `srch_length_of_stay`          | Int     | Number of nights (check‑out minus check‑in)                          |
-| `srch_adults_count`              | Int     | Number of adults                                                     |
-| `srch_children_count`            | Int     | Number of children                                                   |
-| `srch_room_count`                | Int     | Number of rooms                                                      |
-| `srch_saturday_night_bool`     | Bool    | 1 if stay includes a Saturday night                                  |
-| `orig_destination_distance`    | Float   | Distance between user and hotel (km)                                 |
-
-
-
+- checkout_date </p>
+<ul>
+<li>We could also  represent this as embedding</li>
+</ul>
+<p>Here is the feature definition from dataset</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>srch_destination_id</code></td>
+<td>Int</td>
+<td>Destination ID for the search</td>
+</tr>
+<tr>
+<td><code>srch_length_of_stay</code></td>
+<td>Int</td>
+<td>Number of nights (check‑out minus check‑in)</td>
+</tr>
+<tr>
+<td><code>srch_adults_count</code></td>
+<td>Int</td>
+<td>Number of adults</td>
+</tr>
+<tr>
+<td><code>srch_children_count</code></td>
+<td>Int</td>
+<td>Number of children</td>
+</tr>
+<tr>
+<td><code>srch_room_count</code></td>
+<td>Int</td>
+<td>Number of rooms</td>
+</tr>
+<tr>
+<td><code>srch_saturday_night_bool</code></td>
+<td>Bool</td>
+<td>1 if stay includes a Saturday night</td>
+</tr>
+<tr>
+<td><code>orig_destination_distance</code></td>
+<td>Float</td>
+<td>Distance between user and hotel (km)</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="n">SEARCH_FEATURES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;srch_length_of_stay&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;srch_adults_count&#39;</span><span class="p">,</span>
@@ -578,22 +656,30 @@ Here is the feature definition from dataset
     <span class="s1">&#39;search_rank&#39;</span> <span class="c1"># need to be generated </span>
 <span class="p">]</span> 
 </code></pre></div>
-
-### Click Log 
-
-Last but not least we need the data from search activity the purpose is to train model to maximize the chance of booking happened.  The search process happen in whats called as **Session**. Each User can have multiple session 
-
-
-
-| Column                         | Type    | Description                                                          |
-|--------------------------------|---------|----------------------------------------------------------------------|
-| `click_bool`                   | Bool    | 1 if the listing was clicked                                         |
-| `booking_bool`                 | Bool    | 1 if the listing was booked                                          |
-
-
-## Load Data  
-
-
+<h3 id="click-log">Click Log<a class="headerlink" href="#click-log" title="Permanent link">&para;</a></h3>
+<p>Last but not least we need the data from search activity the purpose is to train model to maximize the chance of booking happened.  The search process happen in whats called as <strong>Session</strong>. Each User can have multiple session </p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>click_bool</code></td>
+<td>Bool</td>
+<td>1 if the listing was clicked</td>
+</tr>
+<tr>
+<td><code>booking_bool</code></td>
+<td>Bool</td>
+<td>1 if the listing was booked</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load-data">Load Data<a class="headerlink" href="#load-data" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -605,20 +691,11 @@ Last but not least we need the data from search activity the purpose is to train
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-pastel&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-Due to the huge size of original data, we decide to sample the data based on  search id. We sampled only 50% of search data resulting 1.3 GB of data. 
-
-
+<p>Due to the huge size of original data, we decide to sample the data based on  search id. We sampled only 50% of search data resulting 1.3 GB of data. </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;expedia_search_sampled.csv&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -787,49 +864,88 @@ Due to the huge size of original data, we decide to sample the data based on  se
 <p>5 rows × 54 columns</p>
 </div>
 
-
-
-### Generate Event
-
-
-What the data should look ? 
-
-
-|search_session_id|   listing_id | event_time          | event_type   |
-|-------------|-------------|--------------------|-------------|
-|1|         3914 | 2022-10-01 17:04:19 | click        |
-|1|         3352 | 2022-10-01 17:04:30 | click        |
-|1|         2575 | 2022-10-01 17:04:36 | click        |
-|1|         4257 | 2022-10-01 17:04:46 | click        |
-|1|         3071 | 2022-10-01 17:05:03 | click        |
-|1|         1757 | 2022-10-01 17:05:22 | click        | 
-|1|         1828 | 2022-10-01 17:05:34 | scroll       | 
-|1|         3494 | 2022-10-01 17:05:53 | click        |
-|1|         2341 | 2022-10-01 17:06:05 | click        |
-|1|          438 | 2022-10-01 17:06:11 | scroll       |
-|1|         1757 | 2022-10-01 17:06:27 | book         |
-
-
-- Each unique session : 
-
-   - occur at a particular time 
-   - has n interactions 
-   - the interactions should be ordered chronologically 
-
-We should order the data first , based on : 
+<h3 id="generate-event">Generate Event<a class="headerlink" href="#generate-event" title="Permanent link">&para;</a></h3>
+<p>What the data should look ? </p>
+<h2 id="generate-event_1">Generate Event<a class="headerlink" href="#generate-event_1" title="Permanent link">&para;</a></h2>
+<p>What the data should look like:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">search_session_id</th>
+<th style="text-align: center;">listing_id</th>
+<th style="text-align: center;">event_time</th>
+<th style="text-align: center;">event_type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3914</td>
+<td style="text-align: center;">2022-10-01 17:04:19</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3352</td>
+<td style="text-align: center;">2022-10-01 17:04:30</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2575</td>
+<td style="text-align: center;">2022-10-01 17:04:36</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4257</td>
+<td style="text-align: center;">2022-10-01 17:04:46</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3071</td>
+<td style="text-align: center;">2022-10-01 17:05:03</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1757</td>
+<td style="text-align: center;">2022-10-01 17:05:22</td>
+<td style="text-align: center;">click</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1828</td>
+<td style="text-align: center;">2022-10-01 17:05:34</td>
+<td style="text-align: center;">scroll</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3492</td>
+<td style="text-align: center;">2022-10-01 17:05:53</td>
+<td style="text-align: center;">click</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>Each unique session : </p>
+</li>
+<li>
+<p>occur at a particular time </p>
+</li>
+<li>has n interactions </li>
+<li>the interactions should be ordered chronologically </li>
+</ul>
+<p>We should order the data first , based on : 
 - search session 
-- event time 
-
-
+- event time </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> 
     <span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <div >
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -925,9 +1041,6 @@ We should order the data first , based on :
 <p>2 rows × 54 columns</p>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="n">session_id</span> <span class="o">=</span> <span class="mi">4</span>
 
 <span class="n">sample_session</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
@@ -937,10 +1050,6 @@ We should order the data first , based on :
 
 <span class="n">sample_session</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1194,15 +1303,11 @@ We should order the data first , based on :
 </table>
 </div>
 
-
-
-What we can infer or how to read the dataset ? 
-
-- a user in a search session scrolled from `prop_id=3625` and clicked at `prop_id=139893`. However the user did not end up booking the property.
-
-Our dataset is not look like what we are expected its because the click and bookings are still in different columns hence we need to make single column responsible for managing event_type
-
-
+<p>What we can infer or how to read the dataset ? </p>
+<ul>
+<li>a user in a search session scrolled from <code>prop_id=3625</code> and clicked at <code>prop_id=139893</code>. However the user did not end up booking the property.</li>
+</ul>
+<p>Our dataset is not look like what we are expected its because the click and bookings are still in different columns hence we need to make single column responsible for managing event_type</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_event</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="p">:</span> 
     <span class="c1"># if booking = 1 --&gt; event_type --&gt; &#39;booked&#39; </span>
     <span class="c1"># if click == 1 --&gt; event_type --&gt; &#39;clicked&#39; </span>
@@ -1215,27 +1320,14 @@ Our dataset is not look like what we are expected its because the click and book
     <span class="k">else</span> <span class="p">:</span> 
         <span class="k">return</span> <span class="s1">&#39;scrolled&#39;</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">generate_event</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
-
-Okay, next sanity check 
-
-
+<p>Okay, next sanity check </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    array(['scrolled', 'clicked', 'booked'], dtype=object)
-
-
-
-no missing values, meaning successfully mapped
-
-
+<div class="highlight"><pre><span></span><code>array([&#39;scrolled&#39;, &#39;clicked&#39;, &#39;booked&#39;], dtype=object)
+</code></pre></div>
+<p>no missing values, meaning successfully mapped</p>
 <div class="highlight"><pre><span></span><code><span class="n">sample_session</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">session_id</span><span class="p">,</span>
     <span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
@@ -1243,10 +1335,6 @@ no missing values, meaning successfully mapped
 
 <span class="n">sample_session</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1533,21 +1621,14 @@ no missing values, meaning successfully mapped
 </table>
 </div>
 
-
-
-Okay the result correct, next we should check on the session that is in booking
-
-
+<p>Okay the result correct, next we should check on the session that is in booking</p>
 <div class="highlight"><pre><span></span><code><span class="n">booked_session_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;srch_id&#39;</span>
 <span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample of Booked Session, srch_id = &#39;</span><span class="p">,</span><span class="n">booked_session_id</span><span class="p">)</span>
 </code></pre></div>
-
-    Sample of Booked Session, srch_id =  8
-
-
-
+<div class="highlight"><pre><span></span><code>Sample of Booked Session, srch_id =  8
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">booked_session</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">booked_session_id</span><span class="p">,</span>
     <span class="p">[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
@@ -1555,10 +1636,6 @@ Okay the result correct, next we should check on the session that is in booking
 
 <span class="n">booked_session</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1757,17 +1834,9 @@ Okay the result correct, next we should check on the session that is in booking
 </table>
 </div>
 
-
-
-Okay, it correctly annotate the `booked` event . Something interesting is that event after the booked happen the result still appear. We should check if the data also display recommended item but not clicked
-
-
+<p>Okay, it correctly annotate the <code>booked</code> event . Something interesting is that event after the booked happen the result still appear. We should check if the data also display recommended item but not clicked</p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;prop_id&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;prop_id&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1843,9 +1912,6 @@ Okay, it correctly annotate the `booked` event . Something interesting is that e
 <p>157267 rows × 1 columns</p>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">144590</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
 <span class="p">])</span>
@@ -1853,8 +1919,6 @@ Okay, it correctly annotate the `booked` event . Something interesting is that e
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">597375</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
 <span class="p">])</span>
 </code></pre></div>
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1924,8 +1988,6 @@ Okay, it correctly annotate the `booked` event . Something interesting is that e
   </tbody>
 </table>
 </div>
-
-
 
 <div style="overflow-x:scroll;">
 <style scoped>
@@ -2261,50 +2323,99 @@ Okay, it correctly annotate the `booked` event . Something interesting is that e
 </table>
 </div>
 
-
-We can see number of property in each session is different meaning it fully represent user behaviour in recommendation. If the records only 5 property means user only interact (scroll , click , book ) up to 5th position.  Another case is that after booking user still can possibly click item. 
-
-Next, what we should do is to calculate **Generate Search Rank**
-
-### Adding Search Rank 
-
-Next step is to create search ranking feature from recommendation to mitigae positional bias 
-
-we will add new column `search_rank` to define ranking result from recommendation. 
-
-However we have to sure our data really reflect the ordering from current search system. when outputing search result the rank also should be logged. 
-
-
-The assumption is that : 
-- In Company `T.LLC` System if we jump from 1st search result  to 5th position the rank 1 to 4 regarded as `scroll` 
-
-|   listing_id | event_time          | event_type   |search rank   |
-|-------------:|:--------------------|:-------------|:-------------|
-|         3914 | 2022-10-01 17:04:19 | click        | 1 | 
-|         3352 | 2022-10-01 17:04:30 | click        |2 |
-|         2575 | 2022-10-01 17:04:36 | click        |3 |
-|         4257 | 2022-10-01 17:04:46 | click        |4 |
-|         3071 | 2022-10-01 17:05:03 | click        |5 |
-|         1757 | 2022-10-01 17:05:22 | click        |6 | 
-|         1828 | 2022-10-01 17:05:34 | scroll       |7 | 
-|         3494 | 2022-10-01 17:05:53 | click        |8 |
-|         2341 | 2022-10-01 17:06:05 | click        |9 |
-|          438 | 2022-10-01 17:06:11 | scroll       |10 |
-|         1757 | 2022-10-01 17:06:27 | book         |11 |
-
-Next, we need to create those label 
-
-
+<p>We can see number of property in each session is different meaning it fully represent user behaviour in recommendation. If the records only 5 property means user only interact (scroll , click , book ) up to 5<sup>th</sup> position.  Another case is that after booking user still can possibly click item. </p>
+<p>Next, what we should do is to calculate <strong>Generate Search Rank</strong></p>
+<h3 id="adding-search-rank">Adding Search Rank<a class="headerlink" href="#adding-search-rank" title="Permanent link">&para;</a></h3>
+<p>Next step is to create search ranking feature from recommendation to mitigae positional bias </p>
+<p>we will add new column <code>search_rank</code> to define ranking result from recommendation. </p>
+<p>However we have to sure our data really reflect the ordering from current search system. when outputing search result the rank also should be logged. </p>
+<p>The assumption is that : 
+- In Company <code>T.LLC</code> System if we jump from 1<sup>st</sup> search result  to 5<sup>th</sup> position the rank 1 to 4 regarded as <code>scroll</code> </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">listing_id</th>
+<th style="text-align: left;">event_time</th>
+<th style="text-align: left;">event_type</th>
+<th style="text-align: left;">search rank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">3914</td>
+<td style="text-align: left;">2022-10-01 17:04:19</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr>
+<td style="text-align: right;">3352</td>
+<td style="text-align: left;">2022-10-01 17:04:30</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: right;">2575</td>
+<td style="text-align: left;">2022-10-01 17:04:36</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr>
+<td style="text-align: right;">4257</td>
+<td style="text-align: left;">2022-10-01 17:04:46</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">4</td>
+</tr>
+<tr>
+<td style="text-align: right;">3071</td>
+<td style="text-align: left;">2022-10-01 17:05:03</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr>
+<td style="text-align: right;">1757</td>
+<td style="text-align: left;">2022-10-01 17:05:22</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr>
+<td style="text-align: right;">1828</td>
+<td style="text-align: left;">2022-10-01 17:05:34</td>
+<td style="text-align: left;">scroll</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr>
+<td style="text-align: right;">3494</td>
+<td style="text-align: left;">2022-10-01 17:05:53</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">8</td>
+</tr>
+<tr>
+<td style="text-align: right;">2341</td>
+<td style="text-align: left;">2022-10-01 17:06:05</td>
+<td style="text-align: left;">click</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr>
+<td style="text-align: right;">438</td>
+<td style="text-align: left;">2022-10-01 17:06:11</td>
+<td style="text-align: left;">scroll</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr>
+<td style="text-align: right;">1757</td>
+<td style="text-align: left;">2022-10-01 17:06:27</td>
+<td style="text-align: left;">book</td>
+<td style="text-align: left;">11</td>
+</tr>
+</tbody>
+</table>
+<p>Next, we need to create those label </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">144590</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">,</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span>
 <span class="p">])</span>
 </code></pre></div>
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2381,64 +2492,57 @@ Next, we need to create those label
 </table>
 </div>
 
-
-After that we need to create / calculate **Relevance Score**
-
-### Calculate Relevance Score 
-
-Purpose --> To evaluate how well our search model produce the ordering 
-
-The score could be created in a way such that some interaction scored higher. According to original kaggle competition the score for each event type is : 
-
-- `Book` : `5`
-- `Click` : `1` 
-- `Scroll` : `0` 
-
-
+<p>After that we need to create / calculate <strong>Relevance Score</strong></p>
+<h3 id="calculate-relevance-score">Calculate Relevance Score<a class="headerlink" href="#calculate-relevance-score" title="Permanent link">&para;</a></h3>
+<p>Purpose &rarr; To evaluate how well our search model produce the ordering </p>
+<p>The score could be created in a way such that some interaction scored higher. According to original kaggle competition the score for each event type is : </p>
+<ul>
+<li><code>Book</code> : <code>5</code></li>
+<li><code>Click</code> : <code>1</code> </li>
+<li><code>Scroll</code> : <code>0</code> </li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;relevance_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span>
     <span class="s1">&#39;scrolled&#39;</span> <span class="p">:</span> <span class="mi">0</span> <span class="p">,</span> 
     <span class="s1">&#39;clicked&#39;</span> <span class="p">:</span> <span class="mi">1</span> <span class="p">,</span> 
     <span class="s1">&#39;booked&#39;</span>  <span class="p">:</span> <span class="mi">5</span> 
 <span class="p">})</span>
 </code></pre></div>
-
-Sanity Check 
-
-
+<p>Sanity Check </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;relevance_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    relevance_score
-    0    3732736
-    5     108884
-    1      65565
-    Name: count, dtype: int64
-
-
-
-## Crafting Training Data 
-
-How to construct training pair : 
+<div class="highlight"><pre><span></span><code>relevance_score
+0    3732736
+5     108884
+1      65565
+Name: count, dtype: int64
+</code></pre></div>
+<h2 id="crafting-training-data">Crafting Training Data<a class="headerlink" href="#crafting-training-data" title="Permanent link">&para;</a></h2>
+<p>How to construct training pair : 
 - We need to ensure there is book in a query to make sure the model learn the labels / relevance score 
-- We need to substract the training pair which does not contain `event_type = book`. 
-- Why ? Some of the learning models work in query level. 
-
-
-Here is a glimpse of how our data would look like
-
-| srch_id | X (features)   | y (relevance score) |
-|----------|----------------|---------------------|
-|          |  |                     |
-
-There are variety of design type to construct dataset. Choosing this method also will affect how model learn : 
-
-- Filter only search id contain at least 1 booking 
-- Not Filtering search id 
-
-
+- We need to substract the training pair which does not contain <code>event_type = book</code>. 
+- Why ? Some of the learning models work in query level. </p>
+<p>Here is a glimpse of how our data would look like</p>
+<table>
+<thead>
+<tr>
+<th>srch_id</th>
+<th>X (features)</th>
+<th>y (relevance score)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>There are variety of design type to construct dataset. Choosing this method also will affect how model learn : </p>
+<ul>
+<li>Filter only search id contain at least 1 booking </li>
+<li>Not Filtering search id </li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># get query id which contain `event==book`</span>
 <span class="n">book_session_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;booked&#39;</span><span class="p">,</span><span class="s1">&#39;srch_id&#39;</span>
@@ -2447,12 +2551,9 @@ There are variety of design type to construct dataset. Choosing this method also
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before filtering search_id with bookings, Num of search id = &#39;</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">srch_id</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After filtering search_id with bookings, Num of search id = &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">book_session_id</span><span class="p">))</span>
 </code></pre></div>
-
-    Before filtering search_id with bookings, Num of search id =  157267
-    After filtering search_id with bookings, Num of search id =  108884
-
-
-
+<div class="highlight"><pre><span></span><code>Before filtering search_id with bookings, Num of search id =  157267
+After filtering search_id with bookings, Num of search id =  108884
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">prev_shape</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shape</span> 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">book_session_id</span><span class="p">)</span>
@@ -2460,46 +2561,26 @@ There are variety of design type to construct dataset. Choosing this method also
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before filtering search_id with bookings, Num of Records = &#39;</span><span class="p">,</span><span class="n">prev_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After filtering search_id with bookings, Num of Records = &#39;</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </code></pre></div>
-
-    Before filtering search_id with bookings, Num of Records =  3907185
-    After filtering search_id with bookings, Num of Records =  2727065
-
-
-To create training data, we should list all feature combination 
-
-
+<div class="highlight"><pre><span></span><code>Before filtering search_id with bookings, Num of Records =  3907185
+After filtering search_id with bookings, Num of Records =  2727065
+</code></pre></div>
+<p>To create training data, we should list all feature combination </p>
 <div class="highlight"><pre><span></span><code><span class="n">ALL_FEATURES</span> <span class="o">=</span> <span class="n">USER_FEATURES</span> <span class="o">+</span> <span class="n">PROPERTY_FEATURES</span> <span class="o">+</span> <span class="n">SEARCH_FEATURES</span> 
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Features = &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ALL_FEATURES</span><span class="p">)</span> <span class="p">)</span>
 </code></pre></div>
-
-    Number of Features =  11
-
-
-### Split Data
-
-How to split data ? 
-
-
-It depends on ranking metrics. Our ranking metrics compare relevance score in actual vs predicted (from our model). 
-
-to obtain actual ranking , we need to obtain to each query. Hence our split process is quite different from random subsetting where we pick random for example 80% of data. 
-
-Our split unit is search id 
-
-
+<div class="highlight"><pre><span></span><code>Number of Features =  11
+</code></pre></div>
+<h3 id="split-data">Split Data<a class="headerlink" href="#split-data" title="Permanent link">&para;</a></h3>
+<p>How to split data ? </p>
+<p>It depends on ranking metrics. Our ranking metrics compare relevance score in actual vs predicted (from our model). </p>
+<p>to obtain actual ranking , we need to obtain to each query. Hence our split process is quite different from random subsetting where we pick random for example 80% of data. </p>
+<p>Our split unit is search id </p>
 <div class="highlight"><pre><span></span><code><span class="n">book_session_id</span>
 </code></pre></div>
-
-
-
-
-    array([     8,     25,     28, ..., 665554, 665562, 665574],
-          shape=(108884,))
-
-
-
-
+<div class="highlight"><pre><span></span><code>array([     8,     25,     28, ..., 665554, 665562, 665574],
+      shape=(108884,))
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Split training data into Train and Test Data</span>
 <span class="n">train_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">book_session_id</span><span class="p">)))</span>
 <span class="n">valid_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.9</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">book_session_id</span><span class="p">)))</span>
@@ -2512,13 +2593,10 @@ Our split unit is search id
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Validation search_id : &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">search_id_val</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Test search_id : &#39;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">search_id_test</span><span class="p">))</span>
 </code></pre></div>
-
-    Number of Training search_id :  87107
-    Number of Validation search_id :  10888
-    Number of Test search_id :  10889
-
-
-
+<div class="highlight"><pre><span></span><code>Number of Training search_id :  87107
+Number of Validation search_id :  10888
+Number of Test search_id :  10889
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># split X &amp; y </span>
 <span class="n">X_train_relevance</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">search_id_train</span><span class="p">)]</span>
 <span class="n">qid_train</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">search_id_train</span><span class="p">),</span>
@@ -2540,8 +2618,6 @@ Our split unit is search id
 <span class="n">y_test_relevance</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">search_id_test</span><span class="p">),</span>
                           <span class="s1">&#39;relevance_score&#39;</span><span class="p">]</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">split_data</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span>
                 <span class="n">train_frac</span><span class="p">,</span>
                 <span class="n">unique_query_id</span><span class="p">,</span>
@@ -2598,120 +2674,92 @@ Our split unit is search id
 
     <span class="k">return</span> <span class="n">split</span>
 </code></pre></div>
-
-### EDA 
-
-Some EDA wont hurt , right ? 
-
-Question / Focus of EDA : 
-
-- Number of event per search activity
-- Check Position that most booking occur 
-- Check whether there is missing value in each feature 
-
-
-#### Number of Missing Values
-
-
+<h3 id="eda">EDA<a class="headerlink" href="#eda" title="Permanent link">&para;</a></h3>
+<p>Some EDA wont hurt , right ? </p>
+<p>Question / Focus of EDA : </p>
+<ul>
+<li>Number of event per search activity</li>
+<li>Check Position that most booking occur </li>
+<li>Check whether there is missing value in each feature </li>
+</ul>
+<h4 id="number-of-missing-values">Number of Missing Values<a class="headerlink" href="#number-of-missing-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">((</span><span class="n">X_train_relevance</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></div>
-
-
-    comp1_rate_percent_diff        0.981806
-    comp6_rate_percent_diff        0.979394
-    comp1_rate                     0.976894
-    comp1_inv                      0.975163
-    comp4_rate_percent_diff        0.973210
-    comp7_rate_percent_diff        0.970401
-    gross_bookings_usd             0.960052
-    comp6_rate                     0.948188
-    comp6_inv                      0.943810
-    comp4_rate                     0.937723
-    visitor_hist_starrating        0.936747
-    visitor_hist_adr_usd           0.936399
-    comp7_rate                     0.932321
-    comp4_inv                      0.930634
-    comp7_inv                      0.923850
-    srch_query_affinity_score      0.921880
-    comp3_rate_percent_diff        0.896652
-    comp2_rate_percent_diff        0.880073
-    comp8_rate_percent_diff        0.865494
-    comp5_rate_percent_diff        0.820446
-    comp3_rate                     0.669075
-    comp3_inv                      0.644406
-    comp8_rate                     0.584797
-    comp8_inv                      0.569799
-    comp2_rate                     0.568846
-    comp2_inv                      0.546673
-    comp5_rate                     0.529495
-    comp5_inv                      0.501489
-    orig_destination_distance      0.314939
-    prop_location_score2           0.217862
-    prop_review_score              0.001281
-    event                          0.000000
-    booking_bool                   0.000000
-    search_rank                    0.000000
-    click_bool                     0.000000
-    srch_id                        0.000000
-    date_time                      0.000000
-    position                       0.000000
-    site_id                        0.000000
-    visitor_location_country_id    0.000000
-    prop_country_id                0.000000
-    prop_id                        0.000000
-    prop_starrating                0.000000
-    prop_brand_bool                0.000000
-    prop_location_score1           0.000000
-    prop_log_historical_price      0.000000
-    price_usd                      0.000000
-    random_bool                    0.000000
-    promotion_flag                 0.000000
-    srch_destination_id            0.000000
-    srch_length_of_stay            0.000000
-    srch_booking_window            0.000000
-    srch_adults_count              0.000000
-    srch_children_count            0.000000
-    srch_room_count                0.000000
-    srch_saturday_night_bool       0.000000
-    relevance_score                0.000000
-    dtype: float64
-
-
-We can see that most of the user feature is not available, hence we can update the decision not to include the feature. For now we are not interested in imputation technique. you can check other blogs. This article point out the wholistic pipeline of learning to rank in application to OTA search particularly in hotel / property ranking
-
-#### Position that most booking occur 
-
-
+<div class="highlight"><pre><span></span><code>comp1_rate_percent_diff        0.981806
+comp6_rate_percent_diff        0.979394
+comp1_rate                     0.976894
+comp1_inv                      0.975163
+comp4_rate_percent_diff        0.973210
+comp7_rate_percent_diff        0.970401
+gross_bookings_usd             0.960052
+comp6_rate                     0.948188
+comp6_inv                      0.943810
+comp4_rate                     0.937723
+visitor_hist_starrating        0.936747
+visitor_hist_adr_usd           0.936399
+comp7_rate                     0.932321
+comp4_inv                      0.930634
+comp7_inv                      0.923850
+srch_query_affinity_score      0.921880
+comp3_rate_percent_diff        0.896652
+comp2_rate_percent_diff        0.880073
+comp8_rate_percent_diff        0.865494
+comp5_rate_percent_diff        0.820446
+comp3_rate                     0.669075
+comp3_inv                      0.644406
+comp8_rate                     0.584797
+comp8_inv                      0.569799
+comp2_rate                     0.568846
+comp2_inv                      0.546673
+comp5_rate                     0.529495
+comp5_inv                      0.501489
+orig_destination_distance      0.314939
+prop_location_score2           0.217862
+prop_review_score              0.001281
+event                          0.000000
+booking_bool                   0.000000
+search_rank                    0.000000
+click_bool                     0.000000
+srch_id                        0.000000
+date_time                      0.000000
+position                       0.000000
+site_id                        0.000000
+visitor_location_country_id    0.000000
+prop_country_id                0.000000
+prop_id                        0.000000
+prop_starrating                0.000000
+prop_brand_bool                0.000000
+prop_location_score1           0.000000
+prop_log_historical_price      0.000000
+price_usd                      0.000000
+random_bool                    0.000000
+promotion_flag                 0.000000
+srch_destination_id            0.000000
+srch_length_of_stay            0.000000
+srch_booking_window            0.000000
+srch_adults_count              0.000000
+srch_children_count            0.000000
+srch_room_count                0.000000
+srch_saturday_night_bool       0.000000
+relevance_score                0.000000
+dtype: float64
+</code></pre></div>
+<p>We can see that most of the user feature is not available, hence we can update the decision not to include the feature. For now we are not interested in imputation technique. you can check other blogs. This article point out the wholistic pipeline of learning to rank in application to OTA search particularly in hotel / property ranking</p>
+<h4 id="position-that-most-booking-occur">Position that most booking occur<a class="headerlink" href="#position-that-most-booking-occur" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">bookings_event_train</span> <span class="o">=</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">X_train_relevance</span><span class="p">[</span><span class="s1">&#39;event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;booked&#39;</span>
 <span class="p">]</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">bookings_event_train</span><span class="p">,</span>
              <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;search_rank&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;search rank position&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Search Position Distribution Where Bookings Occur&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
-    Text(0.5, 1.0, 'Search Position Distribution Where Bookings Occur')
-
-
-
-
-
-![png](hotel_ranking_files/hotel_ranking_105_1.png)
-
-
-
-There is bias in bookings, where most of bookings occur at top position, hence we need to add position as feature 
-
-#### Number of Activity Occur Within Search 
-
-
+<div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Search Position Distribution Where Bookings Occur&#39;)
+</code></pre></div>
+<p><img alt="png" src="hotel_ranking_files/hotel_ranking_105_1.png" /></p>
+<p>There is bias in bookings, where most of bookings occur at top position, hence we need to add position as feature </p>
+<h4 id="number-of-activity-occur-within-search">Number of Activity Occur Within Search<a class="headerlink" href="#number-of-activity-occur-within-search" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">search_activity_count</span> <span class="o">=</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
     <span class="s1">&#39;prop_id&#39;</span> <span class="p">:</span> <span class="s1">&#39;count&#39;</span>
 <span class="p">})</span>
@@ -2724,90 +2772,72 @@ There is bias in bookings, where most of bookings occur at top position, hence w
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Event&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distibution of Number of Event from each search&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
-    Text(0.5, 1.0, 'Distibution of Number of Event from each search')
-
-
-
-
-
-![png](hotel_ranking_files/hotel_ranking_108_1.png)
-
-
-
-## Training Model 
-
-Previously we checked some features and we decide to remove some of them. 
-
-
+<div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Distibution of Number of Event from each search&#39;)
+</code></pre></div>
+<p><img alt="png" src="hotel_ranking_files/hotel_ranking_108_1.png" /></p>
+<h2 id="training-model">Training Model<a class="headerlink" href="#training-model" title="Permanent link">&para;</a></h2>
+<p>Previously we checked some features and we decide to remove some of them. </p>
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">((</span><span class="n">X_train_relevance</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></div>
-
-
-    comp1_rate_percent_diff        0.981806
-    comp6_rate_percent_diff        0.979394
-    comp1_rate                     0.976894
-    comp1_inv                      0.975163
-    comp4_rate_percent_diff        0.973210
-    comp7_rate_percent_diff        0.970401
-    gross_bookings_usd             0.960052
-    comp6_rate                     0.948188
-    comp6_inv                      0.943810
-    comp4_rate                     0.937723
-    visitor_hist_starrating        0.936747
-    visitor_hist_adr_usd           0.936399
-    comp7_rate                     0.932321
-    comp4_inv                      0.930634
-    comp7_inv                      0.923850
-    srch_query_affinity_score      0.921880
-    comp3_rate_percent_diff        0.896652
-    comp2_rate_percent_diff        0.880073
-    comp8_rate_percent_diff        0.865494
-    comp5_rate_percent_diff        0.820446
-    comp3_rate                     0.669075
-    comp3_inv                      0.644406
-    comp8_rate                     0.584797
-    comp8_inv                      0.569799
-    comp2_rate                     0.568846
-    comp2_inv                      0.546673
-    comp5_rate                     0.529495
-    comp5_inv                      0.501489
-    orig_destination_distance      0.314939
-    prop_location_score2           0.217862
-    prop_review_score              0.001281
-    event                          0.000000
-    booking_bool                   0.000000
-    search_rank                    0.000000
-    click_bool                     0.000000
-    srch_id                        0.000000
-    date_time                      0.000000
-    position                       0.000000
-    site_id                        0.000000
-    visitor_location_country_id    0.000000
-    prop_country_id                0.000000
-    prop_id                        0.000000
-    prop_starrating                0.000000
-    prop_brand_bool                0.000000
-    prop_location_score1           0.000000
-    prop_log_historical_price      0.000000
-    price_usd                      0.000000
-    random_bool                    0.000000
-    promotion_flag                 0.000000
-    srch_destination_id            0.000000
-    srch_length_of_stay            0.000000
-    srch_booking_window            0.000000
-    srch_adults_count              0.000000
-    srch_children_count            0.000000
-    srch_room_count                0.000000
-    srch_saturday_night_bool       0.000000
-    relevance_score                0.000000
-    dtype: float64
-
-
-
+<div class="highlight"><pre><span></span><code>comp1_rate_percent_diff        0.981806
+comp6_rate_percent_diff        0.979394
+comp1_rate                     0.976894
+comp1_inv                      0.975163
+comp4_rate_percent_diff        0.973210
+comp7_rate_percent_diff        0.970401
+gross_bookings_usd             0.960052
+comp6_rate                     0.948188
+comp6_inv                      0.943810
+comp4_rate                     0.937723
+visitor_hist_starrating        0.936747
+visitor_hist_adr_usd           0.936399
+comp7_rate                     0.932321
+comp4_inv                      0.930634
+comp7_inv                      0.923850
+srch_query_affinity_score      0.921880
+comp3_rate_percent_diff        0.896652
+comp2_rate_percent_diff        0.880073
+comp8_rate_percent_diff        0.865494
+comp5_rate_percent_diff        0.820446
+comp3_rate                     0.669075
+comp3_inv                      0.644406
+comp8_rate                     0.584797
+comp8_inv                      0.569799
+comp2_rate                     0.568846
+comp2_inv                      0.546673
+comp5_rate                     0.529495
+comp5_inv                      0.501489
+orig_destination_distance      0.314939
+prop_location_score2           0.217862
+prop_review_score              0.001281
+event                          0.000000
+booking_bool                   0.000000
+search_rank                    0.000000
+click_bool                     0.000000
+srch_id                        0.000000
+date_time                      0.000000
+position                       0.000000
+site_id                        0.000000
+visitor_location_country_id    0.000000
+prop_country_id                0.000000
+prop_id                        0.000000
+prop_starrating                0.000000
+prop_brand_bool                0.000000
+prop_location_score1           0.000000
+prop_log_historical_price      0.000000
+price_usd                      0.000000
+random_bool                    0.000000
+promotion_flag                 0.000000
+srch_destination_id            0.000000
+srch_length_of_stay            0.000000
+srch_booking_window            0.000000
+srch_adults_count              0.000000
+srch_children_count            0.000000
+srch_room_count                0.000000
+srch_saturday_night_bool       0.000000
+relevance_score                0.000000
+dtype: float64
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">PROPERTY_FEATURES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;prop_starrating&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;price_usd&#39;</span><span class="p">,</span>
@@ -2829,14 +2859,9 @@ Previously we checked some features and we decide to remove some of them.
 
 <span class="n">ALL_FEATURES</span> <span class="o">=</span> <span class="n">PROPERTY_FEATURES</span> <span class="o">+</span> <span class="n">SEARCH_FEATURES</span> <span class="o">+</span> <span class="n">POSITIONAL_FEATURES</span>
 </code></pre></div>
-
-### Pointwise Model 
-
-We can train model to predict directly relevance score, but only minimizing error on relevance score prediction. We dont need the query id information since we are not performing swapping. 
-
-For example we could use Regression as **LinearRegression** and **RandomForest**
-
-
+<h3 id="pointwise-model">Pointwise Model<a class="headerlink" href="#pointwise-model" title="Permanent link">&para;</a></h3>
+<p>We can train model to predict directly relevance score, but only minimizing error on relevance score prediction. We dont need the query id information since we are not performing swapping. </p>
+<p>For example we could use Regression as <strong>LinearRegression</strong> and <strong>RandomForest</strong></p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span> 
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span> 
 
@@ -2853,127 +2878,122 @@ For example we could use Regression as **LinearRegression** and **RandomForest**
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Random Forest&#39;</span><span class="p">)</span>
 <span class="n">rf_pointwise</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">],</span><span class="n">y_train_relevance</span><span class="p">)</span>
 </code></pre></div>
-
-    Training Linear Regression
-    Training Random Forest
-    building tree 1 of 100
-    building tree 2 of 100
-    building tree 3 of 100
-    building tree 4 of 100
-    building tree 5 of 100
-    building tree 6 of 100
-    building tree 7 of 100
-    building tree 8 of 100
-
-
-    [Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.
+<div class="highlight"><pre><span></span><code>Training Linear Regression
+Training Random Forest
+building tree 1 of 100
+building tree 2 of 100
+building tree 3 of 100
+building tree 4 of 100
+building tree 5 of 100
+building tree 6 of 100
+building tree 7 of 100
+building tree 8 of 100
 
 
-    building tree 9 of 100
-    building tree 10 of 100
-    building tree 11 of 100
-    building tree 12 of 100
-    building tree 13 of 100
-    building tree 14 of 100
-    building tree 15 of 100
-    building tree 16 of 100
-    building tree 17 of 100
-    building tree 18 of 100
-    building tree 19 of 100
-    building tree 20 of 100
-    building tree 21 of 100
-    building tree 22 of 100
-    building tree 23 of 100
-    building tree 24 of 100
+[Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.
 
 
-    [Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s
+building tree 9 of 100
+building tree 10 of 100
+building tree 11 of 100
+building tree 12 of 100
+building tree 13 of 100
+building tree 14 of 100
+building tree 15 of 100
+building tree 16 of 100
+building tree 17 of 100
+building tree 18 of 100
+building tree 19 of 100
+building tree 20 of 100
+building tree 21 of 100
+building tree 22 of 100
+building tree 23 of 100
+building tree 24 of 100
 
 
-    building tree 25 of 100
-    building tree 26 of 100
-    building tree 27 of 100
-    building tree 28 of 100
-    building tree 29 of 100
-    building tree 30 of 100
-    building tree 31 of 100
-    building tree 32 of 100
-    building tree 33 of 100
-    building tree 34 of 100
-    building tree 35 of 100
-    building tree 36 of 100
-    building tree 37 of 100
-    building tree 38 of 100
-    building tree 39 of 100
-    building tree 40 of 100
-    building tree 41 of 100
-    building tree 42 of 100
-    building tree 43 of 100
-    building tree 44 of 100
-    building tree 45 of 100
-    building tree 46 of 100
-    building tree 47 of 100
-    building tree 48 of 100
-    building tree 49 of 100
-    building tree 50 of 100
-    building tree 51 of 100
-    building tree 52 of 100
-    building tree 53 of 100
-    building tree 54 of 100
-    building tree 55 of 100
-    building tree 56 of 100
-    building tree 57 of 100
-    building tree 58 of 100
-    building tree 59 of 100
-    building tree 60 of 100
-    building tree 61 of 100
-    building tree 62 of 100
-    building tree 63 of 100
-    building tree 64 of 100
-    building tree 65 of 100
-    building tree 66 of 100
-    building tree 67 of 100
-    building tree 68 of 100
-    building tree 69 of 100
-    building tree 70 of 100
-    building tree 71 of 100
-    building tree 72 of 100
-    building tree 73 of 100
-    building tree 74 of 100
-    building tree 75 of 100
-    building tree 76 of 100
-    building tree 77 of 100
-    building tree 78 of 100
-    building tree 79 of 100
-    building tree 80 of 100
-    building tree 81 of 100
-    building tree 82 of 100
-    building tree 83 of 100
-    building tree 84 of 100
-    building tree 85 of 100
-    building tree 86 of 100
-    building tree 87 of 100
-    building tree 88 of 100
-    building tree 89 of 100
-    building tree 90 of 100
-    building tree 91 of 100
-    building tree 92 of 100
-    building tree 93 of 100
-    building tree 94 of 100
-    building tree 95 of 100
-    building tree 96 of 100
-    building tree 97 of 100
-    building tree 98 of 100
-    building tree 99 of 100
-    building tree 100 of 100
+[Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s
 
 
-    [Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished
+building tree 25 of 100
+building tree 26 of 100
+building tree 27 of 100
+building tree 28 of 100
+building tree 29 of 100
+building tree 30 of 100
+building tree 31 of 100
+building tree 32 of 100
+building tree 33 of 100
+building tree 34 of 100
+building tree 35 of 100
+building tree 36 of 100
+building tree 37 of 100
+building tree 38 of 100
+building tree 39 of 100
+building tree 40 of 100
+building tree 41 of 100
+building tree 42 of 100
+building tree 43 of 100
+building tree 44 of 100
+building tree 45 of 100
+building tree 46 of 100
+building tree 47 of 100
+building tree 48 of 100
+building tree 49 of 100
+building tree 50 of 100
+building tree 51 of 100
+building tree 52 of 100
+building tree 53 of 100
+building tree 54 of 100
+building tree 55 of 100
+building tree 56 of 100
+building tree 57 of 100
+building tree 58 of 100
+building tree 59 of 100
+building tree 60 of 100
+building tree 61 of 100
+building tree 62 of 100
+building tree 63 of 100
+building tree 64 of 100
+building tree 65 of 100
+building tree 66 of 100
+building tree 67 of 100
+building tree 68 of 100
+building tree 69 of 100
+building tree 70 of 100
+building tree 71 of 100
+building tree 72 of 100
+building tree 73 of 100
+building tree 74 of 100
+building tree 75 of 100
+building tree 76 of 100
+building tree 77 of 100
+building tree 78 of 100
+building tree 79 of 100
+building tree 80 of 100
+building tree 81 of 100
+building tree 82 of 100
+building tree 83 of 100
+building tree 84 of 100
+building tree 85 of 100
+building tree 86 of 100
+building tree 87 of 100
+building tree 88 of 100
+building tree 89 of 100
+building tree 90 of 100
+building tree 91 of 100
+building tree 92 of 100
+building tree 93 of 100
+building tree 94 of 100
+building tree 95 of 100
+building tree 96 of 100
+building tree 97 of 100
+building tree 98 of 100
+building tree 99 of 100
+building tree 100 of 100
 
 
-
-
-
+[Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished
+</code></pre></div>
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -3389,92 +3409,116 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div style="overflow-x:scroll;"><div style="overflow-x:scroll;">RandomForestRegressor</div></div><div style="overflow-x:scroll;"><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestRegressor.html">?<span>Documentation for RandomForestRegressor</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre></div> </div></div></div></div>
+</style>
+<div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div style="overflow-x:scroll;"><div style="overflow-x:scroll;">RandomForestRegressor</div></div><div style="overflow-x:scroll;"><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.ensemble.RandomForestRegressor.html">?<span>Documentation for RandomForestRegressor</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>RandomForestRegressor(n_jobs=-1, random_state=2, verbose=3)</pre></div> </div></div></div></div>
 
-
-
-### Pairwise Model
-
-There are lot of model that are used objective to maximize pairwise learning. 
-
-for example let say user A has search in e commerce "shiny bag" and it returns 3 items 
-
-1. Item A (click)
-2. Item B (click)
-3. Item C (bought)
-
-the idea is that our model should optimize maximizing pairwise objective Item C > Item A and Item C > B 
-
-
-
-Some of them model that have pairwise objective : 
+<h3 id="pairwise-model">Pairwise Model<a class="headerlink" href="#pairwise-model" title="Permanent link">&para;</a></h3>
+<p>There are lot of model that are used objective to maximize pairwise learning. </p>
+<p>for example let say user A has search in e commerce "shiny bag" and it returns 3 items </p>
+<ol>
+<li>Item A (click)</li>
+<li>Item B (click)</li>
+<li>Item C (bought)</li>
+</ol>
+<p>the idea is that our model should optimize maximizing pairwise objective Item C &gt; Item A and Item C &gt; B </p>
+<p>Some of them model that have pairwise objective : 
 - RankNet 
-- LambdaMART (Logistic Loss / RankNet Loss)
-
-#### RankNet 
-
-
-- Training Data Construction : 
-    - Given query result , each item in result has relevance score depends on how user interact (for example book should have bigger relevance score)
-    -
-
-- Objective : 
-    - $P_{i,j} = P(U_i > U_j) = \cfrac{1}{1 + e^{-\sigma(s_i-s_j)}}$
-
-    - Where : 
-        - $P_{i,j} $ : Probability that item i is scored higher than item j
-
-    - In plain words we want our model giving higher score to item that are having higher score. 
-
-    - the $s_i$ comes from model prediction / output : 
-
-    - $s_i = f(x_i|\theta)$
-
-    - s_i - s_j : 
-        - $s_i - s_j = 1 if s_i > s_j$ 
-        - $s_i - s_j = 0 if s_i = s_j$ 
-        - $s_i - s_j = -1 s_i < s_j$
-
-    - To obtain optimal parameter $\theta$ : 
-        - Minimizing negative log likelihood from all training data (Similar to Classification)  : 
-            - $$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}} \left[
-                y_{ij}\,\log \left(\frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
-                + (1-y_{ij})\,\log \left(1 - \frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
-                \right]
-                $$
-            - $y_{ij}$ : Pairwise label , 1 if item i > item j 
-- The objective could be solved through gradient descent 
-
-- The goal is to learn relevance scoring function. 
-
-
-#### Lambda Rank 
-
-- Why  : 
-  - Previous Approach does not directly optimize information retrieval metrics such as : NDCG
-  - NDCG is not convex function. 
-
-- Solution : 
-  - We can optimize the NDCG but with sneaky trick , we can optimize the NDCG by seeing if we switch position between two item (i,j) how the NDCG changes (that similar  to gradient). 
-
-  $\lambda_{i,j} = \Delta NDCG_{\text{swap}_{i,j}}$
-
-- After swapping position we can find which item if we swap the position has the biggest change in NDCG, after swapping each query result combination 
-
-
-now our task is predicting lambda 
-
-
-| query_id | X (features)   | y (lambda) |
-|----------|----------------|---------------------|
-|          |  |                     |
-
-#### LambdaMART 
-
-
-- Basically LambdaMART ~ Work the same way as Lambda Rank only that the model in Lambda MART use Decision Tree (Multiple Additive Regression Trees)
-
-
+- LambdaMART (Logistic Loss / RankNet Loss)</p>
+<h4 id="ranknet">RankNet<a class="headerlink" href="#ranknet" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Training Data Construction : </p>
+<h2 id="-given-query-result-each-item-in-result-has-relevance-score-depends-on-how-user-interact-for-example-book-should-have-bigger-relevance-score">- Given query result , each item in result has relevance score depends on how user interact (for example book should have bigger relevance score)<a class="headerlink" href="#-given-query-result-each-item-in-result-has-relevance-score-depends-on-how-user-interact-for-example-book-should-have-bigger-relevance-score" title="Permanent link">&para;</a></h2>
+</li>
+<li>
+<p>Objective : </p>
+<ul>
+<li>
+<p><span class="arithmatex">\(P_{i,j} = P(U_i &gt; U_j) = \cfrac{1}{1 + e^{-\sigma(s_i-s_j)}}\)</span></p>
+</li>
+<li>
+<p>Where : </p>
+<ul>
+<li>$P_{i,j} $ : Probability that item i is scored higher than item j</li>
+</ul>
+</li>
+<li>
+<p>In plain words we want our model giving higher score to item that are having higher score. </p>
+</li>
+<li>
+<p>the <span class="arithmatex">\(s_i\)</span> comes from model prediction / output : </p>
+</li>
+<li>
+<p><span class="arithmatex">\(s_i = f(x_i|\theta)\)</span></p>
+</li>
+<li>
+<p>s_i - s_j : </p>
+<ul>
+<li><span class="arithmatex">\(s_i - s_j = 1 if s_i &gt; s_j\)</span> </li>
+<li><span class="arithmatex">\(s_i - s_j = 0 if s_i = s_j\)</span> </li>
+<li><span class="arithmatex">\(s_i - s_j = -1 s_i &lt; s_j\)</span></li>
+</ul>
+</li>
+<li>
+<p>To obtain optimal parameter <span class="arithmatex">\(\theta\)</span> : </p>
+<ul>
+<li>Minimizing negative log likelihood from all training data (Similar to Classification)  : <ul>
+<li>$$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}} \left[
+    y_{ij}\,\log \left(\frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)<ul>
+<li>(1-y_{ij})\,\log \left(1 - \frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
+\right]
+$$</li>
+</ul>
+</li>
+<li><span class="arithmatex">\(y_{ij}\)</span> : Pairwise label , 1 if item i &gt; item j </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The objective could be solved through gradient descent </li>
+</ul>
+</li>
+<li>
+<p>The goal is to learn relevance scoring function. </p>
+</li>
+</ul>
+<h4 id="lambda-rank">Lambda Rank<a class="headerlink" href="#lambda-rank" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Why  : </li>
+<li>Previous Approach does not directly optimize information retrieval metrics such as : NDCG</li>
+<li>
+<p>NDCG is not convex function. </p>
+</li>
+<li>
+<p>Solution : </p>
+</li>
+<li>We can optimize the NDCG but with sneaky trick , we can optimize the NDCG by seeing if we switch position between two item (i,j) how the NDCG changes (that similar  to gradient). </li>
+</ul>
+<p><span class="arithmatex">\(\lambda_{i,j} = \Delta NDCG_{\text{swap}_{i,j}}\)</span></p>
+<ul>
+<li>After swapping position we can find which item if we swap the position has the biggest change in NDCG, after swapping each query result combination </li>
+</ul>
+<p>now our task is predicting lambda </p>
+<table>
+<thead>
+<tr>
+<th>query_id</th>
+<th>X (features)</th>
+<th>y (lambda)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="lambdamart">LambdaMART<a class="headerlink" href="#lambdamart" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Basically LambdaMART ~ Work the same way as Lambda Rank only that the model in Lambda MART use Decision Tree (Multiple Additive Regression Trees)</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xgb</span>
 <span class="n">ranker_pairwise</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRanker</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
                                 <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> 
@@ -3483,16 +3527,11 @@ now our task is predicting lambda
                                 <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;rank:pairwise&quot;</span><span class="p">)</span>
 <span class="n">ranker_pairwise</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">],</span> <span class="n">y_train_relevance</span><span class="p">,</span><span class="n">qid</span><span class="o">=</span><span class="n">qid_train</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/Users/sintamulyawati/Documents/rovos/venv/lib/python3.11/site-packages/xgboost/training.py:183: UserWarning: [23:38:21] WARNING: /Users/runner/work/xgboost/xgboost/src/learner.cc:738: 
+Parameters: { &quot;verbose&quot; } are not used.
 
-    /Users/sintamulyawati/Documents/rovos/venv/lib/python3.11/site-packages/xgboost/training.py:183: UserWarning: [23:38:21] WARNING: /Users/runner/work/xgboost/xgboost/src/learner.cc:738: 
-    Parameters: { "verbose" } are not used.
-
-      bst.update(dtrain, iteration=i, fobj=obj)
-
-
-
-
-
+  bst.update(dtrain, iteration=i, fobj=obj)
+</code></pre></div>
 <style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -3908,7 +3947,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
+</style>
+<div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
           colsample_bynode=None, colsample_bytree=None, device=None,
           early_stopping_rounds=None, enable_categorical=False,
           eval_metric=None, feature_types=None, feature_weights=None,
@@ -3928,15 +3968,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
           monotone_constraints=None, multi_strategy=None, n_estimators=500,
           n_jobs=-1, num_parallel_tree=None, ...)</pre></div> </div></div></div></div>
 
-
-
-### Listwise Model 
-
-Some of them model that have pairwise objective : 
+<h3 id="listwise-model">Listwise Model<a class="headerlink" href="#listwise-model" title="Permanent link">&para;</a></h3>
+<p>Some of them model that have pairwise objective : 
 - RankNet 
-- LambdaMART (Logistic Loss / RankNet Loss)
-
-
+- LambdaMART (Logistic Loss / RankNet Loss)</p>
 <div class="highlight"><pre><span></span><code><span class="n">ranker_listwise</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRanker</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
                                 <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> 
                                 <span class="n">tree_method</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">,</span> 
@@ -3944,10 +3979,6 @@ Some of them model that have pairwise objective :
 <span class="n">ranker_listwise</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">],</span> <span class="n">y_train_relevance</span><span class="p">,</span><span class="n">qid</span><span class="o">=</span><span class="n">qid_train</span><span class="p">,</span>
         <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -4363,7 +4394,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
+</style>
+<div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>XGBRanker(base_score=None, booster=None, callbacks=None, colsample_bylevel=None,
           colsample_bynode=None, colsample_bytree=None, device=None,
           early_stopping_rounds=None, enable_categorical=False,
           eval_metric=None, feature_types=None, feature_weights=None,
@@ -4383,107 +4415,72 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
           monotone_constraints=None, multi_strategy=None, n_estimators=500,
           n_jobs=-1, num_parallel_tree=None, ...)</pre></div> </div></div></div></div>
 
-
-
-### Holdout Set Evaluation 
-
-The goal is to check whether model learn or not 
-
-There are lot of Ranking / Information Retrieval Metrics. Some of them are : 
+<h3 id="holdout-set-evaluation">Holdout Set Evaluation<a class="headerlink" href="#holdout-set-evaluation" title="Permanent link">&para;</a></h3>
+<p>The goal is to check whether model learn or not </p>
+<p>There are lot of Ranking / Information Retrieval Metrics. Some of them are : 
 We can divide into 
 - Binary Relevance Metrics 
     - Precision @ K 
     - Mean Average Precision @ K 
-    - Mean Reciprocal Rank 
-
-- Rank Aware Metrics 
-    - Normalized Discounted Cumulative Gain (NDCG)
-
-What is Ideal Ranking Metrics ?
-- If we predict correctly the relevance score at top position is better than correctly predicting relevance score in lower position. 
-
-#### Metrics : NDCG
-
-\begin{align*}\\
-\begin{split}\\
-\text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)} \\
-
-\end{split}\\
-\end{align*}\\
-
-Where : 
-- $\text{DCG}$ = Discounted Cumulative Gain 
-- $k= \text{number of items in recommendation}$\\
-- $\text{rel}[i]$ = relevance score at item in position i th
-- Relevance score itself usually relevance score based on ground truth 
-
-So where is the NDCG ? 
-
-Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1 
-
-
-The Idea of DCG is that position does matter, if our model can predict the highest relevance score at top position is better compared to lower position
-
-
-
-In NDCG we can scale the DCG by maximum value of DCG or we call it as **Ideal DCG**
-
-
-\begin{align*}\\
-\begin{split}\\
-\text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\\
-
-\end{split}\\
-\end{align*}\\
-
-So what is the ideal DCG in this case ? 
-
-There are some flavor, citing Doug TurnBull in His Blogpost , 
-
-- Local Ideal --> Sorted based on ground truth relevance --> 
-- Global Ideal --> using whole score from judgement list as ground truth , the previous one only use the response from search only 
-- Max Label --> Considering each position has maximum score, for example in our case the book event type has relevance of 2. 
-
-
-The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic
-
-for example we will use validation to measure ndcg. 
-
-#### Validation Set
-
-The purpose on this set mainly **selecting model** : 
+    - Mean Reciprocal Rank </p>
+<ul>
+<li>Rank Aware Metrics <ul>
+<li>Normalized Discounted Cumulative Gain (NDCG)</li>
+</ul>
+</li>
+</ul>
+<p>What is Ideal Ranking Metrics ?
+- If we predict correctly the relevance score at top position is better than correctly predicting relevance score in lower position. </p>
+<h4 id="metrics-ndcg">Metrics : NDCG<a class="headerlink" href="#metrics-ndcg" title="Permanent link">&para;</a></h4>
+<p>\begin{align*}\
+\begin{split}\
+\text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)} \</p>
+<p>\end{split}\
+\end{align*}\</p>
+<p>Where : 
+- <span class="arithmatex">\(\text{DCG}\)</span> = Discounted Cumulative Gain 
+- <span class="arithmatex">\(k= \text{number of items in recommendation}\)</span>\
+- <span class="arithmatex">\(\text{rel}[i]\)</span> = relevance score at item in position i th
+- Relevance score itself usually relevance score based on ground truth </p>
+<p>So where is the NDCG ? </p>
+<p>Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1 </p>
+<p>The Idea of DCG is that position does matter, if our model can predict the highest relevance score at top position is better compared to lower position</p>
+<p>In NDCG we can scale the DCG by maximum value of DCG or we call it as <strong>Ideal DCG</strong></p>
+<p>\begin{align*}\
+\begin{split}\
+\text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\</p>
+<p>\end{split}\
+\end{align*}\</p>
+<p>So what is the ideal DCG in this case ? </p>
+<p>There are some flavor, citing Doug TurnBull in His Blogpost , </p>
+<ul>
+<li>Local Ideal &rarr; Sorted based on ground truth relevance &rarr; </li>
+<li>Global Ideal &rarr; using whole score from judgement list as ground truth , the previous one only use the response from search only </li>
+<li>Max Label &rarr; Considering each position has maximum score, for example in our case the book event type has relevance of 2. </li>
+</ul>
+<p>The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic</p>
+<p>for example we will use validation to measure ndcg. </p>
+<h4 id="validation-set">Validation Set<a class="headerlink" href="#validation-set" title="Permanent link">&para;</a></h4>
+<p>The purpose on this set mainly <strong>selecting model</strong> : 
 - Selecting best hyperparameter 
 - Selecting approach 
-- pipeline etc 
-
-We could do through **Cross Validation** which have better estimate of model performance. 
-
-In this article we only implement the **Validation Set** approach 
-
-
-We also wont cover **Hyperparameter Tuning** in this article
-
-Next, we should add our model prediction. So, how can we predict ? 
-
-First this model focus on ranking, which means, does not focus on **candidate generation step**. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. 
-
-Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank 
-
-
+- pipeline etc </p>
+<p>We could do through <strong>Cross Validation</strong> which have better estimate of model performance. </p>
+<p>In this article we only implement the <strong>Validation Set</strong> approach </p>
+<p>We also wont cover <strong>Hyperparameter Tuning</strong> in this article</p>
+<p>Next, we should add our model prediction. So, how can we predict ? </p>
+<p>First this model focus on ranking, which means, does not focus on <strong>candidate generation step</strong>. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. </p>
+<p>Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank </p>
 <div class="highlight"><pre><span></span><code><span class="n">X_val_relevance</span><span class="p">[</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/2832532597.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-    /var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/2832532597.py:1: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      X_val_relevance['search_rank'] = 1
-
-
-**Pointwise**
-
-
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X_val_relevance[&#39;search_rank&#39;] = 1
+</code></pre></div>
+<p><strong>Pointwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pointwise score </span>
 <span class="n">y_val_pred_pointwise</span> <span class="o">=</span> <span class="n">rf_pointwise</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">])</span>
 
@@ -4502,15 +4499,10 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <span class="n">val_prediction_pointwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_pointwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_pointwise</span>
 </code></pre></div>
-
-    [Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
-    [Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    0.3s
-    [Parallel(n_jobs=8)]: Done 100 out of 100 | elapsed:    1.7s finished
-
-
-
-
-
+<div class="highlight"><pre><span></span><code>[Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
+[Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    0.3s
+[Parallel(n_jobs=8)]: Done 100 out of 100 | elapsed:    1.7s finished
+</code></pre></div>
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4630,11 +4622,7 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <p>273242 rows × 5 columns</p>
 </div>
 
-
-
-**Pairwise**
-
-
+<p><strong>Pairwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pairwise score </span>
 <span class="n">y_val_pred_pairwise</span> <span class="o">=</span> <span class="n">ranker_pairwise</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">])</span>
 
@@ -4653,10 +4641,6 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <span class="n">val_prediction_pairwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_pairwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_pairwise</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4776,11 +4760,7 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <p>273242 rows × 5 columns</p>
 </div>
 
-
-
-**Listwise**
-
-
+<p><strong>Listwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># listwise score </span>
 <span class="n">val_prediction_listwise</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">search_id_val</span><span class="p">),</span>
                           <span class="p">[</span><span class="s1">&#39;prop_id&#39;</span> <span class="p">,</span> <span class="s1">&#39;srch_id&#39;</span><span class="p">]]</span>
@@ -4797,10 +4777,6 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <span class="n">val_prediction_listwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_listwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_listwise</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -4920,11 +4896,7 @@ Before we perform prediction we have our positional feature needs to be adjusted
 <p>273242 rows × 5 columns</p>
 </div>
 
-
-
-lets make a function to prepare the prediction on ground truth 
-
-
+<p>lets make a function to prepare the prediction on ground truth </p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_for_eval</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">query_id</span><span class="p">,</span><span class="n">search_col</span><span class="o">=</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="n">prop_col</span> <span class="o">=</span> <span class="s1">&#39;prop_id&#39;</span><span class="p">)</span> <span class="p">:</span> 
     <span class="n">pred_df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="n">search_col</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">query_id</span><span class="p">),</span>
                             <span class="p">[</span><span class="n">prop_col</span> <span class="p">,</span> <span class="n">search_col</span><span class="p">]]</span>
@@ -4938,49 +4910,35 @@ lets make a function to prepare the prediction on ground truth
     <span class="n">pred_df</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">search_col</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">pred_df</span>
 </code></pre></div>
-
-Simple NDCG Calculation on a query 
-
-
+<p>Simple NDCG Calculation on a query </p>
 <div class="highlight"><pre><span></span><code><span class="n">sample_dcg</span> <span class="o">=</span> <span class="n">val_prediction_listwise</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">val_prediction_listwise</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">val_prediction_listwise</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">])</span> 
 <span class="p">]</span>
 </code></pre></div>
-
-$$
+<div class="arithmatex">\[
 \text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)}
-$$
-
-
-
+\]</div>
 <div class="highlight"><pre><span></span><code><span class="c1"># </span>
 <span class="n">sample_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">sample_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;y_true&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="c1"># </span>
 <span class="n">sample_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;dcg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gain&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">sample_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/404199756.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-    /var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/404199756.py:2: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  sample_dcg.loc[:,&#39;gain&#39;] = 2 ** sample_dcg.loc[:,&#39;y_true&#39;] - 1
+/var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/404199756.py:4: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      sample_dcg.loc[:,'gain'] = 2 ** sample_dcg.loc[:,'y_true'] - 1
-    /var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/404199756.py:4: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      sample_dcg.loc[:,'dcg'] = sample_dcg.loc[:,'gain'] / np.log2(sample_dcg.loc[:,'rank'] + 1)
-
-
-
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  sample_dcg.loc[:,&#39;dcg&#39;] = sample_dcg.loc[:,&#39;gain&#39;] / np.log2(sample_dcg.loc[:,&#39;rank&#39;] + 1)
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">dcg</span> <span class="o">=</span> <span class="n">sample_dcg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;dcg&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span>
 <span class="n">dcg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5015,9 +4973,6 @@ $$
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="c1"># calculate ideal dcg , ideal sorting based on y_true </span>
 <span class="n">ideal_dcg</span> <span class="o">=</span> <span class="n">sample_dcg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">ideal_dcg</span> <span class="o">=</span> <span class="n">sample_dcg</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span>
@@ -5027,10 +4982,6 @@ $$
 <span class="n">ideal_dcg</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">ideal_dcg</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5213,23 +5164,14 @@ $$
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="c1"># </span>
 <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;y_true&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="c1"># </span>
 <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;dcg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gain&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">ideal_dcg</span> <span class="o">=</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;dcg&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">dcg</span> <span class="o">/</span> <span class="n">ideal_dcg</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5264,9 +5206,6 @@ $$
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_dcg</span><span class="p">(</span><span class="n">prediction_result</span><span class="p">,</span>
                   <span class="n">target_col</span><span class="p">,</span>
                   <span class="n">sorting_col</span><span class="p">,</span>
@@ -5294,10 +5233,7 @@ $$
 
      <span class="k">return</span> <span class="n">dcg</span>
 </code></pre></div>
-
-we usually calculate using Top N Position of ranking, not full item. 
-
-
+<p>we usually calculate using Top N Position of ranking, not full item. </p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_dcg_topk</span><span class="p">(</span><span class="n">prediction_result</span><span class="p">,</span>
                   <span class="n">target_col</span><span class="p">,</span>
                   <span class="n">sorting_col</span><span class="p">,</span>
@@ -5331,8 +5267,6 @@ we usually calculate using Top N Position of ranking, not full item.
 
      <span class="k">return</span> <span class="n">dcg</span>
 </code></pre></div>
-
-
 <div class="highlight"><pre><span></span><code><span class="n">dcg_listwise</span> <span class="o">=</span> <span class="n">calculate_dcg</span><span class="p">(</span><span class="n">prediction_result</span><span class="o">=</span><span class="n">val_prediction_listwise</span><span class="p">,</span>
                              <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
                              <span class="n">sorting_col</span><span class="o">=</span><span class="s1">&#39;pred_lambda&#39;</span><span class="p">,</span>
@@ -5346,18 +5280,10 @@ we usually calculate using Top N Position of ranking, not full item.
 
 <span class="n">ndcg</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    dcg    0.439791
-    dtype: float64
-
-
-
-Top 5
-
-
+<div class="highlight"><pre><span></span><code>dcg    0.439791
+dtype: float64
+</code></pre></div>
+<p>Top 5</p>
 <div class="highlight"><pre><span></span><code><span class="n">dcg_listwise_top5</span> <span class="o">=</span> <span class="n">calculate_dcg_topk</span><span class="p">(</span><span class="n">prediction_result</span><span class="o">=</span><span class="n">val_prediction_listwise</span><span class="p">,</span>
                              <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
                              <span class="n">sorting_col</span><span class="o">=</span><span class="s1">&#39;pred_lambda&#39;</span><span class="p">,</span>
@@ -5371,18 +5297,10 @@ Top 5
 
 <span class="n">ndcg5</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    dcg    0.289173
-    dtype: float64
-
-
-
-Top 10 
-
-
+<div class="highlight"><pre><span></span><code>dcg    0.289173
+dtype: float64
+</code></pre></div>
+<p>Top 10 </p>
 <div class="highlight"><pre><span></span><code><span class="n">dcg_listwise_top10</span> <span class="o">=</span> <span class="n">calculate_dcg_topk</span><span class="p">(</span><span class="n">prediction_result</span><span class="o">=</span><span class="n">val_prediction_listwise</span><span class="p">,</span>
                              <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
                              <span class="n">sorting_col</span><span class="o">=</span><span class="s1">&#39;pred_lambda&#39;</span><span class="p">,</span>
@@ -5396,16 +5314,9 @@ Top 10
 
 <span class="n">ndcg10</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    dcg    0.357547
-    dtype: float64
-
-
-
-
+<div class="highlight"><pre><span></span><code>dcg    0.357547
+dtype: float64
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">dcg_listwise_top50</span> <span class="o">=</span> <span class="n">calculate_dcg_topk</span><span class="p">(</span><span class="n">prediction_result</span><span class="o">=</span><span class="n">val_prediction_listwise</span><span class="p">,</span>
                              <span class="n">target_col</span><span class="o">=</span><span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
                              <span class="n">sorting_col</span><span class="o">=</span><span class="s1">&#39;pred_lambda&#39;</span><span class="p">,</span>
@@ -5419,20 +5330,11 @@ Top 10
 
 <span class="n">ndcg50</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </code></pre></div>
-
-
-
-
-    dcg    0.439791
-    dtype: float64
-
-
-
-We can see as number of Top N increase NDCG gets bigger. 
-
-Wrapping Up into a function  to calculate ndcg
-
-
+<div class="highlight"><pre><span></span><code>dcg    0.439791
+dtype: float64
+</code></pre></div>
+<p>We can see as number of Top N increase NDCG gets bigger. </p>
+<p>Wrapping Up into a function  to calculate ndcg</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_ndcg_ideal</span><span class="p">(</span><span class="n">prediction_result</span><span class="p">,</span>
                          <span class="n">target_col</span><span class="p">,</span><span class="n">sorting_col</span><span class="p">,</span>
                          <span class="n">search_col</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="p">:</span> 
@@ -5449,12 +5351,8 @@ Wrapping Up into a function  to calculate ndcg
 
     <span class="k">return</span> <span class="n">ndcg</span>
 </code></pre></div>
-
-Comparing Model Performance on Validation Set
-
-**NDCG@5**
-
-
+<p>Comparing Model Performance on Validation Set</p>
+<p><strong>NDCG@5</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pointwise </span>
 <span class="n">pointwise_ndcg5</span> <span class="o">=</span> <span class="n">calculate_ndcg_ideal</span><span class="p">(</span><span class="n">prediction_result</span> <span class="o">=</span> <span class="n">val_prediction_pointwise</span> <span class="p">,</span>
                          <span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
@@ -5480,10 +5378,6 @@ Comparing Model Performance on Validation Set
 <span class="p">},</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pointwise&#39;</span><span class="p">,</span><span class="s1">&#39;pairwise&#39;</span><span class="p">,</span><span class="s1">&#39;listwise&#39;</span><span class="p">])</span>
 <span class="n">val_ndcg5</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5522,11 +5416,7 @@ Comparing Model Performance on Validation Set
 </table>
 </div>
 
-
-
-**NDCG@10**
-
-
+<p><strong>NDCG@10</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pointwise </span>
 <span class="n">pointwise_ndcg10</span> <span class="o">=</span> <span class="n">calculate_ndcg_ideal</span><span class="p">(</span><span class="n">prediction_result</span> <span class="o">=</span> <span class="n">val_prediction_pointwise</span> <span class="p">,</span>
                          <span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
@@ -5552,10 +5442,6 @@ Comparing Model Performance on Validation Set
 <span class="p">},</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pointwise&#39;</span><span class="p">,</span><span class="s1">&#39;pairwise&#39;</span><span class="p">,</span><span class="s1">&#39;listwise&#39;</span><span class="p">])</span>
 <span class="n">val_ndcg10</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5594,11 +5480,7 @@ Comparing Model Performance on Validation Set
 </table>
 </div>
 
-
-
-**NDCG@50**
-
-
+<p><strong>NDCG@50</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pointwise </span>
 <span class="n">pointwise_ndcg50</span> <span class="o">=</span> <span class="n">calculate_ndcg_ideal</span><span class="p">(</span><span class="n">prediction_result</span> <span class="o">=</span> <span class="n">val_prediction_pointwise</span> <span class="p">,</span>
                          <span class="n">target_col</span> <span class="o">=</span> <span class="s1">&#39;y_true&#39;</span><span class="p">,</span>
@@ -5624,10 +5506,6 @@ Comparing Model Performance on Validation Set
 <span class="p">},</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pointwise&#39;</span><span class="p">,</span><span class="s1">&#39;pairwise&#39;</span><span class="p">,</span><span class="s1">&#39;listwise&#39;</span><span class="p">])</span>
 <span class="n">val_ndcg50</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5666,16 +5544,9 @@ Comparing Model Performance on Validation Set
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="n">val_ndcg</span> <span class="o">=</span> <span class="n">val_ndcg5</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val_ndcg10</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">val_ndcg50</span><span class="p">)</span>
 <span class="n">val_ndcg</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;NDCG@10&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5722,28 +5593,19 @@ Comparing Model Performance on Validation Set
 </table>
 </div>
 
-
-
-From the result above we can see that most of the NDCG measure pairwise models perform better by huge margin. 
-
-Next, we predict on the test set. 
-
-#### Test Set
-
-
+<p>From the result above we can see that most of the NDCG measure pairwise models perform better by huge margin. </p>
+<p>Next, we predict on the test set. </p>
+<h4 id="test-set">Test Set<a class="headerlink" href="#test-set" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="c1"># set the positional features first </span>
 <span class="n">X_test_relevance</span><span class="p">[</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/1429340643.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
 
-    /var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/1429340643.py:2: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      X_test_relevance['search_rank'] = 1
-
-
-
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  X_test_relevance[&#39;search_rank&#39;] = 1
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">test_prediction_pairwise</span> <span class="o">=</span> <span class="n">prepare_for_eval</span><span class="p">(</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">,</span>
                  <span class="n">model</span> <span class="o">=</span> <span class="n">ranker_pairwise</span><span class="p">,</span>
                  <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">],</span>
@@ -5777,10 +5639,6 @@ Next, we predict on the test set.
 <span class="p">},</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pairwise in test set&#39;</span><span class="p">])</span>
 <span class="n">test_ndcg_pairwise</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5815,18 +5673,11 @@ Next, we predict on the test set.
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="n">val_ndcg_pairwise</span> <span class="o">=</span> <span class="n">val_ndcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">val_ndcg</span><span class="o">.</span><span class="n">index</span><span class="o">==</span><span class="s1">&#39;pairwise&#39;</span>
 <span class="p">]</span>
 <span class="n">val_ndcg_pairwise</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5861,18 +5712,11 @@ Next, we predict on the test set.
 </table>
 </div>
 
-
-
-
 <div class="highlight"><pre><span></span><code><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
     <span class="p">[</span><span class="n">val_ndcg_pairwise</span><span class="p">,</span>
     <span class="n">test_ndcg_pairwise</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
 </code></pre></div>
-
-
-
-
 <div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -5913,11 +5757,7 @@ Next, we predict on the test set.
 </table>
 </div>
 
-
-
-### Dump Model Artifact
-
-
+<h3 id="dump-model-artifact">Dump Model Artifact<a class="headerlink" href="#dump-model-artifact" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span> 
 
 
@@ -5925,32 +5765,38 @@ Next, we predict on the test set.
 <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ranker_listwise</span><span class="p">,</span><span class="s1">&#39;ltr_listwise.pkl&#39;</span><span class="p">)</span>
 <span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">rf_pointwise</span><span class="p">,</span><span class="s1">&#39;rf_pointwise.pkl&#39;</span><span class="p">)</span>
 </code></pre></div>
-
-
-
-
-    ['rf_pointwise.pkl']
-
-
-
-## References : 
-
-- [Expedia's Channel-Smart Property Search: How Expedia Tailors Rankings for You](https://medium.com/expedia-group-tech/learning-to-rank-at-expedia-group-how-to-adapt-the-property-search-result-page-based-on-f4ebef78c94b)
-
-- [Embedding-Based Retrieval for Airbnb Search](https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839)
-
-- [Doug TurnBull : Flavors of NDCG](https://softwaredoug.com/blog/2024/05/22/flavors-of-ndcg)
-
-- [Stanford University CS 276 : Information Retrieval](https://web.stanford.edu/class/cs276/)
-
-- [AI Powered Search (Book)](https://www.manning.com/books/ai-powered-search)
-
-- [Machine Learning Powered Search Ranking of AirBnB Experiences](https://medium.com/airbnb-engineering/machine-learning-powered-search-ranking-of-airbnb-experiences-110b4b1a0789)
-
-- [Learning to Rank with Non-Smooth Cost Functions (Lambda Rank) ](https://papers.nips.cc/paper_files/paper/2006/file/af44c4c56f385c43f2529f9b1b018f6a-Paper.pdf)
-- [From RankNet to LambdaRank to LambdaMART: An Overview](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf)
-
-- [Eugene Yan's System Design for Recommendations and Search](https://eugeneyan.com/writing/system-design-for-discovery/)
+<div class="highlight"><pre><span></span><code>[&#39;rf_pointwise.pkl&#39;]
+</code></pre></div>
+<h2 id="references">References :<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="https://medium.com/expedia-group-tech/learning-to-rank-at-expedia-group-how-to-adapt-the-property-search-result-page-based-on-f4ebef78c94b">Expedia's Channel-Smart Property Search: How Expedia Tailors Rankings for You</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839">Embedding-Based Retrieval for Airbnb Search</a></p>
+</li>
+<li>
+<p><a href="https://softwaredoug.com/blog/2024/05/22/flavors-of-ndcg">Doug TurnBull : Flavors of NDCG</a></p>
+</li>
+<li>
+<p><a href="https://web.stanford.edu/class/cs276/">Stanford University CS 276 : Information Retrieval</a></p>
+</li>
+<li>
+<p><a href="https://www.manning.com/books/ai-powered-search">AI Powered Search (Book)</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/airbnb-engineering/machine-learning-powered-search-ranking-of-airbnb-experiences-110b4b1a0789">Machine Learning Powered Search Ranking of AirBnB Experiences</a></p>
+</li>
+<li>
+<p><a href="https://papers.nips.cc/paper_files/paper/2006/file/af44c4c56f385c43f2529f9b1b018f6a-Paper.pdf">Learning to Rank with Non-Smooth Cost Functions (Lambda Rank) </a></p>
+</li>
+<li>
+<p><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf">From RankNet to LambdaRank to LambdaMART: An Overview</a></p>
+</li>
+<li>
+<p><a href="https://eugeneyan.com/writing/system-design-for-discovery/">Eugene Yan's System Design for Recommendations and Search</a></p>
+</li>
+</ul>
 
 
 
