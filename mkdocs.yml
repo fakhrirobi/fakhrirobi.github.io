@@ -75,7 +75,6 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-  - pymdownx.nl2br 
   - mdx_math
   - md_in_html
   - pymdownx.superfences:
