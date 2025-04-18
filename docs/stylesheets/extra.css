@@ -43,3 +43,12 @@ max-width: 800px !important;
 margin-bottom: 0.8em !important;
 line-height: 1.5 !important;
 }
+
+.hl-red {
+    background-color: #ffdddd;
+    color: #800;
+    padding: 0 .2em;
+    border-radius: 2px;
+  }
+
+  
