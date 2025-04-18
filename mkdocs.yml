@@ -7,7 +7,7 @@ theme:
   name: material
   highlightjs: true
   font : 
-    text : Geologica
+    text : Monospace
     code : Fira Code 
   highlightjs_languages:
     - yaml
@@ -15,13 +15,13 @@ theme:
     - python
   features:
   - announce.dismiss
-  - content.action.edit
-  - content.action.view
-  - content.code.annotate
-  - content.code.copy
-  - content.tabs.link
-  - content.tooltips
-  - header.autohide
+  # - content.action.edit
+  # - content.action.view
+  # - content.code.annotate
+  # - content.code.copy
+  # - content.tabs.link
+  # - content.tooltips
+  # - header.autohide
   - navigation.expand
   - navigation.footer
   - navigation.indexes

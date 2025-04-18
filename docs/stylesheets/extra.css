@@ -25,7 +25,7 @@
 
 div { 
     overflow-x: scroll;
-    overflow-y: scroll;
+
 }
 
 
@@ -36,7 +36,7 @@ div {
   
   
 .md-content__inner {
-max-width: 800px !important;   
+max-width: 500px !important;   
 }
 
 .md-content__inner p {
@@ -51,4 +51,26 @@ line-height: 1.5 !important;
     border-radius: 2px;
   }
 
+  
+
+.md-content__inner .toc {
+float: right;
+width: 200px;              
+margin: 0 0 1em 2em;       
+padding: 0.5em;
+background: var(--md-default-bg-contrast);
+border: 1px solid var(--md-default-border);
+border-radius: 4px;
+font-size: 0.9em;
+line-height: 1.4em;
+}
+
+
+@media (max-width: 960px) {
+.md-content__inner .toc {
+    float: none;
+    width: auto;
+    margin: 0 0 1em;
+}
+}
   
