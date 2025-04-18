@@ -26,3 +26,15 @@
 div { 
     overflow-x: scroll
 }
+
+
+.md-content {
+    margin-inline-start: 0 !important;
+    margin-inline-end: auto !important;
+  }
+  
+  
+  .md-content__inner {
+    max-width: 800px !important;   
+  }
+  

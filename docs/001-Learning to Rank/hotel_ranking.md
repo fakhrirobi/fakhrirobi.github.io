@@ -201,7 +201,7 @@ We classify the dataset into 3 domain :
 2. User / Personalized Features 
 3. Query Features  
 
-<Table of Feature>
+
 
 ### Listing / Hotel Features 
 
@@ -564,25 +564,26 @@ dataset.head()
 
 
 
-### Generate Event
+###  Generate Event
 
 
 What the data should look ? 
 
+## Generate Event
 
-|search_session_id|   listing_id | event_time          | event_type   |
-|-------------|-------------|--------------------|-------------|
-|1|         3914 | 2022-10-01 17:04:19 | click        |
-|1|         3352 | 2022-10-01 17:04:30 | click        |
-|1|         2575 | 2022-10-01 17:04:36 | click        |
-|1|         4257 | 2022-10-01 17:04:46 | click        |
-|1|         3071 | 2022-10-01 17:05:03 | click        |
-|1|         1757 | 2022-10-01 17:05:22 | click        | 
-|1|         1828 | 2022-10-01 17:05:34 | scroll       | 
-|1|         3494 | 2022-10-01 17:05:53 | click        |
-|1|         2341 | 2022-10-01 17:06:05 | click        |
-|1|          438 | 2022-10-01 17:06:11 | scroll       |
-|1|         1757 | 2022-10-01 17:06:27 | book         |
+What the data should look like:
+
+| search_session_id | listing_id | event_time           | event_type |
+|:-----------------:|:----------:|:--------------------:|:----------:|
+| 1                 | 3914       | 2022-10-01 17:04:19  | click      |
+| 1                 | 3352       | 2022-10-01 17:04:30  | click      |
+| 1                 | 2575       | 2022-10-01 17:04:36  | click      |
+| 1                 | 4257       | 2022-10-01 17:04:46  | click      |
+| 1                 | 3071       | 2022-10-01 17:05:03  | click      |
+| 1                 | 1757       | 2022-10-01 17:05:22  | click      |
+| 1                 | 1828       | 2022-10-01 17:05:34  | scroll     |
+| 1                 | 3492       | 2022-10-01 17:05:53  | click      |
+
 
 
 - Each unique session : 
