@@ -707,169 +707,164 @@ Features that describe criteria for hotels we are looking for , for example : </
 </code></pre></div>
 <p>Due to the huge size of original data, we decide to sample the data based on  search id. We sampled only 50% of search data resulting 1.3 GB of data. </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;expedia_search_sampled.csv&#39;</span><span class="p">)</span>
-</code></pre></div>
-<div class="admonition details">
-<p class="admonition-title">▶ Show code &amp; output</p>
-</div>
-<div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
 <details class="note" open="open">
 <summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll">
+<table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th></th>
+        <th>srch_id</th>
+        <th>date_time</th>
+        <th>site_id</th>
+        <th>visitor_location_country_id</th>
+        <th>visitor_hist_starrating</th>
+        <th>visitor_hist_adr_usd</th>
+        <th>prop_country_id</th>
+        <th>prop_id</th>
+        <th>prop_starrating</th>
+        <th>prop_review_score</th>
+        <th>...</th>
+        <th>comp6_rate_percent_diff</th>
+        <th>comp7_rate</th>
+        <th>comp7_inv</th>
+        <th>comp7_rate_percent_diff</th>
+        <th>comp8_rate</th>
+        <th>comp8_inv</th>
+        <th>comp8_rate_percent_diff</th>
+        <th>click_bool</th>
+        <th>gross_bookings_usd</th>
+        <th>booking_bool</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>0</th>
+        <td>4</td>
+        <td>2012-12-31 08:59:22</td>
+        <td>5</td>
+        <td>219</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>219</td>
+        <td>3625</td>
+        <td>4</td>
+        <td>4.0</td>
+        <td>...</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>0</td>
+        <td>NaN</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <th>1</th>
+        <td>4</td>
+        <td>2012-12-31 08:59:22</td>
+        <td>5</td>
+        <td>219</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>219</td>
+        <td>11622</td>
+        <td>4</td>
+        <td>4.0</td>
+        <td>...</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>0</td>
+        <td>NaN</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <th>2</th>
+        <td>4</td>
+        <td>2012-12-31 08:59:22</td>
+        <td>5</td>
+        <td>219</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>219</td>
+        <td>11826</td>
+        <td>5</td>
+        <td>4.5</td>
+        <td>...</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>0</td>
+        <td>NaN</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <th>3</th>
+        <td>4</td>
+        <td>2012-12-31 08:59:22</td>
+        <td>5</td>
+        <td>219</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>219</td>
+        <td>22824</td>
+        <td>3</td>
+        <td>4.0</td>
+        <td>...</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>0</td>
+        <td>NaN</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <th>4</th>
+        <td>4</td>
+        <td>2012-12-31 08:59:22</td>
+        <td>5</td>
+        <td>219</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>219</td>
+        <td>37581</td>
+        <td>5</td>
+        <td>4.5</td>
+        <td>...</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>NaN</td>
+        <td>0</td>
+        <td>NaN</td>
+        <td>0</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>5 rows × 54 columns</p>
+  </div></p>
 </details>
-<div style="overflow-x:scroll">
-  <table border="1" class="dataframe">
-      <thead>
-        <tr style="text-align: right;">
-          <th></th>
-          <th>srch_id</th>
-          <th>date_time</th>
-          <th>site_id</th>
-          <th>visitor_location_country_id</th>
-          <th>visitor_hist_starrating</th>
-          <th>visitor_hist_adr_usd</th>
-          <th>prop_country_id</th>
-          <th>prop_id</th>
-          <th>prop_starrating</th>
-          <th>prop_review_score</th>
-          <th>...</th>
-          <th>comp6_rate_percent_diff</th>
-          <th>comp7_rate</th>
-          <th>comp7_inv</th>
-          <th>comp7_rate_percent_diff</th>
-          <th>comp8_rate</th>
-          <th>comp8_inv</th>
-          <th>comp8_rate_percent_diff</th>
-          <th>click_bool</th>
-          <th>gross_bookings_usd</th>
-          <th>booking_bool</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>0</th>
-          <td>4</td>
-          <td>2012-12-31 08:59:22</td>
-          <td>5</td>
-          <td>219</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>219</td>
-          <td>3625</td>
-          <td>4</td>
-          <td>4.0</td>
-          <td>...</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>0</td>
-          <td>NaN</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th>1</th>
-          <td>4</td>
-          <td>2012-12-31 08:59:22</td>
-          <td>5</td>
-          <td>219</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>219</td>
-          <td>11622</td>
-          <td>4</td>
-          <td>4.0</td>
-          <td>...</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>0</td>
-          <td>NaN</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th>2</th>
-          <td>4</td>
-          <td>2012-12-31 08:59:22</td>
-          <td>5</td>
-          <td>219</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>219</td>
-          <td>11826</td>
-          <td>5</td>
-          <td>4.5</td>
-          <td>...</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>0</td>
-          <td>NaN</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th>3</th>
-          <td>4</td>
-          <td>2012-12-31 08:59:22</td>
-          <td>5</td>
-          <td>219</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>219</td>
-          <td>22824</td>
-          <td>3</td>
-          <td>4.0</td>
-          <td>...</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>0</td>
-          <td>NaN</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th>4</th>
-          <td>4</td>
-          <td>2012-12-31 08:59:22</td>
-          <td>5</td>
-          <td>219</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>219</td>
-          <td>37581</td>
-          <td>5</td>
-          <td>4.5</td>
-          <td>...</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>NaN</td>
-          <td>0</td>
-          <td>NaN</td>
-          <td>0</td>
-        </tr>
-      </tbody>
-    </table>
-    <p>5 rows × 54 columns</p>
-    </div>
-
 <h2 id="generate-event">Generate Event<a class="headerlink" href="#generate-event" title="Permanent link">&para;</a></h2>
 <p>What the data should look like:</p>
 <table>
@@ -943,28 +938,27 @@ Features that describe criteria for hotels we are looking for , for example : </
 <li>search session </li>
 <li>event time </li>
 </ol>
-<details class="note" open="open">
-<summary>Open styled details</summary>
-</details>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> 
     <span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>
-<div >
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1044,8 +1038,8 @@ Features that describe criteria for hotels we are looking for , for example : </
   </tbody>
 </table>
 <p>2 rows × 54 columns</p>
-</div>
-
+</div></p>
+</details>
 <div class="highlight"><pre><span></span><code><span class="n">session_id</span> <span class="o">=</span> <span class="mi">4</span>
 
 <span class="n">sample_session</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
@@ -1055,20 +1049,22 @@ Features that describe criteria for hotels we are looking for , for example : </
 
 <span class="n">sample_session</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1306,8 +1302,8 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
+</div></p>
+</details>
 <p>What we can infer or how to read the dataset ? </p>
 <ul>
 <li>a user in a search session scrolled from <code>prop_id=3625</code> and clicked at <code>prop_id=139893</code>. However the user did not end up booking the property.</li>
@@ -1340,20 +1336,22 @@ Features that describe criteria for hotels we are looking for , for example : </
 
 <span class="n">sample_session</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1624,8 +1622,8 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
+</div></p>
+</details>
 <p>Okay the result correct, next we should check on the session that is in booking</p>
 <div class="highlight"><pre><span></span><code><span class="n">booked_session_id</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">,</span><span class="s1">&#39;srch_id&#39;</span>
@@ -1641,20 +1639,22 @@ Features that describe criteria for hotels we are looking for , for example : </
 
 <span class="n">booked_session</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1837,25 +1837,27 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
+</div></p>
+</details>
 <p>Okay, it correctly annotate the <code>booked</code> event . Something interesting is that event after the booked happen the result still appear. We should check if the data also display recommended item but not clicked</p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;prop_id&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;prop_id&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1915,8 +1917,8 @@ Features that describe criteria for hotels we are looking for , for example : </
   </tbody>
 </table>
 <p>157267 rows × 1 columns</p>
-</div>
-
+</div></p>
+</details>
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">144590</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
 <span class="p">])</span>
@@ -1924,20 +1926,22 @@ Features that describe criteria for hotels we are looking for , for example : </
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">597375</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">]</span>
 <span class="p">])</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1992,22 +1996,21 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
-<div style="overflow-x:scroll;">
+</div></p>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2326,8 +2329,8 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
+</div></p>
+</details>
 <p>We can see number of property in each session is different meaning it fully represent user behaviour in recommendation. If the records only 5 property means user only interact (scroll , click , book ) up to 5<sup>th</sup> position.  Another case is that after booking user still can possibly click item. </p>
 <p>Next, what we should do is to calculate <strong>Generate Search Rank</strong></p>
 <h3 id="adding-search-rank">Adding Search Rank<a class="headerlink" href="#adding-search-rank" title="Permanent link">&para;</a></h3>
@@ -2421,20 +2424,22 @@ Features that describe criteria for hotels we are looking for , for example : </
     <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">144590</span><span class="p">,[</span><span class="s1">&#39;date_time&#39;</span><span class="p">,</span><span class="s1">&#39;prop_id&#39;</span><span class="p">,</span><span class="s1">&#39;click_bool&#39;</span><span class="p">,</span><span class="s1">&#39;booking_bool&#39;</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="p">,</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span>
 <span class="p">])</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2495,8 +2500,8 @@ Features that describe criteria for hotels we are looking for , for example : </
     </tr>
   </tbody>
 </table>
-</div>
-
+</div></p>
+</details>
 <p>After that we need to create / calculate <strong>Relevance Score</strong></p>
 <h3 id="calculate-relevance-score">Calculate Relevance Score<a class="headerlink" href="#calculate-relevance-score" title="Permanent link">&para;</a></h3>
 <p>Purpose &rarr; To evaluate how well our search model produce the ordering </p>
@@ -2690,65 +2695,69 @@ Number of Test search_id :  10889
 <h4 id="number-of-missing-values">Number of Missing Values<a class="headerlink" href="#number-of-missing-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">((</span><span class="n">X_train_relevance</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>comp1_rate_percent_diff        0.981806
-comp6_rate_percent_diff        0.979394
-comp1_rate                     0.976894
-comp1_inv                      0.975163
-comp4_rate_percent_diff        0.973210
-comp7_rate_percent_diff        0.970401
-gross_bookings_usd             0.960052
-comp6_rate                     0.948188
-comp6_inv                      0.943810
-comp4_rate                     0.937723
-visitor_hist_starrating        0.936747
-visitor_hist_adr_usd           0.936399
-comp7_rate                     0.932321
-comp4_inv                      0.930634
-comp7_inv                      0.923850
-srch_query_affinity_score      0.921880
-comp3_rate_percent_diff        0.896652
-comp2_rate_percent_diff        0.880073
-comp8_rate_percent_diff        0.865494
-comp5_rate_percent_diff        0.820446
-comp3_rate                     0.669075
-comp3_inv                      0.644406
-comp8_rate                     0.584797
-comp8_inv                      0.569799
-comp2_rate                     0.568846
-comp2_inv                      0.546673
-comp5_rate                     0.529495
-comp5_inv                      0.501489
-orig_destination_distance      0.314939
-prop_location_score2           0.217862
-prop_review_score              0.001281
-event                          0.000000
-booking_bool                   0.000000
-search_rank                    0.000000
-click_bool                     0.000000
-srch_id                        0.000000
-date_time                      0.000000
-position                       0.000000
-site_id                        0.000000
-visitor_location_country_id    0.000000
-prop_country_id                0.000000
-prop_id                        0.000000
-prop_starrating                0.000000
-prop_brand_bool                0.000000
-prop_location_score1           0.000000
-prop_log_historical_price      0.000000
-price_usd                      0.000000
-random_bool                    0.000000
-promotion_flag                 0.000000
-srch_destination_id            0.000000
-srch_length_of_stay            0.000000
-srch_booking_window            0.000000
-srch_adults_count              0.000000
-srch_children_count            0.000000
-srch_room_count                0.000000
-srch_saturday_night_bool       0.000000
-relevance_score                0.000000
-dtype: float64
-</code></pre></div>
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<ul>
+<li>comp1_rate_percent_diff        0.981806</li>
+<li>comp6_rate_percent_diff        0.979394</li>
+<li>comp1_rate                     0.976894</li>
+<li>comp1_inv                      0.975163</li>
+<li>comp4_rate_percent_diff        0.973210</li>
+<li>comp7_rate_percent_diff        0.970401</li>
+<li>gross_bookings_usd             0.960052</li>
+<li>comp6_rate                     0.948188</li>
+<li>comp6_inv                      0.943810</li>
+<li>comp4_rate                     0.937723</li>
+<li>visitor_hist_starrating        0.936747</li>
+<li>visitor_hist_adr_usd           0.936399</li>
+<li>comp7_rate                     0.932321</li>
+<li>comp4_inv                      0.930634</li>
+<li>comp7_inv                      0.923850</li>
+<li>srch_query_affinity_score      0.921880</li>
+<li>comp3_rate_percent_diff        0.896652</li>
+<li>comp2_rate_percent_diff        0.880073</li>
+<li>comp8_rate_percent_diff        0.865494</li>
+<li>comp5_rate_percent_diff        0.820446</li>
+<li>comp3_rate                     0.669075</li>
+<li>comp3_inv                      0.644406</li>
+<li>comp8_rate                     0.584797</li>
+<li>comp8_inv                      0.569799</li>
+<li>comp2_rate                     0.568846</li>
+<li>comp2_inv                      0.546673</li>
+<li>comp5_rate                     0.529495</li>
+<li>comp5_inv                      0.501489</li>
+<li>orig_destination_distance      0.314939</li>
+<li>prop_location_score2           0.217862</li>
+<li>prop_review_score              0.001281</li>
+<li>event                          0.000000</li>
+<li>booking_bool                   0.000000</li>
+<li>search_rank                    0.000000</li>
+<li>click_bool                     0.000000</li>
+<li>srch_id                        0.000000</li>
+<li>date_time                      0.000000</li>
+<li>position                       0.000000</li>
+<li>site_id                        0.000000</li>
+<li>visitor_location_country_id    0.000000</li>
+<li>prop_country_id                0.000000</li>
+<li>prop_id                        0.000000</li>
+<li>prop_starrating                0.000000</li>
+<li>prop_brand_bool                0.000000</li>
+<li>prop_location_score1           0.000000</li>
+<li>prop_log_historical_price      0.000000</li>
+<li>price_usd                      0.000000</li>
+<li>random_bool                    0.000000</li>
+<li>promotion_flag                 0.000000</li>
+<li>srch_destination_id            0.000000</li>
+<li>srch_length_of_stay            0.000000</li>
+<li>srch_booking_window            0.000000</li>
+<li>srch_adults_count              0.000000</li>
+<li>srch_children_count            0.000000</li>
+<li>srch_room_count                0.000000</li>
+<li>srch_saturday_night_bool       0.000000</li>
+<li>relevance_score                0.000000
+dtype: float64</li>
+</ul>
+</details>
 <p>We can see that most of the user feature is not available, hence we can update the decision not to include the feature. For now we are not interested in imputation technique. you can check other blogs. This article point out the wholistic pipeline of learning to rank in application to OTA search particularly in hotel / property ranking</p>
 <h4 id="position-that-most-booking-occur">Position that most booking occur<a class="headerlink" href="#position-that-most-booking-occur" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">bookings_event_train</span> <span class="o">=</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> 
@@ -2762,7 +2771,7 @@ dtype: float64
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Search Position Distribution Where Bookings Occur&#39;)
 </code></pre></div>
-<p><img alt="png" src="hotel_ranking_files/hotel_ranking_105_1.png" /></p>
+<p><img alt="png" src="../hotel_ranking_files/hotel_ranking_105_1.png" /></p>
 <p>There is bias in bookings, where most of bookings occur at top position, hence we need to add position as feature </p>
 <h4 id="number-of-activity-occur-within-search">Number of Activity Occur Within Search<a class="headerlink" href="#number-of-activity-occur-within-search" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="n">search_activity_count</span> <span class="o">=</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
@@ -2779,70 +2788,74 @@ dtype: float64
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Distibution of Number of Event from each search&#39;)
 </code></pre></div>
-<p><img alt="png" src="hotel_ranking_files/hotel_ranking_108_1.png" /></p>
+<p><img alt="png" src="../hotel_ranking_files/hotel_ranking_108_1.png" /></p>
 <h2 id="training-model">Training Model<a class="headerlink" href="#training-model" title="Permanent link">&para;</a></h2>
 <p>Previously we checked some features and we decide to remove some of them. </p>
 <div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">((</span><span class="n">X_train_relevance</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">X_train_relevance</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>comp1_rate_percent_diff        0.981806
-comp6_rate_percent_diff        0.979394
-comp1_rate                     0.976894
-comp1_inv                      0.975163
-comp4_rate_percent_diff        0.973210
-comp7_rate_percent_diff        0.970401
-gross_bookings_usd             0.960052
-comp6_rate                     0.948188
-comp6_inv                      0.943810
-comp4_rate                     0.937723
-visitor_hist_starrating        0.936747
-visitor_hist_adr_usd           0.936399
-comp7_rate                     0.932321
-comp4_inv                      0.930634
-comp7_inv                      0.923850
-srch_query_affinity_score      0.921880
-comp3_rate_percent_diff        0.896652
-comp2_rate_percent_diff        0.880073
-comp8_rate_percent_diff        0.865494
-comp5_rate_percent_diff        0.820446
-comp3_rate                     0.669075
-comp3_inv                      0.644406
-comp8_rate                     0.584797
-comp8_inv                      0.569799
-comp2_rate                     0.568846
-comp2_inv                      0.546673
-comp5_rate                     0.529495
-comp5_inv                      0.501489
-orig_destination_distance      0.314939
-prop_location_score2           0.217862
-prop_review_score              0.001281
-event                          0.000000
-booking_bool                   0.000000
-search_rank                    0.000000
-click_bool                     0.000000
-srch_id                        0.000000
-date_time                      0.000000
-position                       0.000000
-site_id                        0.000000
-visitor_location_country_id    0.000000
-prop_country_id                0.000000
-prop_id                        0.000000
-prop_starrating                0.000000
-prop_brand_bool                0.000000
-prop_location_score1           0.000000
-prop_log_historical_price      0.000000
-price_usd                      0.000000
-random_bool                    0.000000
-promotion_flag                 0.000000
-srch_destination_id            0.000000
-srch_length_of_stay            0.000000
-srch_booking_window            0.000000
-srch_adults_count              0.000000
-srch_children_count            0.000000
-srch_room_count                0.000000
-srch_saturday_night_bool       0.000000
-relevance_score                0.000000
-dtype: float64
-</code></pre></div>
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<ul>
+<li>comp1_rate_percent_diff        0.981806</li>
+<li>comp6_rate_percent_diff        0.979394</li>
+<li>comp1_rate                     0.976894</li>
+<li>comp1_inv                      0.975163</li>
+<li>comp4_rate_percent_diff        0.973210</li>
+<li>comp7_rate_percent_diff        0.970401</li>
+<li>gross_bookings_usd             0.960052</li>
+<li>comp6_rate                     0.948188</li>
+<li>comp6_inv                      0.943810</li>
+<li>comp4_rate                     0.937723</li>
+<li>visitor_hist_starrating        0.936747</li>
+<li>visitor_hist_adr_usd           0.936399</li>
+<li>comp7_rate                     0.932321</li>
+<li>comp4_inv                      0.930634</li>
+<li>comp7_inv                      0.923850</li>
+<li>srch_query_affinity_score      0.921880</li>
+<li>comp3_rate_percent_diff        0.896652</li>
+<li>comp2_rate_percent_diff        0.880073</li>
+<li>comp8_rate_percent_diff        0.865494</li>
+<li>comp5_rate_percent_diff        0.820446</li>
+<li>comp3_rate                     0.669075</li>
+<li>comp3_inv                      0.644406</li>
+<li>comp8_rate                     0.584797</li>
+<li>comp8_inv                      0.569799</li>
+<li>comp2_rate                     0.568846</li>
+<li>comp2_inv                      0.546673</li>
+<li>comp5_rate                     0.529495</li>
+<li>comp5_inv                      0.501489</li>
+<li>orig_destination_distance      0.314939</li>
+<li>prop_location_score2           0.217862</li>
+<li>prop_review_score              0.001281</li>
+<li>event                          0.000000</li>
+<li>booking_bool                   0.000000</li>
+<li>search_rank                    0.000000</li>
+<li>click_bool                     0.000000</li>
+<li>srch_id                        0.000000</li>
+<li>date_time                      0.000000</li>
+<li>position                       0.000000</li>
+<li>site_id                        0.000000</li>
+<li>visitor_location_country_id    0.000000</li>
+<li>prop_country_id                0.000000</li>
+<li>prop_id                        0.000000</li>
+<li>prop_starrating                0.000000</li>
+<li>prop_brand_bool                0.000000</li>
+<li>prop_location_score1           0.000000</li>
+<li>prop_log_historical_price      0.000000</li>
+<li>price_usd                      0.000000</li>
+<li>random_bool                    0.000000</li>
+<li>promotion_flag                 0.000000</li>
+<li>srch_destination_id            0.000000</li>
+<li>srch_length_of_stay            0.000000</li>
+<li>srch_booking_window            0.000000</li>
+<li>srch_adults_count              0.000000</li>
+<li>srch_children_count            0.000000</li>
+<li>srch_room_count                0.000000</li>
+<li>srch_saturday_night_bool       0.000000</li>
+<li>relevance_score                0.000000
+dtype: float64</li>
+</ul>
+</details>
 <div class="highlight"><pre><span></span><code><span class="n">PROPERTY_FEATURES</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;prop_starrating&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;price_usd&#39;</span><span class="p">,</span>
@@ -2883,122 +2896,120 @@ dtype: float64
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Random Forest&#39;</span><span class="p">)</span>
 <span class="n">rf_pointwise</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">],</span><span class="n">y_train_relevance</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Training Linear Regression
-Training Random Forest
-building tree 1 of 100
-building tree 2 of 100
-building tree 3 of 100
-building tree 4 of 100
-building tree 5 of 100
-building tree 6 of 100
-building tree 7 of 100
-building tree 8 of 100
-
-
-[Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.
-
-
-building tree 9 of 100
-building tree 10 of 100
-building tree 11 of 100
-building tree 12 of 100
-building tree 13 of 100
-building tree 14 of 100
-building tree 15 of 100
-building tree 16 of 100
-building tree 17 of 100
-building tree 18 of 100
-building tree 19 of 100
-building tree 20 of 100
-building tree 21 of 100
-building tree 22 of 100
-building tree 23 of 100
-building tree 24 of 100
-
-
-[Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s
-
-
-building tree 25 of 100
-building tree 26 of 100
-building tree 27 of 100
-building tree 28 of 100
-building tree 29 of 100
-building tree 30 of 100
-building tree 31 of 100
-building tree 32 of 100
-building tree 33 of 100
-building tree 34 of 100
-building tree 35 of 100
-building tree 36 of 100
-building tree 37 of 100
-building tree 38 of 100
-building tree 39 of 100
-building tree 40 of 100
-building tree 41 of 100
-building tree 42 of 100
-building tree 43 of 100
-building tree 44 of 100
-building tree 45 of 100
-building tree 46 of 100
-building tree 47 of 100
-building tree 48 of 100
-building tree 49 of 100
-building tree 50 of 100
-building tree 51 of 100
-building tree 52 of 100
-building tree 53 of 100
-building tree 54 of 100
-building tree 55 of 100
-building tree 56 of 100
-building tree 57 of 100
-building tree 58 of 100
-building tree 59 of 100
-building tree 60 of 100
-building tree 61 of 100
-building tree 62 of 100
-building tree 63 of 100
-building tree 64 of 100
-building tree 65 of 100
-building tree 66 of 100
-building tree 67 of 100
-building tree 68 of 100
-building tree 69 of 100
-building tree 70 of 100
-building tree 71 of 100
-building tree 72 of 100
-building tree 73 of 100
-building tree 74 of 100
-building tree 75 of 100
-building tree 76 of 100
-building tree 77 of 100
-building tree 78 of 100
-building tree 79 of 100
-building tree 80 of 100
-building tree 81 of 100
-building tree 82 of 100
-building tree 83 of 100
-building tree 84 of 100
-building tree 85 of 100
-building tree 86 of 100
-building tree 87 of 100
-building tree 88 of 100
-building tree 89 of 100
-building tree 90 of 100
-building tree 91 of 100
-building tree 92 of 100
-building tree 93 of 100
-building tree 94 of 100
-building tree 95 of 100
-building tree 96 of 100
-building tree 97 of 100
-building tree 98 of 100
-building tree 99 of 100
-building tree 100 of 100
-
-
-[Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished
-</code></pre></div>
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<ul>
+<li>Training Linear Regression</li>
+<li>Training Random Forest</li>
+<li>building tree 1 of 100</li>
+<li>building tree 2 of 100</li>
+<li>building tree 3 of 100</li>
+<li>building tree 4 of 100</li>
+<li>building tree 5 of 100</li>
+<li>building tree 6 of 100</li>
+<li>building tree 7 of 100</li>
+<li>building tree 8 of 100</li>
+<li>[Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.</li>
+<li>building tree 9 of 100</li>
+<li>building tree 10 of 100</li>
+<li>building tree 11 of 100</li>
+<li>building tree 12 of 100</li>
+<li>building tree 13 of 100</li>
+<li>building tree 14 of 100</li>
+<li>building tree 15 of 100</li>
+<li>building tree 16 of 100</li>
+<li>building tree 17 of 100</li>
+<li>building tree 18 of 100</li>
+<li>building tree 19 of 100</li>
+<li>building tree 20 of 100</li>
+<li>building tree 21 of 100</li>
+<li>building tree 22 of 100</li>
+<li>building tree 23 of 100</li>
+<li>building tree 24 of 100</li>
+<li>[Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s</li>
+<li>building tree 25 of 100</li>
+<li>building tree 26 of 100</li>
+<li>building tree 27 of 100</li>
+<li>building tree 28 of 100</li>
+<li>building tree 29 of 100</li>
+<li>building tree 30 of 100</li>
+<li>building tree 31 of 100</li>
+<li>building tree 32 of 100</li>
+<li>building tree 33 of 100</li>
+<li>building tree 34 of 100</li>
+<li>building tree 35 of 100</li>
+<li>building tree 36 of 100</li>
+<li>building tree 37 of 100</li>
+<li>building tree 38 of 100</li>
+<li>building tree 39 of 100</li>
+<li>building tree 40 of 100</li>
+<li>building tree 41 of 100</li>
+<li>building tree 42 of 100</li>
+<li>building tree 43 of 100</li>
+<li>building tree 44 of 100</li>
+<li>building tree 45 of 100</li>
+<li>building tree 46 of 100</li>
+<li>building tree 47 of 100</li>
+<li>building tree 48 of 100</li>
+<li>building tree 49 of 100</li>
+<li>building tree 50 of 100</li>
+<li>building tree 51 of 100</li>
+<li>building tree 52 of 100</li>
+<li>building tree 53 of 100</li>
+<li>building tree 54 of 100</li>
+<li>building tree 55 of 100</li>
+<li>building tree 56 of 100</li>
+<li>building tree 57 of 100</li>
+<li>building tree 58 of 100</li>
+<li>building tree 59 of 100</li>
+<li>building tree 60 of 100</li>
+<li>building tree 61 of 100</li>
+<li>building tree 62 of 100</li>
+<li>building tree 63 of 100</li>
+<li>building tree 64 of 100</li>
+<li>building tree 65 of 100</li>
+<li>building tree 66 of 100</li>
+<li>building tree 67 of 100</li>
+<li>building tree 68 of 100</li>
+<li>building tree 69 of 100</li>
+<li>building tree 70 of 100</li>
+<li>building tree 71 of 100</li>
+<li>building tree 72 of 100</li>
+<li>building tree 73 of 100</li>
+<li>building tree 74 of 100</li>
+<li>building tree 75 of 100</li>
+<li>building tree 76 of 100</li>
+<li>building tree 77 of 100</li>
+<li>building tree 78 of 100</li>
+<li>building tree 79 of 100</li>
+<li>building tree 80 of 100</li>
+<li>building tree 81 of 100</li>
+<li>building tree 82 of 100</li>
+<li>building tree 83 of 100</li>
+<li>building tree 84 of 100</li>
+<li>building tree 85 of 100</li>
+<li>building tree 86 of 100</li>
+<li>building tree 87 of 100</li>
+<li>building tree 88 of 100</li>
+<li>building tree 89 of 100</li>
+<li>building tree 90 of 100</li>
+<li>building tree 91 of 100</li>
+<li>building tree 92 of 100</li>
+<li>building tree 93 of 100</li>
+<li>building tree 94 of 100</li>
+<li>building tree 95 of 100</li>
+<li>building tree 96 of 100</li>
+<li>building tree 97 of 100</li>
+<li>building tree 98 of 100</li>
+<li>building tree 99 of 100</li>
+<li>
+<p>building tree 100 of 100</p>
+</li>
+<li>
+<p>[Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished</p>
+</li>
+</ul>
+</details>
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -4509,24 +4520,25 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span class="n">val_prediction_pointwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_pointwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_pointwise</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>[Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p>[Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
 [Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    0.3s
-[Parallel(n_jobs=8)]: Done 100 out of 100 | elapsed:    1.7s finished
-</code></pre></div>
-<div style="overflow-x:scroll;">
+[Parallel(n_jobs=8)]: Done 100 out of 100 | elapsed:    1.7s finished</p>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4630,8 +4642,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   </tbody>
 </table>
 <p>273242 rows × 5 columns</p>
-</div>
-
+</div></p>
+</details>
 <p><strong>Pairwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pairwise score </span>
 <span class="n">y_val_pred_pairwise</span> <span class="o">=</span> <span class="n">ranker_pairwise</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val_relevance</span><span class="p">[</span><span class="n">ALL_FEATURES</span><span class="p">])</span>
@@ -4651,20 +4663,22 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span class="n">val_prediction_pairwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_pairwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_pairwise</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4768,8 +4782,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   </tbody>
 </table>
 <p>273242 rows × 5 columns</p>
-</div>
-
+</div></p>
+</details>
 <p><strong>Listwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># listwise score </span>
 <span class="n">val_prediction_listwise</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">search_id_val</span><span class="p">),</span>
@@ -4787,20 +4801,22 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span class="n">val_prediction_listwise</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_prediction_listwise</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">val_prediction_listwise</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
-    }
+    }</p>
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+<p></style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4904,8 +4920,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   </tbody>
 </table>
 <p>273242 rows × 5 columns</p>
-</div>
-
+</div></p>
+</details>
 <p>lets make a function to prepare the prediction on ground truth </p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_for_eval</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">query_id</span><span class="p">,</span><span class="n">search_col</span><span class="o">=</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="n">prop_col</span> <span class="o">=</span> <span class="s1">&#39;prop_id&#39;</span><span class="p">)</span> <span class="p">:</span> 
     <span class="n">pred_df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dataset</span><span class="p">[</span><span class="n">search_col</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">query_id</span><span class="p">),</span>
@@ -4992,188 +5008,190 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span class="n">ideal_dcg</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;srch_id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">ideal_dcg</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
+  <style scoped>
+      .dataframe tbody tr th:only-of-type {
+          vertical-align: middle;
+      }</p>
+<div class="highlight"><pre><span></span><code>  .dataframe tbody tr th {
+      vertical-align: top;
+  }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-      <th>srch_id</th>
-      <th>pred_lambda</th>
-      <th>y_true</th>
-      <th>rank</th>
-      <th>gain</th>
-      <th>dcg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3453954</th>
-      <td>109147</td>
-      <td>587980</td>
-      <td>-0.388572</td>
-      <td>5</td>
-      <td>1</td>
-      <td>31</td>
-      <td>10.333333</td>
-    </tr>
-    <tr>
-      <th>3453941</th>
-      <td>3904</td>
-      <td>587980</td>
-      <td>0.085224</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453951</th>
-      <td>82171</td>
-      <td>587980</td>
-      <td>0.080693</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453948</th>
-      <td>57499</td>
-      <td>587980</td>
-      <td>-0.161591</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453955</th>
-      <td>131812</td>
-      <td>587980</td>
-      <td>-0.281207</td>
-      <td>0</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453953</th>
-      <td>101045</td>
-      <td>587980</td>
-      <td>-0.313309</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453946</th>
-      <td>33678</td>
-      <td>587980</td>
-      <td>-0.374939</td>
-      <td>0</td>
-      <td>7</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453947</th>
-      <td>55787</td>
-      <td>587980</td>
-      <td>-0.388951</td>
-      <td>0</td>
-      <td>8</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453949</th>
-      <td>68081</td>
-      <td>587980</td>
-      <td>-0.528888</td>
-      <td>0</td>
-      <td>9</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453950</th>
-      <td>68414</td>
-      <td>587980</td>
-      <td>-0.581832</td>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453943</th>
-      <td>10085</td>
-      <td>587980</td>
-      <td>-0.616705</td>
-      <td>0</td>
-      <td>11</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453944</th>
-      <td>24104</td>
-      <td>587980</td>
-      <td>-0.616705</td>
-      <td>0</td>
-      <td>12</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453942</th>
-      <td>3910</td>
-      <td>587980</td>
-      <td>-0.698352</td>
-      <td>0</td>
-      <td>13</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453952</th>
-      <td>92278</td>
-      <td>587980</td>
-      <td>-0.813638</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453945</th>
-      <td>24966</td>
-      <td>587980</td>
-      <td>-0.872794</td>
-      <td>0</td>
-      <td>15</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+  .dataframe thead th {
+      text-align: right;
+  }
+</code></pre></div>
+<p></style>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th></th>
+        <th>prop_id</th>
+        <th>srch_id</th>
+        <th>pred_lambda</th>
+        <th>y_true</th>
+        <th>rank</th>
+        <th>gain</th>
+        <th>dcg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>3453954</th>
+        <td>109147</td>
+        <td>587980</td>
+        <td>-0.388572</td>
+        <td>5</td>
+        <td>1</td>
+        <td>31</td>
+        <td>10.333333</td>
+      </tr>
+      <tr>
+        <th>3453941</th>
+        <td>3904</td>
+        <td>587980</td>
+        <td>0.085224</td>
+        <td>0</td>
+        <td>2</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453951</th>
+        <td>82171</td>
+        <td>587980</td>
+        <td>0.080693</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453948</th>
+        <td>57499</td>
+        <td>587980</td>
+        <td>-0.161591</td>
+        <td>0</td>
+        <td>4</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453955</th>
+        <td>131812</td>
+        <td>587980</td>
+        <td>-0.281207</td>
+        <td>0</td>
+        <td>5</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453953</th>
+        <td>101045</td>
+        <td>587980</td>
+        <td>-0.313309</td>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453946</th>
+        <td>33678</td>
+        <td>587980</td>
+        <td>-0.374939</td>
+        <td>0</td>
+        <td>7</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453947</th>
+        <td>55787</td>
+        <td>587980</td>
+        <td>-0.388951</td>
+        <td>0</td>
+        <td>8</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453949</th>
+        <td>68081</td>
+        <td>587980</td>
+        <td>-0.528888</td>
+        <td>0</td>
+        <td>9</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453950</th>
+        <td>68414</td>
+        <td>587980</td>
+        <td>-0.581832</td>
+        <td>0</td>
+        <td>10</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453943</th>
+        <td>10085</td>
+        <td>587980</td>
+        <td>-0.616705</td>
+        <td>0</td>
+        <td>11</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453944</th>
+        <td>24104</td>
+        <td>587980</td>
+        <td>-0.616705</td>
+        <td>0</td>
+        <td>12</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453942</th>
+        <td>3910</td>
+        <td>587980</td>
+        <td>-0.698352</td>
+        <td>0</td>
+        <td>13</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453952</th>
+        <td>92278</td>
+        <td>587980</td>
+        <td>-0.813638</td>
+        <td>0</td>
+        <td>14</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+      <tr>
+        <th>3453945</th>
+        <td>24966</td>
+        <td>587980</td>
+        <td>-0.872794</td>
+        <td>0</td>
+        <td>15</td>
+        <td>0</td>
+        <td>0.000000</td>
+      </tr>
+    </tbody>
+  </table>
+</div></p>
+</details>
 <div class="highlight"><pre><span></span><code><span class="c1"># </span>
 <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gain&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">ideal_dcg</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;y_true&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="c1"># </span>
@@ -5182,40 +5200,42 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">dcg</span> <span class="o">/</span> <span class="n">ideal_dcg</span>
 </code></pre></div>
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+<p><div style="overflow-x:scroll;">
+  <style scoped>
+      .dataframe tbody tr th:only-of-type {
+          vertical-align: middle;
+      }</p>
+<div class="highlight"><pre><span></span><code>  .dataframe tbody tr th {
+      vertical-align: top;
+  }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dcg</th>
-    </tr>
-    <tr>
-      <th>srch_id</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>587980</th>
-      <td>0.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+  .dataframe thead th {
+      text-align: right;
+  }
+</code></pre></div>
+<p></style>
+  <table border="1" class="dataframe">
+    <thead>
+      <tr style="text-align: right;">
+        <th></th>
+        <th>dcg</th>
+      </tr>
+      <tr>
+        <th>srch_id</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>587980</th>
+        <td>0.333333</td>
+      </tr>
+    </tbody>
+  </table>
+  </div></p>
+</details>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_dcg</span><span class="p">(</span><span class="n">prediction_result</span><span class="p">,</span>
                   <span class="n">target_col</span><span class="p">,</span>
                   <span class="n">sorting_col</span><span class="p">,</span>

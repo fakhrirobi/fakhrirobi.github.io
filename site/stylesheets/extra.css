@@ -1,7 +1,4 @@
-/* docs/css/overrides.css */
 
-/* 1) Pandas “dataframe” tables: collapse heavy borders, add
-      thin underlines + header shading to mimic Material tables */
 .dataframe table {
     width: 100%;
     border-collapse: collapse;
@@ -9,7 +6,7 @@
     font-size: 0.95rem;
     }
 
-/* header row: subtle background + bottom border */
+
 .dataframe thead th {
     background-color: var(--md-default-bg-contrast);
     border-bottom: 1px solid var(--md-default-border);
@@ -18,30 +15,18 @@
     text-align: left;
     }
 
-/* body cells: only a bottom border on each row */
+
 .dataframe tbody td {
     border-bottom: 1px solid var(--md-default-border);
     padding: 0.6em 1em;
     }
 
-/* no border under very last row */
+
 .dataframe tbody tr:last-child td {
                         border-bottom: none;
                         }
 
-/* inline code in tables (e.g. <code>3625</code>) */
-/* .dataframe td code {
-        background-color: var(--md-default-bg-contrast);
-        padding: 0 0.2em;
-        border-radius: 2px;
-        font-family: var(--md-code-font);
-        } */
 
-        /* 2) Hide all Jupyter output areas (adjust selectors if your plugin differs) */
-/* div.jp-OutputArea,   div.output_area, div.nboutput  {
-                                                        display: none !important;
-                                                        }
-       */
 div { 
     overflow-x: scroll;
 
@@ -52,7 +37,7 @@ div.output_area {
   display: none;
 }
 
-/* but let them expand when inside a <details> */
+
 details div.jp-OutputArea,
 details div.output_area {
   display: block;
