@@ -69,15 +69,15 @@ line-height: 1.5 !important;
   
 
 .md-content__inner .toc {
-float: right;
-width: 200px;              
-margin: 0 0 1em 2em;       
-padding: 0.5em;
-background: var(--md-default-bg-contrast);
-border: 1px solid var(--md-default-border);
-border-radius: 4px;
-font-size: 0.9em;
-line-height: 1.4em;
+  float: right;
+  width: 200px;              
+  margin: 0 0 1em 2em;       
+  padding: 0.5em;
+  background: var(--md-default-bg-contrast);
+  border: 1px solid var(--md-default-border);
+  border-radius: 4px;
+  font-size: 0.9em;
+  line-height: 1.4em;
 }
 
 
