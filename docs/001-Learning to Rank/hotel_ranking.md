@@ -1,5 +1,9 @@
 ## Hotel Search Ranking System 
 
+![alt text](sumup-mK6upImi-qQ-unsplash.jpg "Title")
+
+
+Photo by <a href="https://unsplash.com/@sumup?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">SumUp</a> on <a href="https://unsplash.com/photos/a-person-is-cutting-a-piece-of-paper-with-a-knife-mK6upImi-qQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
 ## Background
 
@@ -9,41 +13,40 @@
 
 OTA Company has two business models : 
 
-- Merchant Model 
+1. Merchant Model 
   
-  The company own what they sell. They have some flexibility in changing price. Their Revenues mostly from profit margin. 
+    The company own what they sell. They have some flexibility in changing price. Their Revenues mostly from profit margin. 
   
 
-- Agency Model 
+2. Agency Model 
   
-  More like broker. Revenue from commision and fees. 
+    More like broker. Revenue from commision and fees. 
 
 
 
 Some of OTA Company which apply  **Merchant Model** : 
-- KAI 
-- AirAsia 
-- etc 
+
+  - KAI 
+  - AirAsia 
+  - etc 
 
 
 Some of OTA Company which apply **Agency Model** : 
-- AirBnB
-- Booking.com 
-- Expedia
-- Traveloka
-- Tiket.com
 
-Let say there is OTA company , you can name `T.LLC`
-The problem is that : 
+  - AirBnB
+  - Booking.com 
+  - Expedia
+  - Traveloka
+  - Tiket.com
+
+Let say there is OTA company , you can name `T.LLC`, their  problem is that : 
+
 - The Conversion has dropped 10% from last month 
 
-As data scientist we should help business teams to fix the issue 
-
-After some analysis for example session replay + interview with product manager they said the customer does not convert when the recommendation show
-
-
+As data scientist we should help business teams to fix the issue. After some analysis for example session replay + interview with product manager they said the customer does not convert when the recommendation show. 
 
 There are several touchpoint of consumer conversion : 
+
 1. Home Feed Recommendation 
 2. Search Feature 
 
@@ -85,14 +88,16 @@ $\textbf{Total Booking} = \text{Number of bookings from search activity}$
 Its about what you expect from your ML System. 
 
 *Model Wise* : 
-Model Performance : 
-1. Can Beat Baseline Model in terms of NDCG (Previously 0.30)
+
+1. Model Performance : 
+    1. Can Beat Baseline Model in terms of NDCG (Previously 0.30)
 
 
 *Model Serving* : 
-1. Max Latency 500ms 
-- Search Experience is time sensitive
-- A company like google already estimated that they apps latency increase by 100ms it affects to their revenue 
+
+1. Max Latency 50ms 
+  - Search Experience is time sensitive
+  - A company like google already estimated that they apps latency increase by 100ms it affects to their revenue 
 
 ## User Flow 
 
@@ -129,17 +134,14 @@ In [Eugene Yan's Blog Post](https://eugeneyan.com/writing/system-design-for-disc
 
 - Retrieval / Candidate Generation 
 
-  Job : Filtering Out many items from 10.000 items to 1.000 items for example
+    Job : Filtering Out many items from 10.000 items to 1.000 items for example
 
 - Ranking Stage 
 
-  Job : Ordering the rank , this is the heavy duty job. 
+    Job : Ordering the rank , this is the heavy duty job. 
 
 
-Does all the the system design for search and recommender system should contain both ? No. Its depend on number of item you have in catalogue. 
-
-
-The concern on this article is to highlight on **Ranker Model** Part
+Does all the the system design for search and recommender system should contain both ? No. Its depend on number of item you have in catalogue. The concern on this article is to highlight on **Ranker Model** Part
 
 ## Model Development
 
@@ -151,9 +153,10 @@ Given User Query give ordered list of hotels that maximized chance user will boo
 
 
 The first stage is no ML at all. because if we just launch a product / company we dont have enough data, hence we can use simple heuristic such as : 
-1. Sort by Name 
-2. Sort by Price 
-3. Ranking Randomly
+
+  1. Sort by Name 
+  2. Sort by Price 
+  3. Ranking Randomly
 
 The goal is to obtain enough data to collect data to move on to the next step 
 
@@ -185,32 +188,32 @@ For example we could use predicted probability or ranking as starter.
 The Data is obtained from [Personalize Expedia Hotel Searches - ICDM 2013 Kaggle Competition](https://www.kaggle.com/c/expedia-personalized-sort)
 
 So in ml based solution it requires data. What type of Information we show. Air BnB in their [Article](https://medium.com/airbnb-engineering/machine-learning-powered-search-ranking-of-airbnb-experiences-110b4b1a0789)  can classify the feature as : 
-1. Hotels / Listing Feature
-2. User / Personalized Features 
-3. Query Features  
+
+  1. Hotels / Listing Feature
+  2. User / Personalized Features 
+  3. Query Features  
 
 Here is the idea : 
 
 
-1. If we use Hotel Features Only --> it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. 
-2. To add more personalization we can add feature that unique to user level 
-3. To what extend its unique, if user characteristics does not change then the recommendation would be the same. However that is not ideal because user intention may be different at different search session 
+  1. If we use Hotel Features Only --> it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. 
+  2. To add more personalization we can add feature that unique to user level 
+  3. To what extend its unique, if user characteristics does not change then the recommendation would be the same. However that is not ideal because user intention may be different at different search session 
 
-We classify the dataset into 3 domain : 
-1. Hotels / Listing Feature
-2. User / Personalized Features 
-3. Query Features  
 
 
 
 ### Listing / Hotel Features 
 
 - It could be feature that describe facility , for example : 
+
     - Number of rooms available between dates 
     - Price 
     - Location 
     - etc 
+
 - For now there are lot of companies using embeddings to express the feature of an entity 
+
 - Usually embeddings are resulted from pretrained model (neural nets for example)
 
 
@@ -225,10 +228,11 @@ Why we care about new item / new user ?
 
 **New Item / Property** 
 
-- It affects revenue of property, 
-- We want our search / recommendation is fair towards property 
+  - It affects revenue of property, 
+  - We want our search / recommendation is fair towards property 
 
 **New User** : 
+
 - Help user build interaction 
 - Have great search experience by providing relevant property 
 
@@ -308,9 +312,10 @@ USER_FEATURES = [
 
 What does Query Features Mean ? [article](https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839)
 Features that describe criteria for hotels we are looking for , for example : 
-- Number of guests 
-- Number of Stay 
-- etc 
+
+  - Number of guests 
+  - Number of Stay 
+  - etc 
 
 
 
@@ -384,190 +389,168 @@ Due to the huge size of original data, we decide to sample the data based on  se
 
 ```python
 dataset = pd.read_csv('expedia_search_sampled.csv')
-```
-
-
-```python
 dataset.head()
 ```
 
 
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-    
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>srch_id</th>
-      <th>date_time</th>
-      <th>site_id</th>
-      <th>visitor_location_country_id</th>
-      <th>visitor_hist_starrating</th>
-      <th>visitor_hist_adr_usd</th>
-      <th>prop_country_id</th>
-      <th>prop_id</th>
-      <th>prop_starrating</th>
-      <th>prop_review_score</th>
-      <th>...</th>
-      <th>comp6_rate_percent_diff</th>
-      <th>comp7_rate</th>
-      <th>comp7_inv</th>
-      <th>comp7_rate_percent_diff</th>
-      <th>comp8_rate</th>
-      <th>comp8_inv</th>
-      <th>comp8_rate_percent_diff</th>
-      <th>click_bool</th>
-      <th>gross_bookings_usd</th>
-      <th>booking_bool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>3625</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>11622</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>11826</td>
-      <td>5</td>
-      <td>4.5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>22824</td>
-      <td>3</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>37581</td>
-      <td>5</td>
-      <td>4.5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 54 columns</p>
-</div>
+    <div style="overflow-x:scroll">
+    <table border="1" class="dataframe">
+        <thead>
+          <tr style="text-align: right;">
+            <th></th>
+            <th>srch_id</th>
+            <th>date_time</th>
+            <th>site_id</th>
+            <th>visitor_location_country_id</th>
+            <th>visitor_hist_starrating</th>
+            <th>visitor_hist_adr_usd</th>
+            <th>prop_country_id</th>
+            <th>prop_id</th>
+            <th>prop_starrating</th>
+            <th>prop_review_score</th>
+            <th>...</th>
+            <th>comp6_rate_percent_diff</th>
+            <th>comp7_rate</th>
+            <th>comp7_inv</th>
+            <th>comp7_rate_percent_diff</th>
+            <th>comp8_rate</th>
+            <th>comp8_inv</th>
+            <th>comp8_rate_percent_diff</th>
+            <th>click_bool</th>
+            <th>gross_bookings_usd</th>
+            <th>booking_bool</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>0</th>
+            <td>4</td>
+            <td>2012-12-31 08:59:22</td>
+            <td>5</td>
+            <td>219</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>219</td>
+            <td>3625</td>
+            <td>4</td>
+            <td>4.0</td>
+            <td>...</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>0</td>
+            <td>NaN</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>1</th>
+            <td>4</td>
+            <td>2012-12-31 08:59:22</td>
+            <td>5</td>
+            <td>219</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>219</td>
+            <td>11622</td>
+            <td>4</td>
+            <td>4.0</td>
+            <td>...</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>0</td>
+            <td>NaN</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>4</td>
+            <td>2012-12-31 08:59:22</td>
+            <td>5</td>
+            <td>219</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>219</td>
+            <td>11826</td>
+            <td>5</td>
+            <td>4.5</td>
+            <td>...</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>0</td>
+            <td>NaN</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td>4</td>
+            <td>2012-12-31 08:59:22</td>
+            <td>5</td>
+            <td>219</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>219</td>
+            <td>22824</td>
+            <td>3</td>
+            <td>4.0</td>
+            <td>...</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>0</td>
+            <td>NaN</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>4</th>
+            <td>4</td>
+            <td>2012-12-31 08:59:22</td>
+            <td>5</td>
+            <td>219</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>219</td>
+            <td>37581</td>
+            <td>5</td>
+            <td>4.5</td>
+            <td>...</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>NaN</td>
+            <td>0</td>
+            <td>NaN</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>5 rows × 54 columns</p>
+      </div>
 
 
-
-###  Generate Event
-
-
-What the data should look ? 
 
 ## Generate Event
 
@@ -586,17 +569,20 @@ What the data should look like:
 
 
 
-- Each unique session : 
+Each unique session : 
   
-   - occur at a particular time 
-   - has n interactions 
-   - the interactions should be ordered chronologically 
+   1. occur at a particular time 
+   2. has n interactions 
+   3. the interactions should be ordered chronologically 
 
 We should order the data first , based on : 
-- search session 
-- event time 
+
+  1. search session 
+  2. event time 
 
 
+
+    
 ```python
 dataset = dataset.sort_values( 
     ['srch_id','date_time']
@@ -606,101 +592,102 @@ dataset.head(2)
 
 
 
+???+ note "Show Code Output"
 
-<div >
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>srch_id</th>
-      <th>date_time</th>
-      <th>site_id</th>
-      <th>visitor_location_country_id</th>
-      <th>visitor_hist_starrating</th>
-      <th>visitor_hist_adr_usd</th>
-      <th>prop_country_id</th>
-      <th>prop_id</th>
-      <th>prop_starrating</th>
-      <th>prop_review_score</th>
-      <th>...</th>
-      <th>comp6_rate_percent_diff</th>
-      <th>comp7_rate</th>
-      <th>comp7_inv</th>
-      <th>comp7_rate_percent_diff</th>
-      <th>comp8_rate</th>
-      <th>comp8_inv</th>
-      <th>comp8_rate_percent_diff</th>
-      <th>click_bool</th>
-      <th>gross_bookings_usd</th>
-      <th>booking_bool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>3625</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>11622</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>2 rows × 54 columns</p>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>srch_id</th>
+          <th>date_time</th>
+          <th>site_id</th>
+          <th>visitor_location_country_id</th>
+          <th>visitor_hist_starrating</th>
+          <th>visitor_hist_adr_usd</th>
+          <th>prop_country_id</th>
+          <th>prop_id</th>
+          <th>prop_starrating</th>
+          <th>prop_review_score</th>
+          <th>...</th>
+          <th>comp6_rate_percent_diff</th>
+          <th>comp7_rate</th>
+          <th>comp7_inv</th>
+          <th>comp7_rate_percent_diff</th>
+          <th>comp8_rate</th>
+          <th>comp8_inv</th>
+          <th>comp8_rate_percent_diff</th>
+          <th>click_bool</th>
+          <th>gross_bookings_usd</th>
+          <th>booking_bool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>3625</td>
+          <td>4</td>
+          <td>4.0</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>11622</td>
+          <td>4</td>
+          <td>4.0</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>2 rows × 54 columns</p>
+    </div>
 
 
 
@@ -716,261 +703,260 @@ sample_session = dataset.loc[
 sample_session
 ```
 
+???+ note "Show Code Output"
 
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>3625</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>11622</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>11826</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>22824</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>37581</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>39993</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>46162</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>49152</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>56063</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>56472</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>58696</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>64344</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>65984</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>71258</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>75491</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>81172</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83045</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83430</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83806</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>85567</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>85742</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>89119</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>97099</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>109185</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>110813</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>116696</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>125069</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>127808</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>129278</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>134162</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>137826</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>139893</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>3625</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>11622</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>11826</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>22824</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>37581</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>39993</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>6</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>46162</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>7</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>49152</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>8</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>56063</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>9</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>56472</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>10</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>58696</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>11</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>64344</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>12</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>65984</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>13</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>71258</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>14</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>75491</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>15</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>81172</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>16</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83045</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>17</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83430</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>18</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83806</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>19</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>85567</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>20</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>85742</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>21</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>89119</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>22</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>97099</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>23</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>109185</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>24</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>110813</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>25</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>116696</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>26</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>125069</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>27</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>127808</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>28</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>129278</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>29</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>134162</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>30</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>137826</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>31</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>139893</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 
@@ -1030,291 +1016,293 @@ sample_session
 
 
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+???+ note "Show Code Output"
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-      <th>event</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>3625</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>11622</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>11826</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>22824</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>37581</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>39993</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>46162</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>49152</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>56063</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>56472</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>58696</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>64344</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>65984</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>71258</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>75491</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>81172</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83045</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83430</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>83806</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>85567</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>85742</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>89119</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>97099</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>109185</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>110813</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>116696</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>125069</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>127808</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>129278</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>134162</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>137826</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>2012-12-31 08:59:22</td>
-      <td>139893</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+          <th>event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>3625</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>11622</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>11826</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>22824</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>37581</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>39993</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>6</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>46162</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>7</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>49152</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>8</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>56063</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>9</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>56472</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>10</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>58696</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>11</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>64344</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>12</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>65984</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>13</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>71258</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>14</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>75491</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>15</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>81172</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>16</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83045</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>17</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83430</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>18</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>83806</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>19</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>85567</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>20</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>85742</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>21</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>89119</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>22</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>97099</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>23</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>109185</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>24</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>110813</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>25</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>116696</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>26</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>125069</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>27</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>127808</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>28</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>129278</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>29</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>134162</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>30</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>137826</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>31</th>
+          <td>2012-12-31 08:59:22</td>
+          <td>139893</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 
@@ -1344,203 +1332,205 @@ booked_session
 
 
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+???+ note "Show Code Output"
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-      <th>event</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>32</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>10250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>13252</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>22756</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>27669</td>
-      <td>1</td>
-      <td>1</td>
-      <td>booked</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>30630</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>32491</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>33805</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>35397</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>39137</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>41497</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>54403</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>58176</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>44</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>63511</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>66444</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>67150</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>73738</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>83293</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>90151</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>50</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>119302</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>51</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>125655</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>52</th>
-      <td>2013-03-20 17:50:44</td>
-      <td>134607</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+          <th>event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>32</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>10250</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>33</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>13252</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>34</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>22756</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>35</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>27669</td>
+          <td>1</td>
+          <td>1</td>
+          <td>booked</td>
+        </tr>
+        <tr>
+          <th>36</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>30630</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>37</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>32491</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>38</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>33805</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>39</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>35397</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>40</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>39137</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>41</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>41497</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>42</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>54403</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>43</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>58176</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>44</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>63511</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>45</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>66444</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>46</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>67150</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>47</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>73738</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>48</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>83293</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>49</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>90151</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>50</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>119302</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>51</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>125655</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>52</th>
+          <td>2013-03-20 17:50:44</td>
+          <td>134607</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 
@@ -1554,80 +1544,82 @@ dataset.groupby('srch_id').agg({'prop_id':'count'}).sort_values('prop_id')
 
 
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+???+ note "Show Code Output"
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-    </tr>
-    <tr>
-      <th>srch_id</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>144590</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>327375</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>159295</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>474323</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>66599</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>560306</th>
-      <td>37</td>
-    </tr>
-    <tr>
-      <th>60367</th>
-      <td>37</td>
-    </tr>
-    <tr>
-      <th>394061</th>
-      <td>38</td>
-    </tr>
-    <tr>
-      <th>524634</th>
-      <td>38</td>
-    </tr>
-    <tr>
-      <th>597375</th>
-      <td>38</td>
-    </tr>
-  </tbody>
-</table>
-<p>157267 rows × 1 columns</p>
-</div>
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>prop_id</th>
+        </tr>
+        <tr>
+          <th>srch_id</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>144590</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>327375</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>159295</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>474323</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>66599</th>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>...</th>
+          <td>...</td>
+        </tr>
+        <tr>
+          <th>560306</th>
+          <td>37</td>
+        </tr>
+        <tr>
+          <th>60367</th>
+          <td>37</td>
+        </tr>
+        <tr>
+          <th>394061</th>
+          <td>38</td>
+        </tr>
+        <tr>
+          <th>524634</th>
+          <td>38</td>
+        </tr>
+        <tr>
+          <th>597375</th>
+          <td>38</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>157267 rows × 1 columns</p>
+    </div>
 
 
 
@@ -1641,412 +1633,413 @@ display(dataset.loc[
 ])
 ```
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-      <th>event</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>847859</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>34327</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>847860</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>45505</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>847861</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>49597</td>
-      <td>1</td>
-      <td>1</td>
-      <td>booked</td>
-    </tr>
-    <tr>
-      <th>847862</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>61770</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-    </tr>
-    <tr>
-      <th>847863</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>79426</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+          <th>event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>847859</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>34327</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>847860</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>45505</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>847861</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>49597</td>
+          <td>1</td>
+          <td>1</td>
+          <td>booked</td>
+        </tr>
+        <tr>
+          <th>847862</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>61770</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+        </tr>
+        <tr>
+          <th>847863</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>79426</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-      <th>event</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3508390</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>499</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508391</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>2998</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508392</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>6268</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508393</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>21838</td>
-      <td>1</td>
-      <td>1</td>
-      <td>booked</td>
-    </tr>
-    <tr>
-      <th>3508394</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>26195</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508395</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>29233</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508396</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>38587</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508397</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>40117</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508398</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>45094</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508399</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>45834</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508400</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>62095</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508401</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>67553</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508402</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>68293</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508403</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>71357</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508404</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>75017</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508405</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>79474</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508406</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>82547</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508407</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>83018</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508408</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>85294</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508409</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>86224</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508410</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>86511</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508411</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>88144</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-    </tr>
-    <tr>
-      <th>3508412</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>91550</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508413</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>94975</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508414</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>102111</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508415</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>102135</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508416</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>102943</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508417</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>103972</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508418</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>104198</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508419</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>106449</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508420</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>110143</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508421</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>117992</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508422</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>123354</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508423</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>123978</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508424</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>124413</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508425</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>131611</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508426</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>132136</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-    <tr>
-      <th>3508427</th>
-      <td>2013-06-26 22:33:27</td>
-      <td>139340</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+          <th>event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>3508390</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>499</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508391</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>2998</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508392</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>6268</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508393</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>21838</td>
+          <td>1</td>
+          <td>1</td>
+          <td>booked</td>
+        </tr>
+        <tr>
+          <th>3508394</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>26195</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508395</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>29233</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508396</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>38587</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508397</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>40117</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508398</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>45094</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508399</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>45834</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508400</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>62095</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508401</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>67553</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508402</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>68293</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508403</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>71357</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508404</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>75017</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508405</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>79474</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508406</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>82547</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508407</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>83018</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508408</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>85294</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508409</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>86224</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508410</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>86511</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508411</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>88144</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+        </tr>
+        <tr>
+          <th>3508412</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>91550</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508413</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>94975</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508414</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>102111</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508415</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>102135</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508416</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>102943</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508417</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>103972</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508418</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>104198</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508419</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>106449</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508420</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>110143</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508421</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>117992</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508422</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>123354</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508423</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>123978</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508424</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>124413</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508425</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>131611</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508426</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>132136</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+        <tr>
+          <th>3508427</th>
+          <td>2013-06-26 22:33:27</td>
+          <td>139340</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 We can see number of property in each session is different meaning it fully represent user behaviour in recommendation. If the records only 5 property means user only interact (scroll , click , book ) up to 5th position.  Another case is that after booking user still can possibly click item. 
@@ -2094,82 +2087,83 @@ display(dataset.loc[
 ])
 ```
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_time</th>
-      <th>prop_id</th>
-      <th>click_bool</th>
-      <th>booking_bool</th>
-      <th>event</th>
-      <th>search_rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>847859</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>34327</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>847860</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>45505</td>
-      <td>0</td>
-      <td>0</td>
-      <td>scrolled</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>847861</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>49597</td>
-      <td>1</td>
-      <td>1</td>
-      <td>booked</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>847862</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>61770</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>847863</th>
-      <td>2013-03-24 15:34:50</td>
-      <td>79426</td>
-      <td>1</td>
-      <td>0</td>
-      <td>clicked</td>
-      <td>5</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>date_time</th>
+          <th>prop_id</th>
+          <th>click_bool</th>
+          <th>booking_bool</th>
+          <th>event</th>
+          <th>search_rank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>847859</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>34327</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>847860</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>45505</td>
+          <td>0</td>
+          <td>0</td>
+          <td>scrolled</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>847861</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>49597</td>
+          <td>1</td>
+          <td>1</td>
+          <td>booked</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>847862</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>61770</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <th>847863</th>
+          <td>2013-03-24 15:34:50</td>
+          <td>79426</td>
+          <td>1</td>
+          <td>0</td>
+          <td>clicked</td>
+          <td>5</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
 
 
 After that we need to create / calculate **Relevance Score**
@@ -2417,65 +2411,66 @@ Question / Focus of EDA :
 ```python
 display((X_train_relevance.isnull().sum() / X_train_relevance.shape[0] ).sort_values(ascending=False))
 ```
+???+ note "Show Code Output"
 
 
-    comp1_rate_percent_diff        0.981806
-    comp6_rate_percent_diff        0.979394
-    comp1_rate                     0.976894
-    comp1_inv                      0.975163
-    comp4_rate_percent_diff        0.973210
-    comp7_rate_percent_diff        0.970401
-    gross_bookings_usd             0.960052
-    comp6_rate                     0.948188
-    comp6_inv                      0.943810
-    comp4_rate                     0.937723
-    visitor_hist_starrating        0.936747
-    visitor_hist_adr_usd           0.936399
-    comp7_rate                     0.932321
-    comp4_inv                      0.930634
-    comp7_inv                      0.923850
-    srch_query_affinity_score      0.921880
-    comp3_rate_percent_diff        0.896652
-    comp2_rate_percent_diff        0.880073
-    comp8_rate_percent_diff        0.865494
-    comp5_rate_percent_diff        0.820446
-    comp3_rate                     0.669075
-    comp3_inv                      0.644406
-    comp8_rate                     0.584797
-    comp8_inv                      0.569799
-    comp2_rate                     0.568846
-    comp2_inv                      0.546673
-    comp5_rate                     0.529495
-    comp5_inv                      0.501489
-    orig_destination_distance      0.314939
-    prop_location_score2           0.217862
-    prop_review_score              0.001281
-    event                          0.000000
-    booking_bool                   0.000000
-    search_rank                    0.000000
-    click_bool                     0.000000
-    srch_id                        0.000000
-    date_time                      0.000000
-    position                       0.000000
-    site_id                        0.000000
-    visitor_location_country_id    0.000000
-    prop_country_id                0.000000
-    prop_id                        0.000000
-    prop_starrating                0.000000
-    prop_brand_bool                0.000000
-    prop_location_score1           0.000000
-    prop_log_historical_price      0.000000
-    price_usd                      0.000000
-    random_bool                    0.000000
-    promotion_flag                 0.000000
-    srch_destination_id            0.000000
-    srch_length_of_stay            0.000000
-    srch_booking_window            0.000000
-    srch_adults_count              0.000000
-    srch_children_count            0.000000
-    srch_room_count                0.000000
-    srch_saturday_night_bool       0.000000
-    relevance_score                0.000000
+    - comp1_rate_percent_diff        0.981806
+    - comp6_rate_percent_diff        0.979394
+    - comp1_rate                     0.976894
+    - comp1_inv                      0.975163
+    - comp4_rate_percent_diff        0.973210
+    - comp7_rate_percent_diff        0.970401
+    - gross_bookings_usd             0.960052
+    - comp6_rate                     0.948188
+    - comp6_inv                      0.943810
+    - comp4_rate                     0.937723
+    - visitor_hist_starrating        0.936747
+    - visitor_hist_adr_usd           0.936399
+    - comp7_rate                     0.932321
+    - comp4_inv                      0.930634
+    - comp7_inv                      0.923850
+    - srch_query_affinity_score      0.921880
+    - comp3_rate_percent_diff        0.896652
+    - comp2_rate_percent_diff        0.880073
+    - comp8_rate_percent_diff        0.865494
+    - comp5_rate_percent_diff        0.820446
+    - comp3_rate                     0.669075
+    - comp3_inv                      0.644406
+    - comp8_rate                     0.584797
+    - comp8_inv                      0.569799
+    - comp2_rate                     0.568846
+    - comp2_inv                      0.546673
+    - comp5_rate                     0.529495
+    - comp5_inv                      0.501489
+    - orig_destination_distance      0.314939
+    - prop_location_score2           0.217862
+    - prop_review_score              0.001281
+    - event                          0.000000
+    - booking_bool                   0.000000
+    - search_rank                    0.000000
+    - click_bool                     0.000000
+    - srch_id                        0.000000
+    - date_time                      0.000000
+    - position                       0.000000
+    - site_id                        0.000000
+    - visitor_location_country_id    0.000000
+    - prop_country_id                0.000000
+    - prop_id                        0.000000
+    - prop_starrating                0.000000
+    - prop_brand_bool                0.000000
+    - prop_location_score1           0.000000
+    - prop_log_historical_price      0.000000
+    - price_usd                      0.000000
+    - random_bool                    0.000000
+    - promotion_flag                 0.000000
+    - srch_destination_id            0.000000
+    - srch_length_of_stay            0.000000
+    - srch_booking_window            0.000000
+    - srch_adults_count              0.000000
+    - srch_children_count            0.000000
+    - srch_room_count                0.000000
+    - srch_saturday_night_bool       0.000000
+    - relevance_score                0.000000
     dtype: float64
 
 
@@ -2552,64 +2547,65 @@ Previously we checked some features and we decide to remove some of them.
 display((X_train_relevance.isnull().sum() / X_train_relevance.shape[0] ).sort_values(ascending=False))
 ```
 
+???+ note "Show Code Output"
 
-    comp1_rate_percent_diff        0.981806
-    comp6_rate_percent_diff        0.979394
-    comp1_rate                     0.976894
-    comp1_inv                      0.975163
-    comp4_rate_percent_diff        0.973210
-    comp7_rate_percent_diff        0.970401
-    gross_bookings_usd             0.960052
-    comp6_rate                     0.948188
-    comp6_inv                      0.943810
-    comp4_rate                     0.937723
-    visitor_hist_starrating        0.936747
-    visitor_hist_adr_usd           0.936399
-    comp7_rate                     0.932321
-    comp4_inv                      0.930634
-    comp7_inv                      0.923850
-    srch_query_affinity_score      0.921880
-    comp3_rate_percent_diff        0.896652
-    comp2_rate_percent_diff        0.880073
-    comp8_rate_percent_diff        0.865494
-    comp5_rate_percent_diff        0.820446
-    comp3_rate                     0.669075
-    comp3_inv                      0.644406
-    comp8_rate                     0.584797
-    comp8_inv                      0.569799
-    comp2_rate                     0.568846
-    comp2_inv                      0.546673
-    comp5_rate                     0.529495
-    comp5_inv                      0.501489
-    orig_destination_distance      0.314939
-    prop_location_score2           0.217862
-    prop_review_score              0.001281
-    event                          0.000000
-    booking_bool                   0.000000
-    search_rank                    0.000000
-    click_bool                     0.000000
-    srch_id                        0.000000
-    date_time                      0.000000
-    position                       0.000000
-    site_id                        0.000000
-    visitor_location_country_id    0.000000
-    prop_country_id                0.000000
-    prop_id                        0.000000
-    prop_starrating                0.000000
-    prop_brand_bool                0.000000
-    prop_location_score1           0.000000
-    prop_log_historical_price      0.000000
-    price_usd                      0.000000
-    random_bool                    0.000000
-    promotion_flag                 0.000000
-    srch_destination_id            0.000000
-    srch_length_of_stay            0.000000
-    srch_booking_window            0.000000
-    srch_adults_count              0.000000
-    srch_children_count            0.000000
-    srch_room_count                0.000000
-    srch_saturday_night_bool       0.000000
-    relevance_score                0.000000
+    - comp1_rate_percent_diff        0.981806
+    - comp6_rate_percent_diff        0.979394
+    - comp1_rate                     0.976894
+    - comp1_inv                      0.975163
+    - comp4_rate_percent_diff        0.973210
+    - comp7_rate_percent_diff        0.970401
+    - gross_bookings_usd             0.960052
+    - comp6_rate                     0.948188
+    - comp6_inv                      0.943810
+    - comp4_rate                     0.937723
+    - visitor_hist_starrating        0.936747
+    - visitor_hist_adr_usd           0.936399
+    - comp7_rate                     0.932321
+    - comp4_inv                      0.930634
+    - comp7_inv                      0.923850
+    - srch_query_affinity_score      0.921880
+    - comp3_rate_percent_diff        0.896652
+    - comp2_rate_percent_diff        0.880073
+    - comp8_rate_percent_diff        0.865494
+    - comp5_rate_percent_diff        0.820446
+    - comp3_rate                     0.669075
+    - comp3_inv                      0.644406
+    - comp8_rate                     0.584797
+    - comp8_inv                      0.569799
+    - comp2_rate                     0.568846
+    - comp2_inv                      0.546673
+    - comp5_rate                     0.529495
+    - comp5_inv                      0.501489
+    - orig_destination_distance      0.314939
+    - prop_location_score2           0.217862
+    - prop_review_score              0.001281
+    - event                          0.000000
+    - booking_bool                   0.000000
+    - search_rank                    0.000000
+    - click_bool                     0.000000
+    - srch_id                        0.000000
+    - date_time                      0.000000
+    - position                       0.000000
+    - site_id                        0.000000
+    - visitor_location_country_id    0.000000
+    - prop_country_id                0.000000
+    - prop_id                        0.000000
+    - prop_starrating                0.000000
+    - prop_brand_bool                0.000000
+    - prop_location_score1           0.000000
+    - prop_log_historical_price      0.000000
+    - price_usd                      0.000000
+    - random_bool                    0.000000
+    - promotion_flag                 0.000000
+    - srch_destination_id            0.000000
+    - srch_length_of_stay            0.000000
+    - srch_booking_window            0.000000
+    - srch_adults_count              0.000000
+    - srch_children_count            0.000000
+    - srch_room_count                0.000000
+    - srch_saturday_night_bool       0.000000
+    - relevance_score                0.000000
     dtype: float64
 
 
@@ -2662,121 +2658,114 @@ print('Training Random Forest')
 rf_pointwise.fit(X_train_relevance[ALL_FEATURES],y_train_relevance)
 ```
 
-    Training Linear Regression
-    Training Random Forest
-    building tree 1 of 100
-    building tree 2 of 100
-    building tree 3 of 100
-    building tree 4 of 100
-    building tree 5 of 100
-    building tree 6 of 100
-    building tree 7 of 100
-    building tree 8 of 100
+???+ note "Show Code Output"
 
+    - Training Linear Regression
+    - Training Random Forest
+    - building tree 1 of 100
+    - building tree 2 of 100
+    - building tree 3 of 100
+    - building tree 4 of 100
+    - building tree 5 of 100
+    - building tree 6 of 100
+    - building tree 7 of 100
+    - building tree 8 of 100
+    - [Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.
+    - building tree 9 of 100
+    - building tree 10 of 100
+    - building tree 11 of 100
+    - building tree 12 of 100
+    - building tree 13 of 100
+    - building tree 14 of 100
+    - building tree 15 of 100
+    - building tree 16 of 100
+    - building tree 17 of 100
+    - building tree 18 of 100
+    - building tree 19 of 100
+    - building tree 20 of 100
+    - building tree 21 of 100
+    - building tree 22 of 100
+    - building tree 23 of 100
+    - building tree 24 of 100
+    - [Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s
+    - building tree 25 of 100
+    - building tree 26 of 100
+    - building tree 27 of 100
+    - building tree 28 of 100
+    - building tree 29 of 100
+    - building tree 30 of 100
+    - building tree 31 of 100
+    - building tree 32 of 100
+    - building tree 33 of 100
+    - building tree 34 of 100
+    - building tree 35 of 100
+    - building tree 36 of 100
+    - building tree 37 of 100
+    - building tree 38 of 100
+    - building tree 39 of 100
+    - building tree 40 of 100
+    - building tree 41 of 100
+    - building tree 42 of 100
+    - building tree 43 of 100
+    - building tree 44 of 100
+    - building tree 45 of 100
+    - building tree 46 of 100
+    - building tree 47 of 100
+    - building tree 48 of 100
+    - building tree 49 of 100
+    - building tree 50 of 100
+    - building tree 51 of 100
+    - building tree 52 of 100
+    - building tree 53 of 100
+    - building tree 54 of 100
+    - building tree 55 of 100
+    - building tree 56 of 100
+    - building tree 57 of 100
+    - building tree 58 of 100
+    - building tree 59 of 100
+    - building tree 60 of 100
+    - building tree 61 of 100
+    - building tree 62 of 100
+    - building tree 63 of 100
+    - building tree 64 of 100
+    - building tree 65 of 100
+    - building tree 66 of 100
+    - building tree 67 of 100
+    - building tree 68 of 100
+    - building tree 69 of 100
+    - building tree 70 of 100
+    - building tree 71 of 100
+    - building tree 72 of 100
+    - building tree 73 of 100
+    - building tree 74 of 100
+    - building tree 75 of 100
+    - building tree 76 of 100
+    - building tree 77 of 100
+    - building tree 78 of 100
+    - building tree 79 of 100
+    - building tree 80 of 100
+    - building tree 81 of 100
+    - building tree 82 of 100
+    - building tree 83 of 100
+    - building tree 84 of 100
+    - building tree 85 of 100
+    - building tree 86 of 100
+    - building tree 87 of 100
+    - building tree 88 of 100
+    - building tree 89 of 100
+    - building tree 90 of 100
+    - building tree 91 of 100
+    - building tree 92 of 100
+    - building tree 93 of 100
+    - building tree 94 of 100
+    - building tree 95 of 100
+    - building tree 96 of 100
+    - building tree 97 of 100
+    - building tree 98 of 100
+    - building tree 99 of 100
+    - building tree 100 of 100
 
-    [Parallel(n_jobs=-1)]: Using backend ThreadingBackend with 8 concurrent workers.
-
-
-    building tree 9 of 100
-    building tree 10 of 100
-    building tree 11 of 100
-    building tree 12 of 100
-    building tree 13 of 100
-    building tree 14 of 100
-    building tree 15 of 100
-    building tree 16 of 100
-    building tree 17 of 100
-    building tree 18 of 100
-    building tree 19 of 100
-    building tree 20 of 100
-    building tree 21 of 100
-    building tree 22 of 100
-    building tree 23 of 100
-    building tree 24 of 100
-
-
-    [Parallel(n_jobs=-1)]: Done  16 tasks      | elapsed:   32.3s
-
-
-    building tree 25 of 100
-    building tree 26 of 100
-    building tree 27 of 100
-    building tree 28 of 100
-    building tree 29 of 100
-    building tree 30 of 100
-    building tree 31 of 100
-    building tree 32 of 100
-    building tree 33 of 100
-    building tree 34 of 100
-    building tree 35 of 100
-    building tree 36 of 100
-    building tree 37 of 100
-    building tree 38 of 100
-    building tree 39 of 100
-    building tree 40 of 100
-    building tree 41 of 100
-    building tree 42 of 100
-    building tree 43 of 100
-    building tree 44 of 100
-    building tree 45 of 100
-    building tree 46 of 100
-    building tree 47 of 100
-    building tree 48 of 100
-    building tree 49 of 100
-    building tree 50 of 100
-    building tree 51 of 100
-    building tree 52 of 100
-    building tree 53 of 100
-    building tree 54 of 100
-    building tree 55 of 100
-    building tree 56 of 100
-    building tree 57 of 100
-    building tree 58 of 100
-    building tree 59 of 100
-    building tree 60 of 100
-    building tree 61 of 100
-    building tree 62 of 100
-    building tree 63 of 100
-    building tree 64 of 100
-    building tree 65 of 100
-    building tree 66 of 100
-    building tree 67 of 100
-    building tree 68 of 100
-    building tree 69 of 100
-    building tree 70 of 100
-    building tree 71 of 100
-    building tree 72 of 100
-    building tree 73 of 100
-    building tree 74 of 100
-    building tree 75 of 100
-    building tree 76 of 100
-    building tree 77 of 100
-    building tree 78 of 100
-    building tree 79 of 100
-    building tree 80 of 100
-    building tree 81 of 100
-    building tree 82 of 100
-    building tree 83 of 100
-    building tree 84 of 100
-    building tree 85 of 100
-    building tree 86 of 100
-    building tree 87 of 100
-    building tree 88 of 100
-    building tree 89 of 100
-    building tree 90 of 100
-    building tree 91 of 100
-    building tree 92 of 100
-    building tree 93 of 100
-    building tree 94 of 100
-    building tree 95 of 100
-    building tree 96 of 100
-    building tree 97 of 100
-    building tree 98 of 100
-    building tree 99 of 100
-    building tree 100 of 100
-
-
-    [Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished
+    - [Parallel(n_jobs=-1)]: Done 100 out of 100 | elapsed:  3.4min finished
 
 
 
@@ -4199,8 +4188,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 The goal is to check whether model learn or not 
 
-There are lot of Ranking / Information Retrieval Metrics. Some of them are : 
-We can divide into 
+There are lot of Ranking / Information Retrieval Metrics. we can divide into : 
+
 - Binary Relevance Metrics 
     - Precision @ K 
     - Mean Average Precision @ K 
@@ -4210,86 +4199,76 @@ We can divide into
     - Normalized Discounted Cumulative Gain (NDCG)
 
 What is Ideal Ranking Metrics ?
+
 - If we predict correctly the relevance score at top position is better than correctly predicting relevance score in lower position. 
 
 #### Metrics : NDCG
 
+$$
 \begin{align*}\\
 \begin{split}\\
 \text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)} \\
-
 \end{split}\\
 \end{align*}\\
+$$
 
 Where : 
-- $\text{DCG}$ = Discounted Cumulative Gain 
-- $k= \text{number of items in recommendation}$\\
-- $\text{rel}[i]$ = relevance score at item in position i th
-- Relevance score itself usually relevance score based on ground truth 
 
-So where is the NDCG ? 
+  - $\text{DCG}$ = Discounted Cumulative Gain 
+  - $k= \text{number of items in recommendation}$\\
+  - $\text{rel}[i]$ = relevance score at item in position i th
+  - Relevance score itself usually relevance score based on ground truth 
 
-Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1 
+So what is the NDCG ? Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1. 
 
 
 The Idea of DCG is that position does matter, if our model can predict the highest relevance score at top position is better compared to lower position
 
 
 
-In NDCG we can scale the DCG by maximum value of DCG or we call it as **Ideal DCG**
+In NDCG we can scale the DCG by maximum value of DCG or we call it as 
+**Ideal DCG**
 
-
-\begin{align*}\\
-\begin{split}\\
-\text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\\
-
-\end{split}\\
-\end{align*}\\
+$$
+  \begin{align*}\\
+  \begin{split}\\
+  \text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\\
+  \end{split}\\
+  \end{align*}\\
+$$
 
 So what is the ideal DCG in this case ? 
 
-There are some flavor, citing Doug TurnBull in His Blogpost , 
+There are some flavor, citing Doug TurnBull in His Blogpost 
 
 - Local Ideal --> Sorted based on ground truth relevance --> 
 - Global Ideal --> using whole score from judgement list as ground truth , the previous one only use the response from search only 
 - Max Label --> Considering each position has maximum score, for example in our case the book event type has relevance of 2. 
 
 
-The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic
+The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic.
 
 for example we will use validation to measure ndcg. 
 
 #### Validation Set
 
 The purpose on this set mainly **selecting model** : 
+
 - Selecting best hyperparameter 
 - Selecting approach 
 - pipeline etc 
 
-We could do through **Cross Validation** which have better estimate of model performance. 
+We could do through **Cross Validation** which have better estimate of model performance.  In this article we only implement the **Validation Set** approach . We  wont cover **Hyperparameter Tuning** in this article.
 
-In this article we only implement the **Validation Set** approach 
+Next, we should add our model prediction. So, how can we predict ?First this model focus on ranking, which means, does not focus on **candidate generation step**. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. 
 
-
-We also wont cover **Hyperparameter Tuning** in this article
-
-Next, we should add our model prediction. So, how can we predict ? 
-
-First this model focus on ranking, which means, does not focus on **candidate generation step**. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. 
-
-Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank 
+Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank.
 
 
 ```python
 X_val_relevance['search_rank'] = 1
 ```
 
-    /var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/2832532597.py:1: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-      X_val_relevance['search_rank'] = 1
 
 
 **Pointwise**
@@ -4314,6 +4293,7 @@ val_prediction_pointwise = val_prediction_pointwise.sort_values(['srch_id',
 val_prediction_pointwise['rank'] = val_prediction_pointwise.groupby('srch_id').cumcount() + 1
 val_prediction_pointwise
 ```
+???+ note "Show Code Output"
 
     [Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
     [Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    0.3s
@@ -4323,124 +4303,125 @@ val_prediction_pointwise
 
 
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-      <th>srch_id</th>
-      <th>y_true</th>
-      <th>pred_lambda</th>
-      <th>rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3123447</th>
-      <td>105305</td>
-      <td>532288</td>
-      <td>5</td>
-      <td>1.275</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3123444</th>
-      <td>90139</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.650</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3123455</th>
-      <td>136621</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.530</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3123433</th>
-      <td>25017</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.500</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3123436</th>
-      <td>35962</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.400</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3516328</th>
-      <td>53300</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>0.100</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>3516344</th>
-      <td>107244</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>0.100</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>3516327</th>
-      <td>48186</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>0.050</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>3516341</th>
-      <td>101066</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>0.050</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>3516340</th>
-      <td>96306</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>0.000</td>
-      <td>32</td>
-    </tr>
-  </tbody>
-</table>
-<p>273242 rows × 5 columns</p>
-</div>
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>prop_id</th>
+          <th>srch_id</th>
+          <th>y_true</th>
+          <th>pred_lambda</th>
+          <th>rank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>3123447</th>
+          <td>105305</td>
+          <td>532288</td>
+          <td>5</td>
+          <td>1.275</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>3123444</th>
+          <td>90139</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.650</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>3123455</th>
+          <td>136621</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.530</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>3123433</th>
+          <td>25017</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.500</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <th>3123436</th>
+          <td>35962</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.400</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>...</th>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <th>3516328</th>
+          <td>53300</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>0.100</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <th>3516344</th>
+          <td>107244</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>0.100</td>
+          <td>29</td>
+        </tr>
+        <tr>
+          <th>3516327</th>
+          <td>48186</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>0.050</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <th>3516341</th>
+          <td>101066</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>0.050</td>
+          <td>31</td>
+        </tr>
+        <tr>
+          <th>3516340</th>
+          <td>96306</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>0.000</td>
+          <td>32</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>273242 rows × 5 columns</p>
+    </div>
 
 
 
@@ -4470,125 +4451,127 @@ val_prediction_pairwise
 
 
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-      <th>srch_id</th>
-      <th>y_true</th>
-      <th>pred_lambda</th>
-      <th>rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3123433</th>
-      <td>25017</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.170013</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3123448</th>
-      <td>105787</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.161488</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3123436</th>
-      <td>35962</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>0.082060</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3123454</th>
-      <td>136377</td>
-      <td>532288</td>
-      <td>0</td>
-      <td>-0.105323</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3123447</th>
-      <td>105305</td>
-      <td>532288</td>
-      <td>5</td>
-      <td>-0.230895</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3516343</th>
-      <td>104950</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>-0.857398</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>3516339</th>
-      <td>95810</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>-1.003210</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>3516342</th>
-      <td>102352</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>-1.123185</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>3516341</th>
-      <td>101066</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>-1.618251</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>3516328</th>
-      <td>53300</td>
-      <td>598662</td>
-      <td>0</td>
-      <td>-1.923931</td>
-      <td>32</td>
-    </tr>
-  </tbody>
-</table>
-<p>273242 rows × 5 columns</p>
-</div>
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>prop_id</th>
+          <th>srch_id</th>
+          <th>y_true</th>
+          <th>pred_lambda</th>
+          <th>rank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>3123433</th>
+          <td>25017</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.170013</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>3123448</th>
+          <td>105787</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.161488</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>3123436</th>
+          <td>35962</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>0.082060</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>3123454</th>
+          <td>136377</td>
+          <td>532288</td>
+          <td>0</td>
+          <td>-0.105323</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <th>3123447</th>
+          <td>105305</td>
+          <td>532288</td>
+          <td>5</td>
+          <td>-0.230895</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>...</th>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <th>3516343</th>
+          <td>104950</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>-0.857398</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <th>3516339</th>
+          <td>95810</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>-1.003210</td>
+          <td>29</td>
+        </tr>
+        <tr>
+          <th>3516342</th>
+          <td>102352</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>-1.123185</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <th>3516341</th>
+          <td>101066</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>-1.618251</td>
+          <td>31</td>
+        </tr>
+        <tr>
+          <th>3516328</th>
+          <td>53300</td>
+          <td>598662</td>
+          <td>0</td>
+          <td>-1.923931</td>
+          <td>32</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>273242 rows × 5 columns</p>
+    </div>
 
 
 
@@ -4615,125 +4598,126 @@ val_prediction_listwise
 
 
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    <div style="overflow-x:scroll;">
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-      <th>srch_id</th>
-      <th>pred_lambda</th>
-      <th>y_true</th>
-      <th>rank</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3123433</th>
-      <td>25017</td>
-      <td>532288</td>
-      <td>0.144549</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3123436</th>
-      <td>35962</td>
-      <td>532288</td>
-      <td>0.136666</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3123447</th>
-      <td>105305</td>
-      <td>532288</td>
-      <td>-0.069895</td>
-      <td>5</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3123451</th>
-      <td>111825</td>
-      <td>532288</td>
-      <td>-0.170109</td>
-      <td>0</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3123439</th>
-      <td>49185</td>
-      <td>532288</td>
-      <td>-0.170845</td>
-      <td>0</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3516349</th>
-      <td>120070</td>
-      <td>598662</td>
-      <td>-0.440107</td>
-      <td>0</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>3516331</th>
-      <td>62444</td>
-      <td>598662</td>
-      <td>-0.501732</td>
-      <td>0</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>3516339</th>
-      <td>95810</td>
-      <td>598662</td>
-      <td>-0.638550</td>
-      <td>0</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>3516328</th>
-      <td>53300</td>
-      <td>598662</td>
-      <td>-0.875726</td>
-      <td>0</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>3516341</th>
-      <td>101066</td>
-      <td>598662</td>
-      <td>-1.246449</td>
-      <td>0</td>
-      <td>32</td>
-    </tr>
-  </tbody>
-</table>
-<p>273242 rows × 5 columns</p>
-</div>
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>prop_id</th>
+          <th>srch_id</th>
+          <th>pred_lambda</th>
+          <th>y_true</th>
+          <th>rank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>3123433</th>
+          <td>25017</td>
+          <td>532288</td>
+          <td>0.144549</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>3123436</th>
+          <td>35962</td>
+          <td>532288</td>
+          <td>0.136666</td>
+          <td>0</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <th>3123447</th>
+          <td>105305</td>
+          <td>532288</td>
+          <td>-0.069895</td>
+          <td>5</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <th>3123451</th>
+          <td>111825</td>
+          <td>532288</td>
+          <td>-0.170109</td>
+          <td>0</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <th>3123439</th>
+          <td>49185</td>
+          <td>532288</td>
+          <td>-0.170845</td>
+          <td>0</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <th>...</th>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <th>3516349</th>
+          <td>120070</td>
+          <td>598662</td>
+          <td>-0.440107</td>
+          <td>0</td>
+          <td>28</td>
+        </tr>
+        <tr>
+          <th>3516331</th>
+          <td>62444</td>
+          <td>598662</td>
+          <td>-0.501732</td>
+          <td>0</td>
+          <td>29</td>
+        </tr>
+        <tr>
+          <th>3516339</th>
+          <td>95810</td>
+          <td>598662</td>
+          <td>-0.638550</td>
+          <td>0</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <th>3516328</th>
+          <td>53300</td>
+          <td>598662</td>
+          <td>-0.875726</td>
+          <td>0</td>
+          <td>31</td>
+        </tr>
+        <tr>
+          <th>3516341</th>
+          <td>101066</td>
+          <td>598662</td>
+          <td>-1.246449</td>
+          <td>0</td>
+          <td>32</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>273242 rows × 5 columns</p>
+    </div>
 
 
 
@@ -4852,188 +4836,190 @@ ideal_dcg
 
 
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+      <div style="overflow-x:scroll;">
+      <style scoped>
+          .dataframe tbody tr th:only-of-type {
+              vertical-align: middle;
+          }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>prop_id</th>
-      <th>srch_id</th>
-      <th>pred_lambda</th>
-      <th>y_true</th>
-      <th>rank</th>
-      <th>gain</th>
-      <th>dcg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3453954</th>
-      <td>109147</td>
-      <td>587980</td>
-      <td>-0.388572</td>
-      <td>5</td>
-      <td>1</td>
-      <td>31</td>
-      <td>10.333333</td>
-    </tr>
-    <tr>
-      <th>3453941</th>
-      <td>3904</td>
-      <td>587980</td>
-      <td>0.085224</td>
-      <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453951</th>
-      <td>82171</td>
-      <td>587980</td>
-      <td>0.080693</td>
-      <td>0</td>
-      <td>3</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453948</th>
-      <td>57499</td>
-      <td>587980</td>
-      <td>-0.161591</td>
-      <td>0</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453955</th>
-      <td>131812</td>
-      <td>587980</td>
-      <td>-0.281207</td>
-      <td>0</td>
-      <td>5</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453953</th>
-      <td>101045</td>
-      <td>587980</td>
-      <td>-0.313309</td>
-      <td>0</td>
-      <td>6</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453946</th>
-      <td>33678</td>
-      <td>587980</td>
-      <td>-0.374939</td>
-      <td>0</td>
-      <td>7</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453947</th>
-      <td>55787</td>
-      <td>587980</td>
-      <td>-0.388951</td>
-      <td>0</td>
-      <td>8</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453949</th>
-      <td>68081</td>
-      <td>587980</td>
-      <td>-0.528888</td>
-      <td>0</td>
-      <td>9</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453950</th>
-      <td>68414</td>
-      <td>587980</td>
-      <td>-0.581832</td>
-      <td>0</td>
-      <td>10</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453943</th>
-      <td>10085</td>
-      <td>587980</td>
-      <td>-0.616705</td>
-      <td>0</td>
-      <td>11</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453944</th>
-      <td>24104</td>
-      <td>587980</td>
-      <td>-0.616705</td>
-      <td>0</td>
-      <td>12</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453942</th>
-      <td>3910</td>
-      <td>587980</td>
-      <td>-0.698352</td>
-      <td>0</td>
-      <td>13</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453952</th>
-      <td>92278</td>
-      <td>587980</td>
-      <td>-0.813638</td>
-      <td>0</td>
-      <td>14</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3453945</th>
-      <td>24966</td>
-      <td>587980</td>
-      <td>-0.872794</td>
-      <td>0</td>
-      <td>15</td>
-      <td>0</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+          .dataframe tbody tr th {
+              vertical-align: top;
+          }
+
+          .dataframe thead th {
+              text-align: right;
+          }
+      </style>
+      <table border="1" class="dataframe">
+        <thead>
+          <tr style="text-align: right;">
+            <th></th>
+            <th>prop_id</th>
+            <th>srch_id</th>
+            <th>pred_lambda</th>
+            <th>y_true</th>
+            <th>rank</th>
+            <th>gain</th>
+            <th>dcg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>3453954</th>
+            <td>109147</td>
+            <td>587980</td>
+            <td>-0.388572</td>
+            <td>5</td>
+            <td>1</td>
+            <td>31</td>
+            <td>10.333333</td>
+          </tr>
+          <tr>
+            <th>3453941</th>
+            <td>3904</td>
+            <td>587980</td>
+            <td>0.085224</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453951</th>
+            <td>82171</td>
+            <td>587980</td>
+            <td>0.080693</td>
+            <td>0</td>
+            <td>3</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453948</th>
+            <td>57499</td>
+            <td>587980</td>
+            <td>-0.161591</td>
+            <td>0</td>
+            <td>4</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453955</th>
+            <td>131812</td>
+            <td>587980</td>
+            <td>-0.281207</td>
+            <td>0</td>
+            <td>5</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453953</th>
+            <td>101045</td>
+            <td>587980</td>
+            <td>-0.313309</td>
+            <td>0</td>
+            <td>6</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453946</th>
+            <td>33678</td>
+            <td>587980</td>
+            <td>-0.374939</td>
+            <td>0</td>
+            <td>7</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453947</th>
+            <td>55787</td>
+            <td>587980</td>
+            <td>-0.388951</td>
+            <td>0</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453949</th>
+            <td>68081</td>
+            <td>587980</td>
+            <td>-0.528888</td>
+            <td>0</td>
+            <td>9</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453950</th>
+            <td>68414</td>
+            <td>587980</td>
+            <td>-0.581832</td>
+            <td>0</td>
+            <td>10</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453943</th>
+            <td>10085</td>
+            <td>587980</td>
+            <td>-0.616705</td>
+            <td>0</td>
+            <td>11</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453944</th>
+            <td>24104</td>
+            <td>587980</td>
+            <td>-0.616705</td>
+            <td>0</td>
+            <td>12</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453942</th>
+            <td>3910</td>
+            <td>587980</td>
+            <td>-0.698352</td>
+            <td>0</td>
+            <td>13</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453952</th>
+            <td>92278</td>
+            <td>587980</td>
+            <td>-0.813638</td>
+            <td>0</td>
+            <td>14</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+          <tr>
+            <th>3453945</th>
+            <td>24966</td>
+            <td>587980</td>
+            <td>-0.872794</td>
+            <td>0</td>
+            <td>15</td>
+            <td>0</td>
+            <td>0.000000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
 
@@ -5054,40 +5040,42 @@ dcg / ideal_dcg
 
 
 
+???+ note "Show Code Output"
 
-<div style="overflow-x:scroll;">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+      <div style="overflow-x:scroll;">
+      <style scoped>
+          .dataframe tbody tr th:only-of-type {
+              vertical-align: middle;
+          }
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>dcg</th>
-    </tr>
-    <tr>
-      <th>srch_id</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>587980</th>
-      <td>0.333333</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+          .dataframe tbody tr th {
+              vertical-align: top;
+          }
+
+          .dataframe thead th {
+              text-align: right;
+          }
+      </style>
+      <table border="1" class="dataframe">
+        <thead>
+          <tr style="text-align: right;">
+            <th></th>
+            <th>dcg</th>
+          </tr>
+          <tr>
+            <th>srch_id</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>587980</th>
+            <td>0.333333</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
 
 
 

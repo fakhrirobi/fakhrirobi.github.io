@@ -296,35 +296,45 @@
   <h1>Hotel ranking</h1>
 
 <h2 id="hotel-search-ranking-system">Hotel Search Ranking System<a class="headerlink" href="#hotel-search-ranking-system" title="Permanent link">&para;</a></h2>
+<p><img alt="alt text" src="../sumup-mK6upImi-qQ-unsplash.jpg" title="Title" /></p>
+<p>Photo by <a href="https://unsplash.com/@sumup?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">SumUp</a> on <a href="https://unsplash.com/photos/a-person-is-cutting-a-piece-of-paper-with-a-knife-mK6upImi-qQ?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></p>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
 <h2 id="ota-business-nature">OTA Business Nature<a class="headerlink" href="#ota-business-nature" title="Permanent link">&para;</a></h2>
 <p>OTA Company has two business models : </p>
-<ul>
-<li>Merchant Model </li>
-</ul>
+<ol>
+<li>
+<p>Merchant Model </p>
 <p>The company own what they sell. They have some flexibility in changing price. Their Revenues mostly from profit margin. </p>
-<ul>
-<li>Agency Model </li>
-</ul>
+</li>
+<li>
+<p>Agency Model </p>
 <p>More like broker. Revenue from commision and fees. </p>
-<p>Some of OTA Company which apply  <strong>Merchant Model</strong> : 
-- KAI 
-- AirAsia 
-- etc </p>
-<p>Some of OTA Company which apply <strong>Agency Model</strong> : 
-- AirBnB
-- Booking.com 
-- Expedia
-- Traveloka
-- Tiket.com</p>
-<p>Let say there is OTA company , you can name <code>T.LLC</code>
-The problem is that : 
-- The Conversion has dropped 10% from last month </p>
-<p>As data scientist we should help business teams to fix the issue </p>
-<p>After some analysis for example session replay + interview with product manager they said the customer does not convert when the recommendation show</p>
-<p>There are several touchpoint of consumer conversion : 
-1. Home Feed Recommendation 
-2. Search Feature </p>
+</li>
+</ol>
+<p>Some of OTA Company which apply  <strong>Merchant Model</strong> : </p>
+<ul>
+<li>KAI </li>
+<li>AirAsia </li>
+<li>etc </li>
+</ul>
+<p>Some of OTA Company which apply <strong>Agency Model</strong> : </p>
+<ul>
+<li>AirBnB</li>
+<li>Booking.com </li>
+<li>Expedia</li>
+<li>Traveloka</li>
+<li>Tiket.com</li>
+</ul>
+<p>Let say there is OTA company , you can name <code>T.LLC</code>, their  problem is that : </p>
+<ul>
+<li>The Conversion has dropped 10% from last month </li>
+</ul>
+<p>As data scientist we should help business teams to fix the issue. After some analysis for example session replay + interview with product manager they said the customer does not convert when the recommendation show. </p>
+<p>There are several touchpoint of consumer conversion : </p>
+<ol>
+<li>Home Feed Recommendation </li>
+<li>Search Feature </li>
+</ol>
 <p>To provide which one to prioritize we should check the data where most of the conversion take place. Via Home Feed Recommendation or Search Feature. </p>
 <p>There is distinction between homefeed and search result. People which go to the search bar has already have intent to find hotel. Hypothetically the coversion should be bigger in search. </p>
 <p>Hence solving bigger portion cover bigger problem. </p>
@@ -347,13 +357,19 @@ The problem is that :
 <p><span class="arithmatex">\(\textbf{Total Booking} = \text{Number of bookings from search activity}\)</span></p>
 <h3 id="ml-objective">ML Objective<a class="headerlink" href="#ml-objective" title="Permanent link">&para;</a></h3>
 <p>Its about what you expect from your ML System. </p>
-<p><em>Model Wise</em> : 
-Model Performance : 
-1. Can Beat Baseline Model in terms of NDCG (Previously 0.30)</p>
-<p><em>Model Serving</em> : 
-1. Max Latency 500ms 
-- Search Experience is time sensitive
-- A company like google already estimated that they apps latency increase by 100ms it affects to their revenue </p>
+<p><em>Model Wise</em> : </p>
+<ol>
+<li>Model Performance : <ol>
+<li>Can Beat Baseline Model in terms of NDCG (Previously 0.30)</li>
+</ol>
+</li>
+</ol>
+<p><em>Model Serving</em> : </p>
+<ol>
+<li>Max Latency 50ms </li>
+<li>Search Experience is time sensitive</li>
+<li>A company like google already estimated that they apps latency increase by 100ms it affects to their revenue </li>
+</ol>
 <h2 id="user-flow">User Flow<a class="headerlink" href="#user-flow" title="Permanent link">&para;</a></h2>
 <p>It's Important to Understand User Flow </p>
 <pre class="mermaid"><code>
@@ -375,23 +391,26 @@ flowchart TD
 </code></pre>
 <p>In <a href="https://eugeneyan.com/writing/system-design-for-discovery/">Eugene Yan's Blog Post</a> Some Common System Design for Search and Recommendation could be decomposed into two components : </p>
 <ul>
-<li>Retrieval / Candidate Generation </li>
-</ul>
+<li>
+<p>Retrieval / Candidate Generation </p>
 <p>Job : Filtering Out many items from 10.000 items to 1.000 items for example</p>
-<ul>
-<li>Ranking Stage </li>
-</ul>
+</li>
+<li>
+<p>Ranking Stage </p>
 <p>Job : Ordering the rank , this is the heavy duty job. </p>
-<p>Does all the the system design for search and recommender system should contain both ? No. Its depend on number of item you have in catalogue. </p>
-<p>The concern on this article is to highlight on <strong>Ranker Model</strong> Part</p>
+</li>
+</ul>
+<p>Does all the the system design for search and recommender system should contain both ? No. Its depend on number of item you have in catalogue. The concern on this article is to highlight on <strong>Ranker Model</strong> Part</p>
 <h2 id="model-development">Model Development<a class="headerlink" href="#model-development" title="Permanent link">&para;</a></h2>
 <h3 id="problem-formulation">Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permanent link">&para;</a></h3>
 <p>Given User Query give ordered list of hotels that maximized chance user will book the hotel </p>
 <h3 id="solution-1-no-model-approach">Solution 1 : No Model Approach<a class="headerlink" href="#solution-1-no-model-approach" title="Permanent link">&para;</a></h3>
-<p>The first stage is no ML at all. because if we just launch a product / company we dont have enough data, hence we can use simple heuristic such as : 
-1. Sort by Name 
-2. Sort by Price 
-3. Ranking Randomly</p>
+<p>The first stage is no ML at all. because if we just launch a product / company we dont have enough data, hence we can use simple heuristic such as : </p>
+<ol>
+<li>Sort by Name </li>
+<li>Sort by Price </li>
+<li>Ranking Randomly</li>
+</ol>
 <p>The goal is to obtain enough data to collect data to move on to the next step </p>
 <h3 id="solution-2-modelling-approach">Solution 2 : Modelling Approach<a class="headerlink" href="#solution-2-modelling-approach" title="Permanent link">&para;</a></h3>
 <p>Our end task is ranking or to create ordering. </p>
@@ -408,31 +427,35 @@ flowchart TD
 <h2 id="data-description">Data Description<a class="headerlink" href="#data-description" title="Permanent link">&para;</a></h2>
 <h3 id="data-source">Data Source<a class="headerlink" href="#data-source" title="Permanent link">&para;</a></h3>
 <p>The Data is obtained from <a href="https://www.kaggle.com/c/expedia-personalized-sort">Personalize Expedia Hotel Searches - ICDM 2013 Kaggle Competition</a></p>
-<p>So in ml based solution it requires data. What type of Information we show. Air BnB in their <a href="https://medium.com/airbnb-engineering/machine-learning-powered-search-ranking-of-airbnb-experiences-110b4b1a0789">Article</a>  can classify the feature as : 
-1. Hotels / Listing Feature
-2. User / Personalized Features 
-3. Query Features  </p>
+<p>So in ml based solution it requires data. What type of Information we show. Air BnB in their <a href="https://medium.com/airbnb-engineering/machine-learning-powered-search-ranking-of-airbnb-experiences-110b4b1a0789">Article</a>  can classify the feature as : </p>
+<ol>
+<li>Hotels / Listing Feature</li>
+<li>User / Personalized Features </li>
+<li>Query Features  </li>
+</ol>
 <p>Here is the idea : </p>
 <ol>
 <li>If we use Hotel Features Only &rarr; it can produce ranking but we cannot expect variation in user level. If we compare recommendation of two users. Say A and B the recommendation would be the same. </li>
 <li>To add more personalization we can add feature that unique to user level </li>
 <li>To what extend its unique, if user characteristics does not change then the recommendation would be the same. However that is not ideal because user intention may be different at different search session </li>
 </ol>
-<p>We classify the dataset into 3 domain : 
-1. Hotels / Listing Feature
-2. User / Personalized Features 
-3. Query Features  </p>
 <h3 id="listing-hotel-features">Listing / Hotel Features<a class="headerlink" href="#listing-hotel-features" title="Permanent link">&para;</a></h3>
 <ul>
-<li>It could be feature that describe facility , for example : <ul>
+<li>
+<p>It could be feature that describe facility , for example : </p>
+<ul>
 <li>Number of rooms available between dates </li>
 <li>Price </li>
 <li>Location </li>
 <li>etc </li>
 </ul>
 </li>
-<li>For now there are lot of companies using embeddings to express the feature of an entity </li>
-<li>Usually embeddings are resulted from pretrained model (neural nets for example)</li>
+<li>
+<p>For now there are lot of companies using embeddings to express the feature of an entity </p>
+</li>
+<li>
+<p>Usually embeddings are resulted from pretrained model (neural nets for example)</p>
+</li>
 </ul>
 <p>There are lot of variables that classify as Listing / Property Features, however several consideration is that : </p>
 <ul>
@@ -445,9 +468,11 @@ flowchart TD
 <li>It affects revenue of property, </li>
 <li>We want our search / recommendation is fair towards property </li>
 </ul>
-<p><strong>New User</strong> : 
-- Help user build interaction 
-- Have great search experience by providing relevant property </p>
+<p><strong>New User</strong> : </p>
+<ul>
+<li>Help user build interaction </li>
+<li>Have great search experience by providing relevant property </li>
+</ul>
 <p>To properly handle the cold start problem, we research on how to handle it. To do so , we survey several reference (cited in References Section)
 We can divide solution into : </p>
 <ul>
@@ -576,10 +601,12 @@ We can divide solution into : </p>
 </code></pre></div>
 <h3 id="search-features">Search Features<a class="headerlink" href="#search-features" title="Permanent link">&para;</a></h3>
 <p>What does Query Features Mean ? <a href="https://medium.com/airbnb-engineering/embedding-based-retrieval-for-airbnb-search-aabebfc85839">article</a>
-Features that describe criteria for hotels we are looking for , for example : 
-- Number of guests 
-- Number of Stay 
-- etc </p>
+Features that describe criteria for hotels we are looking for , for example : </p>
+<ul>
+<li>Number of guests </li>
+<li>Number of Stay </li>
+<li>etc </li>
+</ul>
 <p>The same goes with expedia in their <a href="https://medium.com/expedia-group-tech/learning-to-rank-at-expedia-group-how-to-adapt-the-property-search-result-page-based-on-f4ebef78c94b">article</a></p>
 <p>which include : 
 - checkin_date 
@@ -681,179 +708,169 @@ Features that describe criteria for hotels we are looking for , for example :
 <p>Due to the huge size of original data, we decide to sample the data based on  search id. We sampled only 50% of search data resulting 1.3 GB of data. </p>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;expedia_search_sampled.csv&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition details">
+<p class="admonition-title">▶ Show code &amp; output</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
+<details class="note" open="open">
+<summary>Show Code Output</summary>
+</details>
 <div style="overflow-x:scroll">
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+  <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>srch_id</th>
+          <th>date_time</th>
+          <th>site_id</th>
+          <th>visitor_location_country_id</th>
+          <th>visitor_hist_starrating</th>
+          <th>visitor_hist_adr_usd</th>
+          <th>prop_country_id</th>
+          <th>prop_id</th>
+          <th>prop_starrating</th>
+          <th>prop_review_score</th>
+          <th>...</th>
+          <th>comp6_rate_percent_diff</th>
+          <th>comp7_rate</th>
+          <th>comp7_inv</th>
+          <th>comp7_rate_percent_diff</th>
+          <th>comp8_rate</th>
+          <th>comp8_inv</th>
+          <th>comp8_rate_percent_diff</th>
+          <th>click_bool</th>
+          <th>gross_bookings_usd</th>
+          <th>booking_bool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>3625</td>
+          <td>4</td>
+          <td>4.0</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>11622</td>
+          <td>4</td>
+          <td>4.0</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>11826</td>
+          <td>5</td>
+          <td>4.5</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>22824</td>
+          <td>3</td>
+          <td>4.0</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>4</td>
+          <td>2012-12-31 08:59:22</td>
+          <td>5</td>
+          <td>219</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>219</td>
+          <td>37581</td>
+          <td>5</td>
+          <td>4.5</td>
+          <td>...</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>NaN</td>
+          <td>0</td>
+          <td>NaN</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>5 rows × 54 columns</p>
+    </div>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>srch_id</th>
-      <th>date_time</th>
-      <th>site_id</th>
-      <th>visitor_location_country_id</th>
-      <th>visitor_hist_starrating</th>
-      <th>visitor_hist_adr_usd</th>
-      <th>prop_country_id</th>
-      <th>prop_id</th>
-      <th>prop_starrating</th>
-      <th>prop_review_score</th>
-      <th>...</th>
-      <th>comp6_rate_percent_diff</th>
-      <th>comp7_rate</th>
-      <th>comp7_inv</th>
-      <th>comp7_rate_percent_diff</th>
-      <th>comp8_rate</th>
-      <th>comp8_inv</th>
-      <th>comp8_rate_percent_diff</th>
-      <th>click_bool</th>
-      <th>gross_bookings_usd</th>
-      <th>booking_bool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>3625</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>11622</td>
-      <td>4</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>11826</td>
-      <td>5</td>
-      <td>4.5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>22824</td>
-      <td>3</td>
-      <td>4.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>2012-12-31 08:59:22</td>
-      <td>5</td>
-      <td>219</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>219</td>
-      <td>37581</td>
-      <td>5</td>
-      <td>4.5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 54 columns</p>
-</div>
-
-<h3 id="generate-event">Generate Event<a class="headerlink" href="#generate-event" title="Permanent link">&para;</a></h3>
-<p>What the data should look ? </p>
-<h2 id="generate-event_1">Generate Event<a class="headerlink" href="#generate-event_1" title="Permanent link">&para;</a></h2>
+<h2 id="generate-event">Generate Event<a class="headerlink" href="#generate-event" title="Permanent link">&para;</a></h2>
 <p>What the data should look like:</p>
 <table>
 <thead>
@@ -915,19 +932,20 @@ Features that describe criteria for hotels we are looking for , for example :
 </tr>
 </tbody>
 </table>
-<ul>
-<li>
 <p>Each unique session : </p>
-</li>
-<li>
-<p>occur at a particular time </p>
-</li>
+<ol>
+<li>occur at a particular time </li>
 <li>has n interactions </li>
 <li>the interactions should be ordered chronologically </li>
-</ul>
-<p>We should order the data first , based on : 
-- search session 
-- event time </p>
+</ol>
+<p>We should order the data first , based on : </p>
+<ol>
+<li>search session </li>
+<li>event time </li>
+</ol>
+<details class="note" open="open">
+<summary>Open styled details</summary>
+</details>
 <div class="highlight"><pre><span></span><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span> 
     <span class="p">[</span><span class="s1">&#39;srch_id&#39;</span><span class="p">,</span><span class="s1">&#39;date_time&#39;</span><span class="p">]</span>
 <span class="p">)</span>
@@ -4404,68 +4422,73 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 <h3 id="holdout-set-evaluation">Holdout Set Evaluation<a class="headerlink" href="#holdout-set-evaluation" title="Permanent link">&para;</a></h3>
 <p>The goal is to check whether model learn or not </p>
-<p>There are lot of Ranking / Information Retrieval Metrics. Some of them are : 
-We can divide into 
-- Binary Relevance Metrics 
-    - Precision @ K 
-    - Mean Average Precision @ K 
-    - Mean Reciprocal Rank </p>
+<p>There are lot of Ranking / Information Retrieval Metrics. we can divide into : </p>
 <ul>
-<li>Rank Aware Metrics <ul>
+<li>
+<p>Binary Relevance Metrics </p>
+<ul>
+<li>Precision @ K </li>
+<li>Mean Average Precision @ K </li>
+<li>Mean Reciprocal Rank </li>
+</ul>
+</li>
+<li>
+<p>Rank Aware Metrics </p>
+<ul>
 <li>Normalized Discounted Cumulative Gain (NDCG)</li>
 </ul>
 </li>
 </ul>
-<p>What is Ideal Ranking Metrics ?
-- If we predict correctly the relevance score at top position is better than correctly predicting relevance score in lower position. </p>
+<p>What is Ideal Ranking Metrics ?</p>
+<ul>
+<li>If we predict correctly the relevance score at top position is better than correctly predicting relevance score in lower position. </li>
+</ul>
 <h4 id="metrics-ndcg">Metrics : NDCG<a class="headerlink" href="#metrics-ndcg" title="Permanent link">&para;</a></h4>
-<p>\begin{align*}\
-\begin{split}\
-\text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)} \</p>
-<p>\end{split}\
-\end{align*}\</p>
-<p>Where : 
-- <span class="arithmatex">\(\text{DCG}\)</span> = Discounted Cumulative Gain 
-- <span class="arithmatex">\(k= \text{number of items in recommendation}\)</span>\
-- <span class="arithmatex">\(\text{rel}[i]\)</span> = relevance score at item in position i th
-- Relevance score itself usually relevance score based on ground truth </p>
-<p>So where is the NDCG ? </p>
-<p>Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1 </p>
+<div class="arithmatex">\[
+\begin{align*}\\
+\begin{split}\\
+\text{DCG}= \sum_{i=1}^{k} \frac{ 2^{\text{rel}[i]}-1}{\log_{2}([i]+2)} \\
+\end{split}\\
+\end{align*}\\
+\]</div>
+<p>Where : </p>
+<ul>
+<li><span class="arithmatex">\(\text{DCG}\)</span> = Discounted Cumulative Gain </li>
+<li><span class="arithmatex">\(k= \text{number of items in recommendation}\)</span>\</li>
+<li><span class="arithmatex">\(\text{rel}[i]\)</span> = relevance score at item in position i th</li>
+<li>Relevance score itself usually relevance score based on ground truth </li>
+</ul>
+<p>So what is the NDCG ? Why do we even need NDCG ? the analogy similar to correlation and covariance matrix. We can measure covariance matrix to asses comovement between two Random Variables. However the value is incomparable hence we need to scale to some finite space such as probability score, ranging from 0 to 1. </p>
 <p>The Idea of DCG is that position does matter, if our model can predict the highest relevance score at top position is better compared to lower position</p>
-<p>In NDCG we can scale the DCG by maximum value of DCG or we call it as <strong>Ideal DCG</strong></p>
-<p>\begin{align*}\
-\begin{split}\
-\text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\</p>
-<p>\end{split}\
-\end{align*}\</p>
+<p>In NDCG we can scale the DCG by maximum value of DCG or we call it as 
+<strong>Ideal DCG</strong></p>
+<div class="arithmatex">\[
+  \begin{align*}\\
+  \begin{split}\\
+  \text{NDCG}= \frac{\text{DCG}}{\text{Ideal DCG}}\\
+  \end{split}\\
+  \end{align*}\\
+\]</div>
 <p>So what is the ideal DCG in this case ? </p>
-<p>There are some flavor, citing Doug TurnBull in His Blogpost , </p>
+<p>There are some flavor, citing Doug TurnBull in His Blogpost </p>
 <ul>
 <li>Local Ideal &rarr; Sorted based on ground truth relevance &rarr; </li>
 <li>Global Ideal &rarr; using whole score from judgement list as ground truth , the previous one only use the response from search only </li>
 <li>Max Label &rarr; Considering each position has maximum score, for example in our case the book event type has relevance of 2. </li>
 </ul>
-<p>The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic</p>
+<p>The fact is that if we use Max Label the NDCG Score will decrease, its because the view is pessimistic.</p>
 <p>for example we will use validation to measure ndcg. </p>
 <h4 id="validation-set">Validation Set<a class="headerlink" href="#validation-set" title="Permanent link">&para;</a></h4>
-<p>The purpose on this set mainly <strong>selecting model</strong> : 
-- Selecting best hyperparameter 
-- Selecting approach 
-- pipeline etc </p>
-<p>We could do through <strong>Cross Validation</strong> which have better estimate of model performance. </p>
-<p>In this article we only implement the <strong>Validation Set</strong> approach </p>
-<p>We also wont cover <strong>Hyperparameter Tuning</strong> in this article</p>
-<p>Next, we should add our model prediction. So, how can we predict ? </p>
-<p>First this model focus on ranking, which means, does not focus on <strong>candidate generation step</strong>. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. </p>
-<p>Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank </p>
+<p>The purpose on this set mainly <strong>selecting model</strong> : </p>
+<ul>
+<li>Selecting best hyperparameter </li>
+<li>Selecting approach </li>
+<li>pipeline etc </li>
+</ul>
+<p>We could do through <strong>Cross Validation</strong> which have better estimate of model performance.  In this article we only implement the <strong>Validation Set</strong> approach . We  wont cover <strong>Hyperparameter Tuning</strong> in this article.</p>
+<p>Next, we should add our model prediction. So, how can we predict ?First this model focus on ranking, which means, does not focus on <strong>candidate generation step</strong>. Hence the model predict all item in given search id. the model doesnot predict relevance score for all item. </p>
+<p>Before we perform prediction we have our positional feature needs to be adjusted , because we dont know the positional features in validation dataset, we can set to the first rank.</p>
 <div class="highlight"><pre><span></span><code><span class="n">X_val_relevance</span><span class="p">[</span><span class="s1">&#39;search_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/zt/dkkszv0n5bd8nq9dywcdj7pc0000gn/T/ipykernel_743/2832532597.py:1: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  X_val_relevance[&#39;search_rank&#39;] = 1
 </code></pre></div>
 <p><strong>Pointwise</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># pointwise score </span>

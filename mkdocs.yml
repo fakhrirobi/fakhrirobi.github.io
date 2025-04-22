@@ -82,7 +82,10 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - md_in_html
 # Extra javascript
 extra:
   social:
@@ -111,3 +114,4 @@ plugins:
 
 nav:
     - Home: index.md
+
