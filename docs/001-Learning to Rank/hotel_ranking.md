@@ -3234,10 +3234,10 @@ Some of them model that have pairwise objective :
 
     - To obtain optimal parameter $\theta$ : 
         - Minimizing negative log likelihood from all training data (Similar to Classification)  : 
-            - $$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}} \left[
+            - $$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}}
                 y_{ij}\,\log \left(\frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
                 + (1-y_{ij})\,\log \left(1 - \frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
-                \right]
+                
                 $$
             - $y_{ij}$ : Pairwise label , 1 if item i > item j 
 - The objective could be solved through gradient descent 
