@@ -3998,19 +3998,20 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <p>To obtain optimal parameter <span class="arithmatex">\(\theta\)</span> : </p>
 <ul>
 <li>Minimizing negative log likelihood from all training data (Similar to Classification)  : <ul>
-<li>$$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}} \left[
-    y_{ij}\,\log \left(\frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)<ul>
-<li>(1-y_{ij})\,\log \left(1 - \frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)
-\right]
-$$</li>
+<li>
+<p>$$ \mathcal{L} = - \sum_{(i,j) \in \mathcal{P}}
+    y_{ij}\,\log \left(\frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)</p>
+<ul>
+<li>(1-y_{ij})\,\log \left(1 - \frac{1}{1+\exp\left(-\sigma\,(s_i-s_j)\right)}\right)</li>
+</ul>
+<p>$$
+            - <span class="arithmatex">\(y_{ij}\)</span> : Pairwise label , 1 if item i &gt; item j 
+- The objective could be solved through gradient descent </p>
+</li>
 </ul>
 </li>
-<li><span class="arithmatex">\(y_{ij}\)</span> : Pairwise label , 1 if item i &gt; item j </li>
 </ul>
 </li>
-</ul>
-</li>
-<li>The objective could be solved through gradient descent </li>
 </ul>
 </li>
 <li>
