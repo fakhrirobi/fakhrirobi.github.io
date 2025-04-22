@@ -162,7 +162,7 @@ Our new initiative by recommending purchase is indeed costly, we have to calcula
 |-------------------|-------------------|------------------|
 | Development Cost  | 186000            | 264000           |
 | Annual Infra Cost | 12000             | 24000            |
-| Total             | 198000            | 288000           |  | 
+| Total             | 198000            | 288000           |  
 
 
 

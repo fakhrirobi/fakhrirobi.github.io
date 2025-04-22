@@ -4,24 +4,33 @@ site_author: Fakhri Robi Aulia
 repo_url: https://github.com/fakhrirobi/
 
 theme:
+  palette: 
+
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
+    - primary: white
+    - accent: teal
+
   name: material
   highlightjs: true
   font : 
     text : Monospace
-    code : Fira Code 
+    code : Menlo 
   highlightjs_languages:
     - yaml
     - rust
     - python
   features:
   - announce.dismiss
-  # - content.action.edit
-  # - content.action.view
-  # - content.code.annotate
-  # - content.code.copy
-  # - content.tabs.link
-  # - content.tooltips
-  # - header.autohide
   - navigation.expand
   - navigation.footer
   - navigation.indexes
@@ -34,8 +43,6 @@ theme:
   - search.highlight
   - search.share
   - search.suggest
-  - toc.follow
-  - toc.integrate
 
 
 markdown_extensions:
@@ -49,8 +56,7 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
-      title: On this page
-      toc_depth: 3
+      title: Table of Contents
 
   # Python Markdown Extensions
   - pymdownx.arithmatex:

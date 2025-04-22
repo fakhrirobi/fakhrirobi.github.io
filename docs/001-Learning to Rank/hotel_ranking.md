@@ -394,7 +394,7 @@ dataset.head()
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll">
     <table border="1" class="dataframe">
@@ -592,7 +592,7 @@ dataset.head(2)
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -703,7 +703,7 @@ sample_session = dataset.loc[
 sample_session
 ```
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -1016,7 +1016,7 @@ sample_session
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -1332,7 +1332,7 @@ booked_session
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -1544,7 +1544,7 @@ dataset.groupby('srch_id').agg({'prop_id':'count'}).sort_values('prop_id')
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -1633,7 +1633,7 @@ display(dataset.loc[
 ])
 ```
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -2087,7 +2087,7 @@ display(dataset.loc[
 ])
 ```
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -2411,7 +2411,7 @@ Question / Focus of EDA :
 ```python
 display((X_train_relevance.isnull().sum() / X_train_relevance.shape[0] ).sort_values(ascending=False))
 ```
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
 
     - comp1_rate_percent_diff        0.981806
@@ -2547,7 +2547,7 @@ Previously we checked some features and we decide to remove some of them.
 display((X_train_relevance.isnull().sum() / X_train_relevance.shape[0] ).sort_values(ascending=False))
 ```
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     - comp1_rate_percent_diff        0.981806
     - comp6_rate_percent_diff        0.979394
@@ -2658,7 +2658,7 @@ print('Training Random Forest')
 rf_pointwise.fit(X_train_relevance[ALL_FEATURES],y_train_relevance)
 ```
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     - Training Linear Regression
     - Training Random Forest
@@ -4293,7 +4293,7 @@ val_prediction_pointwise = val_prediction_pointwise.sort_values(['srch_id',
 val_prediction_pointwise['rank'] = val_prediction_pointwise.groupby('srch_id').cumcount() + 1
 val_prediction_pointwise
 ```
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     [Parallel(n_jobs=8)]: Using backend ThreadingBackend with 8 concurrent workers.
     [Parallel(n_jobs=8)]: Done  16 tasks      | elapsed:    0.3s
@@ -4451,7 +4451,7 @@ val_prediction_pairwise
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
 
     <div style="overflow-x:scroll;">
@@ -4598,7 +4598,7 @@ val_prediction_listwise
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
     <div style="overflow-x:scroll;">
     <style scoped>
@@ -4836,7 +4836,7 @@ ideal_dcg
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
 
       <div style="overflow-x:scroll;">
@@ -5040,7 +5040,7 @@ dcg / ideal_dcg
 
 
 
-???+ note "Show Code Output"
+??? note "Show Code Output"
 
 
       <div style="overflow-x:scroll;">
