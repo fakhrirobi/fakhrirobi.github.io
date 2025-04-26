@@ -1,0 +1,53 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14">
+  <diagram name="Page-1" id="Wk4dbvl3BPVXbVxHZhhf">
+    <mxGraphModel dx="946" dy="610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="y8CcAClOUggkf4cNCvl1-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="y8CcAClOUggkf4cNCvl1-1" target="y8CcAClOUggkf4cNCvl1-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-1" value="PostgreSQL DB&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="130" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="y8CcAClOUggkf4cNCvl1-2" target="y8CcAClOUggkf4cNCvl1-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-2" value="&lt;div&gt;MinIO&amp;nbsp;&lt;/div&gt;&lt;div&gt;Object Storage&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="130" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-3" value="&lt;div&gt;ML Flow&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="330" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-6" value="Stores : Model Performance, Experiment, etc" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="85" y="90" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-7" value="Stores Artifact : Model Artifact, performance plot, etc,&amp;nbsp;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="60" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="y8CcAClOUggkf4cNCvl1-8" target="y8CcAClOUggkf4cNCvl1-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-8" value="&lt;div&gt;Model Experiment / Training Result&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="570" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="y8CcAClOUggkf4cNCvl1-10" target="y8CcAClOUggkf4cNCvl1-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-10" value="&lt;div&gt;Model Experiment / Training Result&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="570" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="y8CcAClOUggkf4cNCvl1-11" target="y8CcAClOUggkf4cNCvl1-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y8CcAClOUggkf4cNCvl1-11" value="&lt;div&gt;Model Experiment / Training Result&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="570" width="210" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

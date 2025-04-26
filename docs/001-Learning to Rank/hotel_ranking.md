@@ -1,4 +1,4 @@
-## Hotel Search Ranking System 
+# Hotel Search Ranking System 
 
 ![alt text](sumup-mK6upImi-qQ-unsplash.jpg "Title")
 
